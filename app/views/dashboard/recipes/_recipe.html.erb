@@ -1,0 +1,10 @@
+<article class="col">
+  <%= link_to dashboard_recipe_path(recipe), class: "d-block rounded-2 position-relative mb-3" do %>
+    <%= image_tag resize_to_medium_image(recipe.featured_image), class: "img-fluid rounded-2" %>
+  <% end %>
+  <div class="mb-2">
+    <%= convert_to_badge(:time_preparation, recipe[:prep_time], "badge-sm me-1") %>
+    <%= convert_to_badge(:time_cooking, recipe[:cook_time], "badge-sm") %>
+  </div>
+  <h3 class="h6 mb-0"><%= link_to recipe.title, dashboard_recipe_path(recipe), class: "text-reset" %></h3>
+</article>

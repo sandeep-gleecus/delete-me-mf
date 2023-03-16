@@ -1,0 +1,20 @@
+.accordion {
+
+  &-item {
+    border-radius: $md-border-radius;
+    box-shadow: $md-box-shadow;
+
+    & + & {
+      margin-top: $spacer-3;
+    }
+  }
+
+  &-button {
+    @include font-size($xl-font-size);
+    border-radius: $md-border-radius;
+
+    &:not(.collapsed) {
+      @include border-bottom-radius(0);
+    }
+  }
+}

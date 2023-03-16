@@ -1,0 +1,52 @@
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-K62G58B');</script>
+<!-- End Google Tag Manager -->
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-170805191-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-170805191-1');
+</script>
+
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '563194601547202');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=563194601547202&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@800&family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Kalam&display=swap" rel="stylesheet">
+<%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+<%= javascript_include_tag "application", "data-turbo-track": "reload" %>
+
+<meta charset="utf-8">
+<%= metamagic site: Rails.configuration.name, title: [:title, :site], separator: " – ",
+  twitter: {card: "summary_large_image", site: "@MotherFitOnline", creator: "@MotherFitOnline"},
+  og: {site_name: "Mother Fit", title: "Mother Fit", description: "Unique and exclusive LIVE workouts every week or catch up On Demand. Prenatal &amp; postnatal workouts. Claim your #{I18n.t('free_trial.try_for_days')}-day free trial today!", type: "website", url: url_for(only_path: false, protocol: "https"), image: image_url("social-previews/default.png")}
+%>
+<%= tag.meta name: "robots", content: "noindex, nofollow" if @noindex %>
+<%= csrf_meta_tags %>
+<%= csp_meta_tag %>

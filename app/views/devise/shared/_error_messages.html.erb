@@ -1,0 +1,11 @@
+<% if resource.errors.any? %>
+  <div class="alert alert-danger text-center fw-bolder mb-4 mb-md-5" role="alert"><%= resource.errors.full_messages.first %></div>
+<% end %>
+
+<% if notice.present? %>
+  <%= notice %>
+<% end %>
+
+<% if alert.present? %>
+  <%= alert %>
+<% end %>

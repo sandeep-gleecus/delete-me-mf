@@ -1,0 +1,5 @@
+<section>
+  <h2 class="h5 mb-3 mb-md-4">Discussion</h2>
+  <%= render commentable.comments %>
+  <%= render partial: "dashboard/comments/form", locals: { commentable: commentable } %>
+</section>

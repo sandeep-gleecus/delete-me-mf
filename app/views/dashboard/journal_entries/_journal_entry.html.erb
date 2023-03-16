@@ -1,0 +1,15 @@
+<article class="d-flex align-items-center mt-4">
+  <div class="tile tile-primary <%= local_assigns[:preview] ? "tile-lg" : "tile-xl" %> flex-column me-3 me-md-4">
+    <div class="<%= local_assigns[:preview] ? "h6" : "h5" %> text-primary mb-0"><%= journal_entry.date.day %></div>
+    <div class="<%= local_assigns[:preview] ? "x-small" : "small" %> text-dark fw-bold"><%= journal_entry.date.strftime("%b") %></div>
+  </div>
+  <div>
+    <% if local_assigns[:preview] %>
+      <h6 class="small mb-0 mb-md-1"><%= link_to journal_entry.title, dashboard_journal_entry_path(journal_entry), class: "text-reset" %></h6>
+      <p class="x-small mb-0 d-none d-md-block"><%= journal_entry.description.truncate(50) %></p>
+    <% else %>
+      <h6 class="mb-0 mb-md-1"><%= link_to journal_entry.title, dashboard_journal_entry_path(journal_entry), class: "text-reset" %></h6>
+      <p class="small mb-0 d-none d-md-block"><%= journal_entry.description.truncate(100) %></p>
+    <% end %>
+  </div>
+</article>

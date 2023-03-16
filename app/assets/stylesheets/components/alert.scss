@@ -1,0 +1,8 @@
+.alert {
+  font-size: $lg-font-size;
+  font-weight: $fw-extra-bold;
+
+  &-primary {
+    color: $white;
+  }
+}

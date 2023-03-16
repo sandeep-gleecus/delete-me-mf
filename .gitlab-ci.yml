@@ -1,0 +1,92 @@
+stages:
+  - build
+  - staging
+  - production
+
+variables:
+  RELEASE_NAME: motherfit
+  RELEASE_NAMESPACE: motherfit
+
+
+build:
+  stage: build
+  image:
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: [""]
+  script:
+    - mkdir -p /kaniko/.docker
+    - echo "{\"auths\":{\"${CI_REGISTRY}\":{\"auth\":\"$(printf "%s:%s" "${CI_REGISTRY_USER}" "${CI_REGISTRY_PASSWORD}" | base64 | tr -d '\n')\"}}}" > /kaniko/.docker/config.json
+    - >-
+      /kaniko/executor
+      --context "${CI_PROJECT_DIR}"
+      --dockerfile "${CI_PROJECT_DIR}/Dockerfile"
+      --cache=true
+      --destination "$CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA"
+
+deploy-staging:
+  extends: .deploy
+  stage: staging
+  before_script:
+    - kubectl config use-context motherfit/website:staging
+  variables:
+    INGRESS_DOMAIN: staging.motherfit.co.uk
+  environment:
+    name: staging
+    url: https://staging.motherfit.co.uk
+  only:
+    - main
+
+rollback-staging:
+  stage: staging
+  when: manual
+  allow_failure: true
+  image:
+    name: dtzar/helm-kubectl:3.7.1
+  before_script:
+    - kubectl config use-context motherfit/website:staging
+  only:
+    - main
+  script:
+    - chmod 600 /builds/motherfit/website.tmp/KUBECONFIG
+    - cd config/chart
+    - >
+      helm rollback
+      --namespace=${RELEASE_NAMESPACE}
+      ${RELEASE_NAME}
+
+deploy-production:
+  extends: .deploy
+  stage: production
+  before_script:
+    - kubectl config use-context motherfit/website:production
+  variables:
+    INGRESS_DOMAIN: motherfit.co.uk
+  environment:
+    name: production
+    url: https://www.motherfit.co.uk
+  only:
+    - main
+  when: manual
+
+.deploy:
+  image:
+    name: dtzar/helm-kubectl:3.7.1
+  script:
+    - chmod 600 /builds/motherfit/website.tmp/KUBECONFIG
+    - cd config/chart
+    - >
+      helm upgrade --install
+      --namespace=${RELEASE_NAMESPACE}
+      --set image.tag="${CI_COMMIT_SHORT_SHA}"
+      --set ingress.domain=${INGRESS_DOMAIN}
+      --set image.pullSecretDockerConfig=${DEPLOY_PULL_SECRET}
+      --set intercom.accessToken=${INTERCOM_ACCESS_TOKEN}
+      --set stripe.monthlyPlanId=${STRIPE_MONTHLY_PLAN_ID}
+      --set stripe.publishableKey=${STRIPE_PUBLISHABLE_KEY}
+      --set stripe.secretKey=${STRIPE_SECRET_KEY}
+      --set stripe.webhookSecretKey=${STRIPE_WEBHOOK_SECRET_KEY}
+      --set stripe.yearlyPlanId=${STRIPE_YEARLY_PLAN_ID}
+      --set sendgrid.apiKey=${SENDGRID_API_KEY}
+      --set recaptcha_v3.siteKey=${RECAPTCHA_SITE_KEY}
+      --set recaptcha_v3.secretKey=${RECAPTCHA_SECRET_KEY}
+      ${RELEASE_NAME} .

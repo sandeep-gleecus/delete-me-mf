@@ -1,0 +1,71 @@
+<div class="offcanvas offcanvas-dashboard offcanvas-start" tabindex="-1" id="offcanvas" aria-labelledby="offcanvasLabel">
+  <nav class="sidebar bg-secondary d-flex overflow-auto">
+    <div class="flex-grow-1 d-flex flex-column h-100">
+      <%= link_to dashboard_root_path, class: "text-center mb-5" do %>
+        <%= image_tag "logo-dark.png", height: 88 %>
+      <% end %>
+      <nav class="nav-sidebar nav flex-column flex-grow-1">
+        <%= link_to dashboard_root_path, class: "nav-link d-flex align-items-center #{current? "active", dashboard_root_path}" do %>
+          <span class="tile tile-sm nav-link-icon me-3">
+          	<%= icon "fas", "th-large" %>
+        	</span>
+        	Dashboard
+        <% end %>
+        <%= link_to dashboard_mind_path, class: "nav-link d-flex align-items-center #{current? "active", dashboard_mind_path}" do %>
+          <span class="tile tile-sm nav-link-icon me-3">
+          	<%= icon "fas", "brain" %>
+          </span>
+          Mind
+        <% end %>
+        <%= link_to dashboard_body_path, class: "nav-link d-flex align-items-center #{current? "active", dashboard_body_path}" do %>
+          <span class="tile tile-sm nav-link-icon me-3">
+          	<%= icon "fas", "heartbeat" %>
+        	</span>
+        	Body
+        <% end %>
+        <%= link_to dashboard_soul_path, class: "nav-link d-flex align-items-center #{current? "active", dashboard_soul_path}" do %>
+          <span class="tile tile-sm nav-link-icon me-3">
+          	<%= icon "fas", "heart" %>
+          </span>
+          Soul
+        <% end %>
+				<%= link_to dashboard_recipes_path, class: "nav-link d-flex align-items-center #{current? "active", dashboard_recipes_path}" do %>
+          <span class="tile tile-sm nav-link-icon me-3">
+          	<%= icon "fas", "apple-alt" %>
+          </span>
+					Nutrition
+				<% end %>
+        <%= link_to dashboard_live_path, class: "nav-link d-flex align-items-center #{current? "active", dashboard_live_path}" do %>
+          <span class="tile tile-sm nav-link-icon me-3">
+            <%= icon "fas", "video" %>
+          </span>
+          LIVE
+        <% end %>
+        <%= link_to dashboard_community_path, class: "nav-link d-flex align-items-center #{current? "active", dashboard_community_path}" do %>
+          <span class="tile tile-sm nav-link-icon me-3">
+          	<%= icon "fas", "users" %>
+        	</span>
+        	Community
+        <% end %>
+        <%= link_to dashboard_support_path, class: "nav-link d-flex align-items-center #{current? "active", dashboard_support_path}" do %>
+          <span class="tile tile-sm nav-link-icon me-3">
+          	<%= icon "fas", "life-ring" %>
+        	</span>
+        	Support
+        <% end %>
+        <%= link_to dashboard_settings_personal_path, class: "nav-link d-flex align-items-center #{"active" if current_page?(dashboard_settings_personal_path) || current_page?(edit_user_registration_path) || controller.controller_name == "settings"}" do %>
+          <span class="tile tile-sm nav-link-icon me-3">
+          	<%= icon "fas", "cog" %>
+        	</span>
+        	Settings
+        <% end %>
+        <%= link_to destroy_user_session_path, class: "nav-link d-flex align-items-center mt-auto", method: :delete do %>
+          <span class="tile tile-sm nav-link-icon me-3">
+          	<%= icon "fas", "sign-out-alt" %>
+        	</span>
+        	Log out
+        <% end %>
+      </nav>
+    </div>
+  </nav>
+</div>

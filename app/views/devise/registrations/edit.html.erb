@@ -1,0 +1,23 @@
+<% meta title: "Dashboard – Settings" %>
+<% @page_title = "Settings" %>
+
+<section class="bg-white shadow rounded-2 p-4">
+  <%= render partial: "dashboard/settings/nav_tabs" %>
+  <div class="row gy-0">
+    <div class="col-xl-20 col-xxl-15">
+      <h2 class="h5 mb-1 mb-md-2">Security</h2>
+      <p class="mb-4 mb-lg-5">Change the password you use to log in to your <%= Rails.configuration.name %> account.</p>
+      <%= render "layouts/alerts" %>
+      <%= simple_form_for resource, as: resource_name, url: registration_path(resource_name), method: :put, validate: true, html: {class: "needs-validation js-form"}, defaults: {wrapper: false} do |f| %>
+        <%= f.input :password, autocomplete: "new-password", placeholder: "New password", label: "New password", required: true, input_html: {class: "mb-3"} %>
+        <%= f.input :password_confirmation, autocomplete: "new-password", placeholder: "Confirm password", label: "Confirm password", required: true, input_html: {class: "mb-4"} %>
+        <label class="form-label email required" for="user_email">Current password</label>
+        <div class="form-text d-flex align-items-center mb-3">
+          <%= icon "fas", "info-circle", class: "text-primary lead me-2" %>You need to confirm your password before making changes.
+        </div>
+        <%= f.input :current_password, autocomplete: "your-password", placeholder: "Your password", label: false, required: true, input_html: {class: "mb-4"} %>
+        <div class="text-end"><%= f.button :button, "#{icon "fas", "save", class: "fa-fw me-2"}Save".html_safe, class: "btn btn-primary" %></div>
+      <% end %>
+    </div>
+  </div>
+</section>

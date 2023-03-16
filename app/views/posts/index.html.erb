@@ -1,0 +1,22 @@
+<% meta title: "Blog" %>
+<% @simple_header_layout = true %>
+
+<%= content_for :hero do %>
+  <div class="container-xl">
+    <div class="row text-center justify-content-center g-0 py-6 py-lg-7 py-xl-8">
+      <div class="col-lg-20 col-xl-18">
+        <h1><%= Rails.configuration.name %> Blog</h1>
+        <p class="lead-xl mb-0">Read the latest blogs from Mother Fit on a range of topics covering nutrition, health improvement, exercise and parenting.</p>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<section class="bg-primary-light py-6 py-lg-7 py-xl-8">
+  <div class="container-xl">
+    <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 gy-4 gx-md-4">
+      <%= render Post.all %>
+    </div>
+  </div>
+</section>
+<%= render partial: "cta_section" %>

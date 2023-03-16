@@ -1,0 +1,50 @@
+{{/* vim: set filetype=mustache: */}}
+{{/*
+Envionment variables for the rails app
+*/}}
+{{- define "env" -}}
+- name: RAILS_LOG_TO_STDOUT
+  value: "yes"
+- name: RAILS_SERVE_STATIC_FILES
+  value: "yes"
+- name: DATABASE_URL
+  {{- with index .Values "postgresql-ha" "postgresql" }}
+  value: postgres://{{ .username }}:{{ .password }}@motherfit-postgresql-ha-pgpool/{{ .database }}
+  {{- end }}
+- name: SECRET_KEY_BASE
+  value: 52b5f76c416f8ee02a0e61497df83b05a3b343aa2834ed8fed8c37f308fe23e0fad32474399939531d5fdb12bad91002021f36d2c32bc45d5e34d2964a48f577
+- name: BUCKETEER_AWS_ACCESS_KEY_ID
+  value: {{ .Values.minio.rootUser }}
+- name: BUCKETEER_AWS_SECRET_ACCESS_KEY
+  value: {{ .Values.minio.rootPassword }}
+- name: BUCKETEER_AWS_REGION
+  value: "minio"
+- name: BUCKETEER_BUCKET_NAME
+  {{- with first .Values.minio.buckets}}
+  value: {{ .name }}
+  {{- end }}
+- name: INTERCOM_ACCESS_TOKEN
+  value: {{ .Values.intercom.accessToken }}
+- name: STRIPE_MONTHLY_PLAN_ID
+  value: {{ .Values.stripe.monthlyPlanId }}
+- name: STRIPE_PUBLISHABLE_KEY
+  value: {{ .Values.stripe.publishableKey }}
+- name: STRIPE_SECRET_KEY
+  value: {{ .Values.stripe.secretKey }}
+- name: STRIPE_WEBHOOK_SECRET_KEY
+  value: {{ .Values.stripe.webhookSecretKey }}
+- name: STRIPE_YEARLY_PLAN_ID
+  value: {{ .Values.stripe.yearlyPlanId }}
+- name: SENDGRID_DOMAIN
+  value: "motherfit.co.uk"
+- name: SENDGRID_FROM_EMAIL
+  value: "michelle@motherfit.co.uk"
+- name: SENDGRID_REPLY_EMAIL
+  value: "michelle@motherfit.co.uk"
+- name: SENDGRID_API_KEY
+  value: {{ .Values.sendgrid.apiKey }}
+- name: RECAPTCHA_SITE_KEY
+  value: {{ .Values.recaptcha_v3.siteKey }}
+- name: RECAPTCHA_SECRET_KEY
+  value: {{ .Values.recaptcha_v3.secretKey }}
+{{- end }}

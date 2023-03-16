@@ -1,0 +1,243 @@
+<% meta title: "Dashboard" %>
+<% @page_title = "Dashboard" %>
+<%= render 'search_form' %>
+<div class="row gy-4 gx-xxl-4">
+  <div class="col-xxl-16">
+    <% if current_user.pregnancy? %>
+      <section class="bg-white shadow rounded-2 p-4 mb-4">
+        <h2 class="h5 mb-3 mb-md-4"><%= shortened_name(current_user.name) %>’s <%= current_user.pregnancy? ? "pregnancy journey" : "postpartum journey" %></h2>
+        <div class="row gy-4 gx-md-4 gy-md-0">
+          <div class="col-md-13 col-lg-14">
+            <% if current_user.pregnancy? %>
+              <%= render partial: "progress_bar",
+                         locals: {start_label: current_user.pregnancy_conceived_date,
+                                  end_label: current_user.pregnancy_due_date,
+                                  percentage: current_user.pregnancy_progress_percentage,
+                                  callout_label: "Week #{current_user.pregnancy_week}",
+                                  callout_text: User::PREGNANCY_WEEK_FACTS["week_#{current_user.pregnancy_week}".to_sym].first[1]} %>
+            <% elsif current_user.postpartum_trimester? %>
+              <%= render partial: "progress_bar", locals: {start_label: current_user.birth_date, end_label: current_user.postpartum_trimester_end_date, percentage: current_user.postpartum_trimester_progress_percentage, callout_label: "Week #{current_user.postpartum_trimester_week}", callout_text: "of your fourth trimester."} %>
+            <% elsif current_user.postpartum_rebuild? %>
+              <%= render partial: "progress_bar", locals: {start_label: current_user.postpartum_trimester_end_date, end_label: current_user.postpartum_rebuild_end_date, percentage: current_user.postpartum_rebuild_progress_percentage, callout_label: "Week #{current_user.postpartum_rebuild_week}", callout_text: "of your rebuild journey."} %>
+            <% end %>
+          </div>
+          <div class="col-md offset-md-1">
+            <% if current_user.pregnancy? %>
+              <h3 class="h6 mb-2">Your baby is…</h3>
+              <ul class="list list-primary small mb-0">
+                <% User::PREGNANCY_WEEK_FACTS["week_#{current_user.pregnancy_week}".to_sym].each_with_index do |v, i| %>
+                  <% next if i == 0 %>
+                  <li class="mt-1"><%= v[1] %></li>
+                <% end %>
+              </ul>
+            <% end %>
+          </div>
+        </div>
+      </section>
+    <% elsif current_user.postpartum? %>
+      <section class="bg-white shadow rounded-2 p-4 mb-4">
+        <h2 class="h5 mb-2 mb-md-2"><%= shortened_name(current_user.name) %>’s postpartum journey</h2>
+        <div class="row gy-4 gx-md-4 gy-md-0">
+          <div class="col-md-7 col-lg-9">
+            <%= render 'intro_video', lesson: @intro_video, intro_video_completed: @intro_video_completed %>
+          </div>
+          <div class="col-md offset-md-1 mt-3">
+            <h4 class="h6 mb-2">Your Postpartum Journey</h4>
+            <ul class="list list-primary small mb-0">
+              <li class="mb-0">
+                <span class="<%= 'text-muted' if @intro_video_completed %>">Watch the Introduction video</span>
+                <%= completed_badge if @intro_video_completed %>
+              </li>
+              <% @categories_stages_hash.each do |stage, category| %>
+                <% stage_completed = category.completed?(current_user) %>
+                <li class="mb-0">
+                  <span class="<%= 'text-muted' if stage_completed %>"> <%= stage %> - <%= category.title %></span>
+                  <%= completed_badge if stage_completed %>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </section>
+    <% elsif current_user.beyond? %>
+      <div class="row row-cols-1 row-cols-md-3 gy-3 gx-md-4 gy-xl-0 mb-4">
+        <div class="col">
+          <%= link_to (current_user.beyond_full_setup? ? dashboard_food_entries_path : edit_user_registration_path), class: "bg-white shadow rounded-2 text-reset p-4 d-flex align-items-center flex-md-column flex-xl-row text-md-center text-xl-start" do %>
+            <div class="tile tile-warning tile-lg me-2 me-md-0 me-xl-2 mb-md-3 mb-xl-0"><%= icon "fas", "utensils" %></div>
+            <div class="ms-2 ms-md-0 ms-xl-2">
+              <div class="h4 mb-0"><%= number_with_delimiter(@calories_burned_today) %><small class="ms-1">kcal</small></div>
+              <% if current_user.beyond_full_setup? %>
+                <small>of <span class="fw-bolder text-dark"><%= number_with_delimiter(current_user.daily_calorie_goal) %></span> calorie goal</small>
+              <% else %>
+                <div class="x-small lh-base"><span class="text-primary">Complete your setup</span> to calculate a calorie goal.</div>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+        <div class="col">
+          <%= link_to dashboard_activities_path, class: "bg-white shadow rounded-2 text-reset p-4 d-flex align-items-center flex-md-column flex-xl-row text-md-center text-xl-start" do %>
+            <div class="tile tile-accent tile-lg me-2 me-md-0 me-xl-2 mb-md-3 mb-xl-0"><%= icon "fas", "dumbbell" %></div>
+            <div class="ms-2 ms-md-0 ms-xl-2">
+              <div class="h4 mb-0"><%= @activity_time_today %><small class="ms-1">mins</small></div>
+              <small>across <span class="fw-bolder text-dark"><%= current_user.activities.size %></span> activities</small>
+            </div>
+          <% end %>
+        </div>
+        <div class="col">
+          <%= link_to edit_user_registration_path, class: "bg-white shadow rounded-2 text-reset p-4 d-flex align-items-center flex-md-column flex-xl-row text-md-center text-xl-start" do %>
+            <div class="tile tile-info tile-lg me-2 me-md-0 me-xl-2 mb-md-3 mb-xl-0"><%= icon "fas", "weight" %></div>
+            <div class="ms-2 ms-md-0 ms-xl-2">
+              <% if current_user.beyond_full_setup? %>
+                <div class="h4 mb-0"><%= convert_to_kg(@recent_weight_entry) %><small class="ms-1">kg</small></div>
+                <small><%= @weight_entry_change >= 0 ? "down" : "up" %> <span class="fw-bolder text-dark"><%= convert_to_kg(@weight_entry_change) %> kg</span> so far</small>
+              <% else %>
+                <div class="h4 mb-0">0<small class="ms-1">kg</small></div>
+                <div class="x-small lh-base"><span class="text-primary">Complete your setup</span> to track your weight.</div>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+    <section class="bg-white shadow rounded-2 p-4 mb-4">
+      <div class="d-md-flex justify-content-md-between align-items-md-start mb-3 mb-md-4">
+        <h2 class="h5 mb-0">
+          <%= primary_section_title(current_user) %>
+        </h2>
+        <% unless current_user.pregnancy? %>
+          <%= link_to "View more#{icon "fas", "angle-right", class: "ms-1"}".html_safe, dashboard_body_path, class: "btn btn-link btn-sm shadow-none p-0 border-0 d-none d-md-block" %>
+        <% end %>
+      </div>
+      <div class="row row-cols-1 row-cols-lg-3 gy-4 gx-lg-4">
+        <% if current_user.postpartum? %>
+          <!-- To display categories inline with postpartum designs -->
+          <%= render 'categories' %>
+        <% else  %>
+          <%= render @primary %>
+          <%# Add CLICK HERE FOR MORE CLASSES for pregnancy user and remove 'view more' %>
+          <% if current_user.pregnancy? %>
+            <article class="col d-flex flex-column">
+              <a class="d-block flex-shrink-0 rounded-2 position-relative mb-3" href="/dashboard/body">
+                <%= image_tag 'pregnancy/click-for-more-classes.png', {class: 'img-fluid rounded-2 '} %>
+              </a>  <div class="">
+              <div class="d-flex">
+              </div>
+            </div>
+            </article>
+          <% end %>
+        <% end  %>
+      </div>
+      <% unless current_user.pregnancy? %>
+        <%= link_to "View more#{icon "fas", "angle-right", class: "ms-1"}".html_safe, dashboard_body_path, class: "btn btn-outline-primary w-100 mt-4 d-md-none" %>
+      <% end %>
+    </section>
+
+    <%= render 'dashboard/book_a_call_and_review' %>
+
+    <section class="bg-white shadow rounded-2 p-4 d-sm-block d-md-block">
+      <div class="d-md-flex justify-content-md-between align-items-md-start mb-3 mb-md-4">
+        <h2 class="h5 mb-0">
+          <% if current_user.pregnancy? %>
+            To support you and your baby’s journey
+          <% elsif current_user.postpartum? %>
+            To support your journey
+          <% elsif current_user.beyond? %>
+            Classes and workouts
+          <% end %>
+        </h2>
+        <%= link_to "View more#{icon "fas", "angle-right", class: "ms-1"}".html_safe, dashboard_mind_path, class: "btn btn-link btn-sm shadow-none p-0 border-0 d-none d-md-block" %>
+      </div>
+      <div class="row row-cols-1 row-cols-lg-3 gy-4 gx-lg-4">
+        <%= render @secondary %>
+      </div>
+      <%= link_to "View more#{icon "fas", "angle-right", class: "ms-1"}".html_safe, dashboard_mind_path, class: "btn btn-outline-primary w-100 mt-4 d-md-none" %>
+    </section>
+  </div>
+  <div class="col-xxl-8">
+    <div class="row gy-4 gx-xl-4 gx-xxl-0">
+      <div class="col-xl-12 col-xxl-24">
+        <%= render 'dashboard/book_a_call_and_review_top' %>
+        <section class="bg-white shadow rounded-2 p-4 px-3 mb-3 d-none d-md-block">
+          <div class="d-flex justify-content-between">
+            <h2 class="h5 mb-0">Journal</h2>
+            <%= link_to "View journal#{icon "fas", "angle-right", class: "ms-2"}".html_safe, dashboard_journal_entries_path, class: "btn btn-link btn-sm shadow-none border-0 p-0 d-flex align-items-center" %>
+          </div>
+          <% if @recent_journal_entries.exists? %>
+            <%= render @recent_journal_entries, preview: true %>
+          <% else %>
+            <p class="small mt-3 mb-0">You have no journal entries. You can add one <%= link_to "here.", new_dashboard_journal_entry_path %></p>
+          <% end %>
+        </section>
+      </div>
+      <div class="col-xl-12 col-xxl-24">
+        <section class="bg-white shadow rounded-2 p-4">
+          <div class="d-flex justify-content-between mb-3 mb-md-4">
+            <h2 class="h5 mb-0">Calendar</h2>
+            <%= link_to "View calendar#{icon "fas", "angle-right", class: "ms-2"}".html_safe, dashboard_calendar_path, class: "btn btn-link btn-sm shadow-none border-0 p-0 d-flex align-items-center" %>
+          </div>
+          <div class="position-relative js-calendar-wrapper" data-preview-type="overlay">
+            <div class="simple-calendar-overlay js-calendar-overlay">
+              <div class="d-flex justify-content-between mb-3">
+                <p class="h6 mb-0 me-2 js-calendar-overlay-title"></p>
+                <button type="button" class="simple-calendar-overlay-btn-close btn-close p-0 js-calendar-overlay-close-btn" aria-label="Close"></button>
+              </div>
+              <div class="js-calendar-overlay-content"></div>
+            </div>
+            <% if @calendar_lessons %>
+              <%= month_calendar(events: @calendar_lessons) do |date, lessons| %>
+                <div>
+                  <div><%= date.strftime("%e") %></div>
+                  <div class="day-actions d-inline-block mt-2 js-day-classes">
+                    <% lessons.each do |lesson| %>
+                        <span class="text-primary">
+                          <%= category_type_image(lesson.lesson_type) %>
+                        </span>
+                    <% end %>
+                  </div>
+                  <% if lessons.present? %>
+                    <div class="card-tooltip-calendar js-calendar-tooltip" role="tooltip">
+                      <%= render partial: "dashboard/calendar_tooltip", locals: {lessons: lessons} %>
+                    </div>
+                  <% end %>
+                </div>
+              <% end %>
+            <% else %>
+              <div class="col-md">
+                <div class="badge badge-secondary badge-md align-self-md-start me-1 mt-2">
+                  No classes are scheduled.
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </section>
+      </div>
+      <div class="col-xl-24">
+        <section class="bg-white shadow rounded-2 p-4">
+          <div class="d-flex justify-content-between">
+            <h2 class="h5 mb-0">Recent activity</h2>
+            <%= link_to "View all#{icon "fas", "angle-right", class: "ms-2"}".html_safe, dashboard_activities_path, class: "btn btn-link btn-sm shadow-none border-0 p-0 d-flex align-items-center" %>
+          </div>
+          <% if @activities.exists? %>
+            <div class="row gy-4 mt-0"><!-- mt-0 forces alignment reset -->
+              <%= render @activities, preview: true %>
+            </div>
+          <% else %>
+            <p class="small mt-3 mb-0">You have no activities logged. You can add one <%= link_to "here.", new_dashboard_activity_path %></p>
+          <% end %>
+        </section>
+      </div>
+
+      <div class="col-xl-24">
+        <section class="bg-white shadow rounded-2 p-4">
+          <div class="d-flex justify-content-between mb-2">
+            <h5 class="h5 mb-0">Add The App To Your Phone</h5>
+          </div>
+          <div style="padding:125% 0 0 0;position:relative;">
+            <iframe src="https://player.vimeo.com/video/793321103?h=2d0e68f843&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Add The App to your Phone"></iframe>
+          </div>
+          <script src="https://player.vimeo.com/api/player.js"></script>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>

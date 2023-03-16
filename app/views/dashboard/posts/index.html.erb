@@ -1,0 +1,14 @@
+<% meta title: "Dashboard - Blog" %>
+<% @page_title = "Blog" %>
+
+<section class="bg-white shadow rounded-2 p-4">
+  <h2 class="h5 mb-1"><%= Rails.configuration.name %> blog</h2>
+  <p class="mb-4">Read the latest blogs from <%= Rails.configuration.name %> on a range of topics covering nutrition, health improvement, exercise and parenting.</p>
+  <div class="row">
+    <div class="col-xxl-16">
+      <div class="row row-cols-1 row-cols-lg-3 gy-4 gx-lg-4">
+        <%= render @recent_posts %>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,91 @@
+<% meta title: "Class – #{@lesson.title}" %>
+<% @page_title = "Class" %>
+
+<section class="bg-white shadow rounded-2 p-4">
+  <div class="row">
+    <div class="col-xxl-16">
+      <div class="mb-3 mb-md-4">
+        <% if @lesson.vimeo_url.present? %>
+          <div style="padding: 56.25% 0 0 0; position: relative;" class="rounded-2 overflow-hidden">
+            <iframe src="<%= @lesson.vimeo_url.sub!("vimeo.com", "player.vimeo.com/video") %>" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <script src="https://player.vimeo.com/api/player.js"></script>
+        <% elsif @lesson.zoom_url.present? %>
+          <%= link_to image_tag(resize_to_medium_image(@lesson.featured_image), class: "img-fluid rounded-2 d-md-none"), @lesson.zoom_url, target: "_blank" %>
+          <%= link_to image_tag(resize_to_large_image(@lesson.featured_image), class: "img-fluid rounded-2 d-none d-md-block"), @lesson.zoom_url, target: "_blank" %>
+        <% elsif @lesson.igtv_url.present? %>
+          <%= link_to image_tag(resize_to_medium_image(@lesson.featured_image), class: "img-fluid rounded-2 d-md-none"), @lesson.igtv_url, target: "_blank" %>
+          <%= link_to image_tag(resize_to_large_image(@lesson.featured_image), class: "img-fluid rounded-2 d-none d-md-block"), @lesson.igtv_url, target: "_blank" %>
+        <% elsif @lesson.link? %>
+          <% lesson_link = @lesson.resource.present? ? rails_storage_proxy_path(@lesson.resource, type: "application/pdf") : @lesson.href %>
+          <%= link_to image_tag(resize_to_medium_image(@lesson.featured_image), class: "img-fluid rounded-2 d-md-none"), lesson_link, target: "_blank" %>
+          <%= link_to image_tag(resize_to_large_image(@lesson.featured_image), class: "img-fluid rounded-2 d-none d-md-block"), lesson_link, target: "_blank" %>
+        <% else %>
+          <%= image_tag resize_to_medium_image(@lesson.featured_image), class: "img-fluid d-md-none" %>
+          <%= image_tag resize_to_large_image(@lesson.featured_image), class: "img-fluid d-none d-md-block" %>
+          <%= audio_tag rails_storage_redirect_path(@lesson.audio, type: "audio/mp4"), controls: true, autoplay: false, class: "mt-4" if @lesson.audio.present? %>
+        <% end %>
+      </div>
+      <section class="mb-5 mb-md-6">
+        <div class="d-md-flex mb-5">
+          <h2 class="h4 mb-3 me-md-auto mb-md-0"><%= @lesson.title %></h2>
+          <div class="d-flex justify-content-between justify-content-md-start">
+            <div class="mx-md-4">
+              <%= render partial: "likes/button", locals: { likeable: @lesson } %>
+            </div>
+            <div>
+              <% if current_user.completed_lessons.exists?(lesson: @lesson) %>
+                <%= form_with(model: [:dashboard, current_user.completed_lessons.find_by(lesson: @lesson)], method: :delete, local: true) do |f| %>
+                  <%= button_tag "#{icon "fas", "check", class: "me-2"}Completed".html_safe, type: "submit", value: "Completed", class: "btn btn-link border-0 shadow-none p-0 d-flex align-items-center text-success" %>
+                <% end %>
+              <% else %>
+                <%= form_with(model: [:dashboard, current_user.completed_lessons.build(lesson: @lesson)], local: true) do |f| %>
+                  <%= f.hidden_field :user_id, value: current_user.id %>
+                  <%= f.hidden_field :lesson_id, value: @lesson.id %>
+                  <%= button_tag "#{icon "fas", "check", class: "me-2"}Complete".html_safe, type: "submit", value: "Complete", class: "btn btn-link border-0 shadow-none p-0 d-flex align-items-center btn-complete" %>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <div class="d-md-flex">
+          <%= display_avatar(@lesson.user, 50, "me-md-4 d-none d-md-block") %>
+          <div>
+            <div class="d-flex d-md-block mb-3 mb-md-0">
+              <%= display_avatar(@lesson.user, 50, "me-3 d-md-none") %>
+              <div>
+                <div class="h6 mb-1"><%= @lesson.user.name %></div>
+                <div class="mb-md-3"><%= expert_title(@lesson.user.name) %></div>
+              </div>
+            </div>
+            <%= simple_format(@lesson.description, class: "lead mb-0") %>
+            <% if @lesson.duration.present? %>
+              <%= convert_to_badge(:time_length, @lesson.duration, "mt-3 me-3") %>
+            <% end %>
+            <% if @lesson.start_time.present? %>
+              <%= convert_to_badge(:time_live, time(@lesson.start_time), "mt-3") %>
+            <% end %>
+            <%= link_to "Get started#{icon "fas", "angle-right", class: "ms-2"}".html_safe, lesson_link, class: "btn btn-secondary mt-4", target: "_blank" if @lesson.link? %>
+          </div>
+        </div>
+        <p class="text-end my-2">
+          <% if @category_id && @previous %>
+              <span class="me-3">
+                <a href="<%= dashboard_category_lesson_path(@category_id, @previous) %>" class="btn btn-secondary px-3 py-1">
+                  <i class="fas fa-arrow-circle-left me-3"></i> Previous
+                </a>
+              </span>
+          <% end  %>
+          <% if @category_id && @next %>
+              <span>
+                <a href="<%= dashboard_category_lesson_path(@category_id, @next) %>" class="btn btn-secondary px-3 py-1">
+                  Next <i class="fas fa-arrow-circle-right ms-3"></i>
+                </a>
+              </span>
+          <% end  %>
+        </p>
+      </section>
+      <%= render partial: "discussion", locals: {commentable: @lesson} %>
+    </div>
+  </div>
+</section>

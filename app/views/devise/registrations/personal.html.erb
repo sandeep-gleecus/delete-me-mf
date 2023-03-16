@@ -1,0 +1,46 @@
+<% meta title: "Dashboard – Settings" %>
+<% @page_title = "Settings" %>
+
+<section class="bg-white shadow rounded-2 p-4">
+  <%= render partial: "dashboard/settings/nav_tabs" %>
+  <div class="row gy-0">
+    <div class="col-xl-20 col-xxl-15">
+      <h2 class="h5 mb-1 mb-md-2">Personal</h2>
+      <p class="mb-4 mb-lg-3">Change your name, email, and how other people see you in and around <%= Rails.configuration.name %>.</p>
+      <%= render "layouts/alerts" %>
+      <% if current_user.phone_number.blank? %>
+        <div class="alert alert-warning" role="alert">
+          <%= I18n.t('personal.phone_cant_blank') %>
+        </div>
+      <% end %>
+      <%= simple_form_for resource, as: resource_name,
+                          url: dashboard_update_personal_settings_path(current_user),
+                          method: :put, validate: true, html: {class: "needs-validation js-form"},
+                          defaults: {wrapper: false} do |f| %>
+        <div class="d-md-flex mb-4">
+          <div class="js-avatar-upload mb-3 me-md-4 me-lg-5 mb-md-0">
+            <%= f.label :avatar, class: "form-label avatar avatar-xl mb-0 js-avatar-upload-label" do %>
+              <%= display_avatar(current_user, 150, "js-avatar-upload-image") %>
+              <div class="avatar-badge"><%= icon "fas", "camera" %></div>
+            <% end %>
+            <%= f.input :avatar, as: :file, label: false, input_html: {class: "visually-hidden js-avatar-upload-input"} %>
+          </div>
+          <div class="flex-grow-1">
+            <%= f.input :name, autofocus: true, autocomplete: "name", placeholder: "Name", required: true, input_html: {class: "form-control mb-3"} %>
+            <%= f.input :email, autofocus: true, autocomplete: "email", placeholder: "Email", required: true, input_html: {class: "form-control mb-3"} %>
+            <%= f.input :phone_number, autofocus: true, autocomplete: "phone", placeholder: "Phone Number", required: true,
+                        input_html: { type: 'number', class: "form-control mb-4"} %>
+            <!-- START ==== Commenting entering current_password section - uncomment it if needed and change form url to registration edit-->
+            <!--<label class="form-label email required" for="user_email">Current password</label>
+            <div class="form-text d-flex align-items-center mb-3">
+              <%#= icon "fas", "info-circle", class: "text-primary lead me-2" %>You need to confirm your password before making changes.
+            </div>
+            <%#= f.input :current_password, autocomplete: "your-password", placeholder: "Your password", label: false, required: true %>-->
+            <!-- END of current_password -->
+          </div>
+        </div>
+        <div class="text-end"><%= f.button :button, "#{icon "fas", "save", class: "fa-fw me-2"}Save".html_safe, class: "btn btn-primary" %></div>
+      <% end %>
+    </div>
+  </div>
+</section>

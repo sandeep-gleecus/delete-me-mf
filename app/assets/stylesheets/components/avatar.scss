@@ -1,0 +1,68 @@
+.avatar {
+  border-radius: $sm-border-radius;
+  height: rem(50px);
+  min-height: rem(50px);
+  min-width: rem(50px);
+  object-fit: cover;
+  position: relative;
+  width: rem(50px);
+
+  & & {
+    border-radius: inherit;
+    height: 100%;
+    width: 100%;
+  }
+
+  &-sm {
+    height: rem(38px);
+    min-height: rem(38px);
+    min-width: rem(38px);
+    width: rem(38px);
+  }
+
+  &-lg {
+    border-radius: $md-border-radius;
+    height: rem(100px);
+    min-height: rem(100px);
+    min-width: rem(100px);
+    width: rem(100px);
+  }
+
+  &-xl {
+    border-radius: $md-border-radius;
+    height: rem(150px);
+    min-height: rem(150px);
+    min-width: rem(150px);
+    width: rem(150px);
+  }
+
+  &-badge {
+    background: $primary-color;
+    border-radius: 50%;
+    bottom: 0;
+    color: $white;
+    font-size: $md-font-size / 1.5; // 12px
+    height: rem(20px);
+    line-height: rem(20px);
+    position: absolute;
+    right: 0;
+    text-align: center;
+    transform: translate(25%, 25%);
+    transition: $transition;
+    width: rem(20px);
+
+    .avatar-lg &,
+    .avatar-xl & {
+      font-size: $lg-font-size;
+      height: rem(40px);
+      line-height: rem(40px);
+      transform: translate(25%, 25%);
+      width: rem(40px);
+    }
+
+    &:hover {
+      background-color: darken($primary-color, 4%);
+      transform: translate(25%, 25%) scale(1.05);
+    }
+  }
+}

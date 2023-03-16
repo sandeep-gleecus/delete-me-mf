@@ -1,0 +1,22 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: motherfit-https
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - kind: Rule
+      match: Host(`{{ .Values.ingress.domain }}`) || Host(`www.{{ .Values.ingress.domain }}`)
+      middlewares:
+        - name: redirect-to-www
+      services:
+      - kind: Service
+        name: {{ .Release.Name }}-web
+        passHostHeader: true
+        port: 80
+        scheme: http
+  tls:
+    secretName: motherfit-tls
+    domains:
+    - main: {{ .Values.ingress.domain }}

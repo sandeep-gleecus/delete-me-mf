@@ -1,0 +1,13 @@
+.carousel {
+
+  &-inspiration {
+
+    @include media-breakpoint-up(md) {
+      max-width: rem(250px);
+    }
+
+    @include media-breakpoint-up(xl) {
+      max-width: rem(300px);
+    }
+  }
+}

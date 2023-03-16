@@ -1,0 +1,72 @@
+<% meta title: "Sign Up" %>
+<% @minimal_layout = true %>
+
+<section class="container-xl">
+  <div class="row justify-content-md-center align-items-md-center gy-6 gy-md-0 mb-5 mb-md-6 mb-xl-7">
+    <div class="col-md-12 col-lg-10 col-xl-8 col-xxl-7">
+      <h1 class="h4">Create your account today and <span class="text-primary">start free for <%= I18n.t('free_trial.try_for_days') %> days</span></h1>
+      <ul class="list-unstyled mb-0">
+        <li class="d-flex align-items-center mb-3">
+          <div><%= icon "fas", "heart", class: "fa-fw text-primary h4 mb-0 me-4" %></div>
+          <p class="lead mb-0">Support for all pregnant, postpartum and beyond mums.</p>
+        </li>
+        <li class="d-flex align-items-center mb-3">
+          <div><%= icon "fas", "users", class: "fa-fw text-primary h4 mb-0 me-4" %></div>
+          <p class="lead mb-0">Become part of and socialise in one large mum community.</p>
+        </li>
+        <li class="d-flex align-items-center">
+          <div><%= icon "fas", "clock", class: "fa-fw text-primary h4 mb-0 me-4" %></div>
+          <p class="lead mb-0">Workout, watch and learn whenever it suits you.</p>
+        </li>
+      </ul>
+    </div>
+    <div class="offset-md-1 col-md-11 col-lg-10 offset-xl-2 col-xl-8">
+      <%= render "layouts/alerts" %>
+      <%= content_for :recaptcha_v3_js do %>
+        <%= include_recaptcha_js %>
+      <% end %>
+      <%= simple_form_for resource, as: resource_name, url: registration_path(resource_name), validate: true, html: {class: "js-form"} do |f| %>
+        <%#= 'register' is action name to be verified later %>
+        <%= recaptcha_action('register') %>
+        <%= f.input :name, wrapper_html: {class: "mb-3"}, input_html: {placeholder: "Name", autocomplete: "name"} %>
+        <%= f.input :email, wrapper_html: {class: "mb-3"}, input_html: {placeholder: "Email address", autocomplete: "email"} %>
+        <%= f.input :password, wrapper_html: {class: "mb-3"}, input_html: {placeholder: "Password", autocomplete: "new-password"} %>
+        <div class="form-check mb-4">
+          <%= f.check_box :terms_and_conditions, class: "form-check-input needs-validation" %>
+          <%= f.label :terms_and_conditions, "I have read and agree to the #{link_to "terms and conditions", terms_path, target: "_blank"}".html_safe, class: "form-check-label small" %>
+        </div>
+        <%= f.button :submit, "Create account", class: "btn btn-primary w-100" %>
+        <hr class="my-4 d-none">
+        <div class="row row-cols-1 row-cols-lg-2 gy-2 gy-lg-0 d-none">
+          <div class="col">
+            <button type="button" class="btn btn-facebook w-100"><%= icon "fab", "facebook", class: "fa-fw me-3" %>Facebook</button>
+          </div>
+          <div class="col">
+            <button type="button" class="btn btn-google w-100"><%= icon "fab", "google", class: "fa-fw me-3" %>Google</button>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <div class="text-center">Have an account? <%= link_to "Sign in", new_session_path(resource_name) %></div>
+</section>
+
+<div class="modal" tabindex="-1" id="emailExistsModal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header p-3">
+        <h5 class="modal-title">Email has already been taken</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body p-3 pb-0">
+        <p>
+          Looks like you already have an account with us, <strong><a href="<%=new_session_path(resource_name) %>">click here</a></strong> to login and access your account or
+          if you've forgotten your password <strong><a href="<%= new_password_path(resource_name) %>">click here</a></strong> to reset it.
+        </p>
+      </div>
+      <div class="modal-footer p-3">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">OK</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,59 @@
+.form {
+
+  // safari browser fix
+  &-check-input,
+  &-control,
+  &-select {
+    -webkit-appearance: none;
+  }
+
+  &-select:required:invalid {
+    color: $text-color-muted; // makes select dropdowns look like they had a placeholder
+  }
+
+  &-switch {
+
+    &-inversed {
+      transform: rotate(180deg);
+    }
+
+    & .form-check-input {
+      background-color: $primary-color-light;
+      border: none;
+      height: rem(38px);
+    }
+  }
+
+  &-floating {
+    .form-label {
+      color: $text-color-muted;
+      margin-bottom: 0;
+    }
+  }
+
+  &-radio-toolbar {
+    &.is-invalid {
+      .invalid-feedback {
+        display: block;
+      }
+    }
+  }
+
+  &-avatar-upload {
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+
+.input-group {
+
+  &-text {
+    padding-right: $spacer / 3.75; // 8px
+
+    & + .form-control {
+      padding-left: $spacer / 3.75; // 8px
+    }
+  }
+}

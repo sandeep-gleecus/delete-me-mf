@@ -1,0 +1,784 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <style type="text/css">
+    #PreviewIntercomModal .ic_message_content h1,
+    #PreviewIntercomModal .ic_message_content h2 {
+      color: #0072b0 !important;
+    }
+    #PreviewIntercomModal .ic_message_without_image > .ic_message_internals > .ic_message_content {
+      border-color: #0072b0 !important;
+    }
+    #PreviewIntercomModal .ic_user_comment_body {
+      background-color: #0072b0 !important;
+      border-color: #0072b0 !important;
+    }
+    #PreviewIntercomModal .ic_message_content a {
+      color: #0072b0 !important;
+    }
+    #PreviewIntercomModal .ic_message_content a:hover {
+      color: #0072b0 !important;
+    }
+    #PreviewIntercomModal .ic_user_comment_body {
+      background-color: #0072b0 !important;
+      border-color: #0072b0 !important;
+    }
+    .intercom-h2b-button br {
+      display: none;
+    }
+  </style>
+  <style type="text/css" data-premailer="ignore">
+    /* styles in here will not be inlined. Use for media queries etc */
+    /* force Outlook to provide a "view in browser" menu link. */
+    #outlook a {padding:0;}
+    /* prevent Webkit and Windows Mobile platforms from changing default font sizes.*/
+    body{width:100% !important; -webkit-text-size-adjust:100%; -ms-text-size-adjust:100%; margin:0; padding:0;}
+    /* force Hotmail to display emails at full width */
+    .ExternalClass {width:100%;}
+    /* force Hotmail to display normal line spacing. http://www.emailonacid.com/forum/viewthread/43/ */
+    .ExternalClass, .ExternalClass p, .ExternalClass span, .ExternalClass font, .ExternalClass td, .ExternalClass div {line-height: 100%;}
+    /* fix a padding issue on Outlook 07, 10 */
+    table td {border-collapse: collapse;}
+    table {
+      table-layout: fixed;
+    }
+
+    @media only screen and (max-width: 480px)
+    {
+      br.hidden { display: block !important; }
+      td.padding_cell { display: none !important; }
+      table.message_footer_table td {
+        font-size: 11px !important;
+      }
+    }
+    @media only screen and (max-device-width: 480px)
+    {
+      br.hidden { display: block !important; }
+      td.padding_cell { display: none !important; }
+      table.message_footer_table td {
+        font-size: 11px !important;
+      }
+    }
+  </style>
+
+  <style type="text/css" data-premailer="ignore">
+    /* styles in here will not be inlined. Use for media queries etc */
+    /* force Outlook to provide a "view in browser" menu link. */
+    #outlook a {padding:0;}
+    /* prevent Webkit and Windows Mobile platforms from changing default font sizes.*/
+    body{width:100% !important; -webkit-text-size-adjust:100%; -ms-text-size-adjust:100%; margin:0; padding:0;}
+    /* force Hotmail to display emails at full width */
+    .ExternalClass {width:100%;}
+    /* force Hotmail to display normal line spacing. http://www.emailonacid.com/forum/viewthread/43/ */
+    .ExternalClass, .ExternalClass p, .ExternalClass span, .ExternalClass font, .ExternalClass td, .ExternalClass div {line-height: 100%;}
+    /* fix a padding issue on Outlook 07, 10 */
+    table td {border-collapse: collapse;}
+
+    @media only screen and (max-width: 480px)
+    {
+      br.hidden { display: block !important; }
+      td.padding_cell { display: none !important; }
+      table.message_footer_table td {
+        font-size: 11px !important;
+      }
+    }
+    @media only screen and (max-device-width: 480px)
+    {
+      br.hidden { display: block !important; }
+      td.padding_cell { display: none !important; }
+      table.message_footer_table td {
+        font-size: 11px !important;
+      }
+    }
+  </style>
+
+  <style type="text/css">
+
+    body {
+      background-color: #f9f9f9;
+    }
+
+    .content-td {
+      background-color: white
+    }
+    .admin_name b {
+      color: #6f6f6f;
+    }
+
+    .date_cell a {
+      color: #999999;
+    }
+
+    .comment_header_td {
+      width: 100%;
+      background: #ef476f;
+      border: none;
+      font-family: 'Helvetica Neue',Arial,sans-serif
+    }
+
+    .content-td {
+      color: #525252;
+      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+      font-family: Helvetica, Arial, sans-serif;
+    }
+
+    .content-td h1 {
+      font-size: 26px;
+      line-height: 33px;
+      color: #282F33;
+      margin-bottom: 7px;
+      margin-top: 30px;
+      font-weight: normal;
+    }
+
+    .content-td h1 a {
+      color: #282F33;
+    }
+
+    .content-td h2 {
+      font-size: 18px;
+      font-weight: bold;
+      color: #282F33;
+      margin: 30px 0 7px;
+    }
+
+    .content-td h2 a {
+      color: #282F33;
+    }
+
+    .content-td h1 + h2 {
+      margin-top: 0 !important;
+    }
+
+    .content-td h2 + h1 {
+      margin-top: 0 !important;
+    }
+
+    .content-td h3 ,
+    .content-td h4 ,
+    .content-td h5 {
+      font-size: 16px;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .content-td p {
+      margin: 0 0 17px 0;
+      line-height: 1.5;
+    }
+
+    .content-td p img,
+    .content-td h1 img,
+    .content-td h2 img,
+    .content-td li img,
+    .content-td .intercom-h2b-button img {
+      margin: 0;
+      padding: 0;
+    }
+
+    .content-td a {
+      color: #1251ba;
+    }
+
+    .content-td p.intro {
+      font-size: 20px;
+      line-height: 30px;
+    }
+
+    .content-td blockquote {
+      margin: 40px 0;
+      font-style: italic;
+      color: #8C8C8C;
+      font-size: 18px;
+      text-align: center;
+      padding: 0 30px;
+      font-family: Georgia, sans-serif;
+      quotes: none;
+    }
+
+    .content-td blockquote a {
+      color: #8C8C8C;
+    }
+
+    .content-td ul {
+      list-style: disc;
+      margin: 0 0 20px 40px;
+      padding: 0;
+    }
+
+    .content-td ol {
+      list-style: decimal;
+      margin: 0 0 20px 40px;
+      padding: 0;
+    }
+
+    .content-td img {
+      margin: 0;
+      max-width: 100%;
+    }
+
+    .content-td .intercom-container {
+      margin-bottom: 16px;
+    }
+
+    .content-td div.intercom-container {
+      margin-bottom: 17px;
+      margin-top: 17px;
+      line-height: 0;
+    }
+
+    .content-td table.intercom-responsive-layout-table div.intercom-container,
+    .content-td table.intercom-responsive-layout-table div.embercom-prosemirror-composer-block-container {
+      margin-top: 0;
+    }
+
+    .content-td hr {
+      border: none;
+      border-top: 1px solid #DDD;
+      border-bottom: 0;
+      margin: 50px 30% 50px 30%;
+    }
+
+    /**/
+    .content-td pre {
+      margin: 0 0 10px;
+      padding: 10px;
+      background-color: #f5f5f5;
+      overflow: auto;
+    }
+
+    .content-td pre code {
+      font-family: Courier, monospace;
+      font-size: 14px;
+      line-height: 1.4;
+      white-space: nowrap;
+    }
+
+    table.intercom-container {
+      margin: 17px 0;
+    }
+    table.intercom-container.intercom-align-center {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    table.intercom-container td {
+      background-color: #ef476f;
+      padding: 12px 35px;
+      border-radius: 3px;
+      font-family: Helvetica, Arial, sans-serif;
+      margin: 0;
+    }
+
+    .content-td .intercom-h2b-button {
+      font-size: 14px;
+      color: #FFF;
+      font-weight: bold;
+      display: inline-block;
+      text-decoration: none;
+      background-color: #ef476f;
+      border: none !important;
+
+    }
+
+    .content-td table.intercom-responsive-layout-table {
+      padding: 0;
+      width: 100%;
+      position: relative;
+      display: table;
+      border-spacing: 0;
+      border-collapse: collapse;
+      border: none;
+    }
+
+    .content-td table.intercom-responsive-layout-table td {
+      word-wrap: break-word;
+
+      -moz-hyphens: auto;
+      hyphens: auto;
+      border-spacing: 0;
+      border-collapse: collapse;
+      border: none;
+      color: #525252;
+      font-size: 15px;
+      vertical-align: top;
+      text-align: left;
+
+    }
+
+    .content-td table.intercom-responsive-layout-table td.columns {
+      margin: 0 auto;
+      padding-left: 16px;
+      padding-bottom: 16px;
+      /*min-width: none !important;*/
+      min-width: unset !important;
+    }
+
+    a.intercom-h2b-button {
+      background-color: #0E4595;
+      border-radius: 5px;
+      border: 1px solid rgba(0,0,0,0.2);
+      color:#fff;
+      display: inline-block;
+      font-size: 15px;
+      font-weight: bold;
+      min-height: 20px;
+      text-decoration: none;
+    }
+
+    .content-td .intercom-h2b-button:hover {
+      background-color:#f46486;
+    }
+
+    .message_footer_table .avatar {
+      -ms-interpolation-mode: bicubic;
+      -webkit-background-clip: padding-box;
+      -webkit-border-radius: 20px;
+      background-clip: padding-box;
+      border-radius: 20px;
+      display: inline-block;
+      height: 40px;
+      max-width: 100%;
+      outline: none;
+      text-decoration: none;
+      width: 40px;
+    }
+
+    .powered-by-table .powered-by-text a {
+      font-weight: bold;
+      text-decoration: none;
+      color: #999;
+    }
+
+    .main_wrapper {
+      padding: 0 20px;
+    }
+
+    .margin-arrow {
+      display: none;
+      visibility:hidden;
+      width:0;
+      height:0;
+      max-width: 0;
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+    }
+
+    .content-td > :first-child {
+      margin-top: 0;
+      padding-top: 0;
+    }
+
+    table.intercom-container td > a.intercom-h2b-button {
+      padding: 0px;
+    }
+
+  </style>
+
+  <!-- Responsive-->
+  <style type="text/css" data-premailer="ignore">
+
+    @media screen and (max-width: 635px) {
+      .main-wrap {
+        width: 100% !important;
+      }
+    }
+
+    @media screen and (max-width: 480px) {
+      .content-td {
+        padding: 30px 15px !important;
+      }
+      .content-td h1 {
+        margin-bottom: 5px;
+      }
+      .message_footer_table .space {
+        width: 20px !important;
+      }
+
+      .message_footer_table .arrow-wrap {
+        padding-left: 20px !important;
+      }
+
+      .message_footer_table .admin_name b{
+        display: block !important;
+      }
+
+      .main_wrapper {
+        padding: 0;
+      }
+
+      .image-arrow {
+        display: none !important;
+      }
+
+      .margin-arrow {
+        display: table !important;
+        visibility:visible !important;
+        width: 100% !important;
+        height: auto !important;
+        max-width: none !important;
+        max-height: none !important;
+        opacity: 1 !important;
+        overflow: visible !important;
+      }
+
+      .comment_body {
+        border-bottom: 1px solid #DDD !important;
+      }
+
+      .footer-td-wrapper {
+        display: block !important;
+        width: 100% !important;
+        text-align: left !important;
+      }
+      .footer-td-wrapper .date_cell {
+        text-align: left !important;
+        padding: 15px 0 0 20px !important;
+      }
+    }
+
+  </style>
+
+
+  <style type="text/css" data-premailer="ignore">
+    .content-td blockquote + * {
+      margin-top: 20px !important;
+    }
+
+    .ExternalClass .content-td h1 {
+      padding: 20px 0 !important;
+    }
+
+    .ExternalClass .content-td h2 {
+      padding: 0 0 5px !important;
+    }
+
+    .ExternalClass .content-td p {
+      padding: 10px 0 !important;
+    }
+
+    .ExternalClass .content-td .intercom-container {
+      padding: 5px 0 !important;
+    }
+
+    .ExternalClass .content-td hr + * {
+      padding-top: 30px !important;
+    }
+
+    .ExternalClass .content-td ol ,
+    .ExternalClass .content-td ul {
+      padding: 0 0 20px 40px !important;
+      margin: 0 !important;
+    }
+
+    .ExternalClass .content-td ol li,
+    .ExternalClass .content-td ul li {
+      padding: 3px 0 !important;
+      margin: 0 !important;
+    }
+    .content-td > :first-child {
+      margin-top: 0 !important;
+      padding-top: 0 !important;
+    }
+
+    .ExternalClass .content-td > :first-child {
+      margin-top: 0 !important;
+      padding-top: 0 !important;
+    }
+  </style>
+
+
+
+  <style type="text/css">
+    .intercom-align-right {
+      text-align: right !important;
+    }
+    .intercom-align-center {
+      text-align: center !important;
+    }
+    .intercom-align-left {
+      text-align: left !important;
+    }
+    /* Over-ride for RTL */
+    .right-to-left .intercom-align-right{
+      text-align: left !important;
+    }
+    .right-to-left .intercom-align-left{
+      text-align: right !important;
+    }
+    .right-to-left .intercom-align-left {
+      text-align:right !important;
+    }
+    .right-to-left li {
+      text-align:right !important;
+      direction: rtl;
+    }
+    .right-to-left .intercom-align-left img,
+    .right-to-left .intercom-align-left .intercom-h2b-button {
+      margin-left: 0 !important;
+    }
+    .intercom-attachment,
+    .intercom-attachments,
+    .intercom-attachments td,
+    .intercom-attachments th,
+    .intercom-attachments tr,
+    .intercom-attachments tbody,
+    .intercom-attachments .icon,
+    .intercom-attachments .icon img {
+      border: none !important;
+      box-shadow: none !important;
+      padding: 0 !important;
+      margin: 0 !important;
+    }
+    .intercom-attachments {
+      margin: 10px 0 !important;
+    }
+    .intercom-attachments .icon,
+    .intercom-attachments .icon img {
+      width: 16px !important;
+      height: 16px !important;
+    }
+    .intercom-attachments .icon {
+      padding-right: 5px !important;
+    }
+    .intercom-attachment {
+      display: inline-block !important;
+      margin-bottom: 5px !important;
+    }
+
+    .intercom-interblocks-content-card {
+      width: 334px !important;
+      max-height: 136px !important;
+      max-width: 100% !important;
+      overflow: hidden !important;
+      border-radius: 20px !important;
+      font-size: 16px !important;
+      border: 1px solid #e0e0e0 !important;
+    }
+
+    .intercom-interblocks-link,
+    .intercom-interblocks-article-card {
+      text-decoration: none !important;
+    }
+
+    .intercom-interblocks-article-icon {
+      width: 22.5% !important;
+      height: 136px !important;
+      float: left !important;
+      background-color: #fafafa !important;
+      /*background-image: url('https://mother-fit.intercom-mail.com/assets/article_book-1a595be287f73c0d02f548f513bfc831.png') !important;*/
+      background-repeat: no-repeat !important;
+      background-size: 32px !important;
+      background-position: center !important;
+    }
+
+    .intercom-interblocks-article-text {
+      width: 77.5% !important;
+      float: right !important;
+      background-color: #fff !important;
+    }
+
+    .intercom-interblocks-link-title,
+    .intercom-interblocks-article-title {
+      color: #519dd4 !important;
+      font-size: 15px !important;
+      margin: 16px 18px 12px !important;
+      line-height: 1.3em !important;
+      overflow: hidden !important;
+    }
+
+    .intercom-interblocks-link-description,
+    .intercom-interblocks-article-body {
+      margin: 0 18px 12px !important;
+      font-size: 14px !important;
+      color: #65757c !important;
+      line-height: 1.3em !important;
+    }
+
+    .intercom-interblocks-link-author,
+    .intercom-interblocks-article-author {
+      margin: 10px 15px !important;
+      height: 24px !important;
+      line-height: normal !important;
+    }
+
+    .intercom-interblocks-link-author-avatar,
+    .intercom-interblocks-article-author-avatar {
+      width: 16px !important;
+      height: 16px !important;
+      display: inline-block !important;
+      vertical-align: middle !important;
+      float: left;
+      margin-right: 5px;
+    }
+
+    .intercom-interblocks-link-author-avatar-image,
+    .intercom-interblocks-article-author-avatar-image {
+      width: 16px !important;
+      height: 16px !important;
+      border-radius: 50% !important;
+      margin: 0 !important;
+      vertical-align: top !important;
+      font-size: 12px !important;
+    }
+
+    .intercom-interblocks-link-author-name,
+    .intercom-interblocks-article-author-name {
+      color: #74848b !important;
+      margin: 0 0 0 5px !important;
+      font-size: 12px !important;
+      font-weight: 500 !important;
+      overflow: hidden !important;
+    }
+
+    .intercom-interblocks-article-written-by {
+      color: #8897a4 !important;
+      margin: 1px 0 0 5px !important;
+      font-size: 12px !important;
+      overflow: hidden !important;
+      vertical-align: middle !important;
+      float: left !important;
+    }
+
+    small {
+      display: block;
+    }
+
+  </style>
+
+
+
+  <style>
+    * img[src*="googleusercontent.com"][alt="intercomavatar"] {
+      display: none !important;
+    }
+  </style>
+
+  <style id="message_level_styles">
+
+    .intercom-template-body,
+    table.intercom-template-body {
+      background-color: #FDF5E1;
+    }
+
+  </style>
+
+</head>
+<body class="intercom-template-body" style="background-color: #FDF5E1" bgcolor="#FDF5E1">
+<div style="color:transparent;visibility:hidden;opacity:0;font-size:0px;border:0;max-height:1px;width:1px;margin:0px;padding:0px;border-width:0px!important;display:none!important;line-height:0px!important;">
+  <img border="0" width="1" height="1"
+       src="https://mother-fit.intercom-mail.com/q/gVXdiKFP5WGCqXpg-2AgAQ~~/AAAAAQA~/RgRkoDClPVcIaW50ZXJjb21CCmK8pau9Yq5F2M1SE3NhbmRlZXBAZ2xlZWN1cy5jb21YBAAEMOA~" alt=""/>
+</div>
+
+<style type="text/css">
+  body {
+    background-color: #f9f9f9;
+  }
+</style>
+
+<table cellpadding="0" cellspacing="0" border="0" class="bgtc personal" align="center" style="border-collapse: collapse; line-height: 100% !important; margin: 0; padding: 0; width: 100% !important">
+  <tbody>
+  <tr>
+    <td>
+      <!--[if (gte mso 10)]>
+      <tr>
+        <td>
+          <table style="width: 600px">
+      <![endif]-->
+      <table style="border-collapse: collapse; margin: auto; max-width: 635px; min-width: 320px; width: 100%" class="main-wrap">
+        <tbody>
+        <tr>
+          <td valign="top">
+            <table cellpadding="0" cellspacing="0" border="0" class="reply_header_table" style="border-collapse: collapse; color: #c0c0c0; font-family: 'Helvetica Neue',Arial,sans-serif; font-size: 13px; line-height: 26px; margin: 0 auto 26px; width: 100%">
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top" class="main_wrapper" style="padding: 0 20px">
+
+            <table cellpadding="0" cellspacing="0" border="0" class="comment_wrapper_table admin_comment" align="center" style="-webkit-background-clip: padding-box; -webkit-border-radius: 3px; background-clip: padding-box; border-collapse: collapse; border-radius: 3px; color: #545454; font-family: 'Helvetica Neue',Arial,sans-serif; font-size: 13px; line-height: 20px; margin: 0 auto 10px; width: 100%">
+              <tbody>
+              <tr>
+                <td valign="top" class="comment_wrapper_td">
+                  <table cellpadding="0" cellspacing="0" border="0" class="comment_body" style="-webkit-background-clip: padding-box; background-clip: padding-box; border-bottom-style: none; border-collapse: collapse; width: 100%">
+                    <tbody>
+                    <tr>
+                      <%= yield %>
+                    </tr>
+                    </tbody>
+                  </table>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+            <table cellpadding="0" cellspacing="0" border="0" class="message_footer_table" align="center" style="border-collapse: collapse; color: #545454; font-family: 'Helvetica Neue',Arial,sans-serif; font-size: 13px; line-height: 20px; margin: 0 auto; max-width: 100%; width: 100%">
+              <tbody><tr>
+              </tr></tbody>
+            </table>
+            <table width="100%" cellpadding="0" cellspacing="0" border="0">
+              <tbody>
+              <tr>
+                <td width="75%" class="footer-td-wrapper">
+                  <table width="100%" cellpadding="0" cellspacing="0" border="0" style="border-collapse: collapse; color: #545454; font-family: 'Helvetica Neue',Arial,sans-serif; font-size: 13px; line-height: 20px; margin: 0 auto; max-width: 100%; width: 100%" class="message_footer_table">
+                    <tbody>
+                    <tr>
+                      <td width="40" class="space"> </td>
+
+                      <td valign="middle" width="50" style="color: #272727" align="left">
+                        <%= mailer_image_tag('mailers/we-are-mother-fit.jpeg',
+                                             height: 40, width: 40,
+                                             class: "avatar",
+                                             alt: "intercomavatar",
+                                             style: "-ms-interpolation-mode: bicubic; -webkit-background-clip: padding-box; -webkit-border-radius: 20px; background-clip: padding-box; border-radius: 20px; display: inline-block; height: 40px; max-width: 100%; outline: none; text-decoration: none; width: 40px") %>
+                      </td>
+
+                      <td class="admin_name" style="color: #999999">
+                        <b style="color: #6f6f6f">Michelle</b> from Mother Fit
+
+                      </td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </td>
+                <td width="25%" class="footer-td-wrapper">
+                  <table width="100%" cellpadding="0" cellspacing="0" border="0" style="border-collapse: collapse; color: #545454; font-family: 'Helvetica Neue',Arial,sans-serif; font-size: 13px; line-height: 20px; margin: 0 auto; max-width: 100%; width: 100%" class="message_footer_table">
+                    <tbody>
+                    <tr>
+                      <td valign="middle" align="right" class="date_cell" style="color: #999999; font-size: 11px; text-align: right">
+                        <a href="#" style="color: #999999">Unsubscribe from our emails</a>
+                      </td>
+                    </tr>
+                    <tr>
+                    </tr>
+                    </tbody>
+                  </table>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td valign="top" height="20"></td>
+  </tr>
+  </tbody>
+</table>
+<!--[if (gte mso 10)]>
+</td>
+</tr>
+</table>
+<![endif]-->
+
+<table style="border-collapse: collapse; color: #545454; font-family: 'Helvetica Neue',Arial,sans-serif; font-size: 13px; letter-spacing: 0.02em; line-height: 20px; margin: 0 auto; max-width: 100%; width: 100%" class="powered-by-table">
+  <tbody>
+  </tbody>
+</table>
+
+</body>
+</html>

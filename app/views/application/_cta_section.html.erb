@@ -1,0 +1,9 @@
+<section class="container-xl text-center py-6 py-lg-7 py-xl-8">
+  <% if user_signed_in? %>
+    <h2 class="mb-4 mb-lg-5">Continue your <%= Rails.configuration.name %> journey</h2>
+    <%= link_to "Go to dashboard", dashboard_root_path, class: "btn btn-secondary btn-lg" %>
+  <% else %>
+    <h2 class="mb-4 mb-lg-5">Join the <%= Rails.configuration.name %> community today</h2>
+    <%= link_to "Try free for #{I18n.t('free_trial.try_for_days')} days", new_user_registration_path, class: "btn btn-secondary btn-lg" %>
+  <% end %>
+</section>

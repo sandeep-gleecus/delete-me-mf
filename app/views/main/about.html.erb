@@ -1,0 +1,64 @@
+<%
+  meta title: "About",
+  description: ""
+%>
+
+<% @simple_header_layout = true %>
+
+<%= content_for :hero do %>
+  <div class="container-xl">
+    <div class="row text-center justify-content-center g-0 py-6 py-lg-7 py-xl-8">
+      <div class="col-lg-20 col-xl-18">
+        <h1 class="mb-0">About</h1>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<section class="container-xl image-wrapper-start py-6 py-lg-7 py-xl-8">
+  <div class="row align-items-center gy-4 gy-md-5 gx-lg-6 gy-lg-0 gx-xl-7 gx-xxl-8">
+    <div class="col-lg-10 col-xl-11 col-xxl-12">
+      <%= image_tag "about/hello-ladies.jpg", alt: "#{Rails.configuration.name} says hello", title: "#{Rails.configuration.name} says hello", class: "image-wrapper-start-image img-fluid d-lg-none" %>
+      <%= image_tag "about/hello-ladies-lg.jpg", alt: "#{Rails.configuration.name} says hello", title: "#{Rails.configuration.name} says hello", class: "image-wrapper-start-image img-fluid d-none d-lg-block d-xl-none" %>
+      <%= image_tag "about/hello-ladies-xl.jpg", alt: "#{Rails.configuration.name} says hello", title: "#{Rails.configuration.name} says hello", class: "image-wrapper-start-image img-fluid d-none d-xl-block" %>
+    </div>
+    <div class="col-lg">
+      <h2>Hey ladies!</h2>
+      <p class="lead"><%= Rails.configuration.name %> is the brainchild of me, Michelle Baynham. As the Founder, mum and pregnancy and postpartum expert, I’m here to support you on your mental and physical journey of motherhood.</p>
+      <p class="lead mb-0">My purpose is seeped in giving new mums a holistic approach to parenting, and I strive to look after your mind, body and soul in Pregnancy, Postpartum and Beyond.</p>
+    </div>
+  </div>
+</section>
+<section class="container-xl image-wrapper-end py-6 py-lg-7 py-xl-8">
+  <div class="row align-items-center gy-4 gy-md-5 gx-lg-6 gy-lg-0 gx-xl-7 gx-xxl-8">
+    <div class="col-lg-10 col-xl-11 col-xxl-12">
+      <%= image_tag "about/how-it-started.jpg", alt: "How #{Rails.configuration.name}started", title: "How #{Rails.configuration.name}started", class: "image-wrapper-end-image img-fluid d-lg-none" %>
+      <%= image_tag "about/how-it-started-lg.jpg", alt: "How #{Rails.configuration.name}started", title: "How #{Rails.configuration.name}started", class: "image-wrapper-end-image img-fluid d-none d-lg-block d-xl-none" %>
+      <%= image_tag "about/how-it-started-xl.jpg", alt: "How #{Rails.configuration.name}started", title: "How #{Rails.configuration.name}started", class: "image-wrapper-end-image img-fluid d-none d-xl-block" %>
+    </div>
+    <div class="order-lg-first col-lg">
+      <h2>How it started…</h2>
+      <p class="lead">With two girls, aged 7 and 8 years old, born 18-months apart, I found myself struggling after the birth of my second daughter, and was diagnosed with postnatal depression. The ‘juggle struggle’ of two children so close in age, a house renovation, and keeping up with every day tasks became too much, and I turned to exercise as my one constant, and a way in which to carve out some ‘me’ time in our very busy schedule. As a result, I found this not only helped me physically, but worked wonders for my mental health.</p>
+      <p class="lead mb-0">Believing it’s essential to get moving whatever stage of pregnancy or motherhood you’re in, I was shocked to find little to no resources online to help. So, taking my desire to offer other pregnant and new mums the same escapism and meditation element of exercise that inspired me, <%= Rails.configuration.name %> was born.</p>
+    </div>
+  </div>
+</section>
+<section class="container-xl image-wrapper-start py-6 py-lg-7 py-xl-8">
+  <div class="row align-items-center gy-4 gy-md-5 gx-lg-6 gy-lg-0 gx-xl-7 gx-xxl-8">
+    <div class="col-lg-10 col-xl-11 col-xxl-12">
+      <%= image_tag "about/how-its-going.jpg", alt: "How #{Rails.configuration.name} is going", title: "How #{Rails.configuration.name} is going", class: "image-wrapper-start-image img-fluid d-lg-none" %>
+      <%= image_tag "about/how-its-going-lg.jpg", alt: "How #{Rails.configuration.name} is going", title: "How #{Rails.configuration.name} is going", class: "image-wrapper-start-image img-fluid d-none d-lg-block d-xl-none" %>
+      <%= image_tag "about/how-its-going-xl.jpg", alt: "How #{Rails.configuration.name} is going", title: "How #{Rails.configuration.name} is going", class: "image-wrapper-start-image img-fluid d-none d-xl-block" %>
+    </div>
+    <div class="col-lg">
+      <h2>How it’s going…</h2>
+      <p class="lead"><%= Rails.configuration.name %> has gone from strength to strength since its inception. I am a qualified Pre & Postnatal Level 3 Fitness Trainer, Core Exercise Solutions certified pregnancy and postpartum corrective exercise specialist, Nutritional Advisor for Weight Management, and have years of experience supporting women through their journeys before, during and after having a baby.</p>
+      <p class="lead">A proud accolade is being the author of my nutrition book, ‘What Would <%= Rails.configuration.name %> Eat.’ This offers handy tips and recipes to keep your food intake on track and goes hand-in-hand with the unique and engaging workouts I design especially for you. These encompass every stage of pregnancy, postpartum and beyond, being mindful of how you might be feeling mentally and physically at each step.</p>
+      <p class="lead">Due to my own motherhood experience, I am able to connect and relate to each and every <%= Rails.configuration.name %> member. I know first hand that feeling empowered by like-minded mums is key on this journey, which is why I created the <%= Rails.configuration.name %> community. Together we share our experiences, recipes, workout together and champion each other as we navigate the tricky path that is parenthood. Joining us will give you access to this group of supportive and motivational women.</p>
+      <p class="lead mb-0">Fundamentally, I am here to guide you through your journey back to yourself, and being a happier, healthier version of you.</p>
+    </div>
+  </div>
+</section>
+<%= render partial: "motherhood_community" %>
+<hr>
+<%= render partial: "cta_section" %>

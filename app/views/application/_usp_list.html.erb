@@ -1,0 +1,53 @@
+<section class="container-xl py-6 py-lg-7 py-xl-8">
+  <h2 class="text-center mb-5 mb-lg-6 mb-xl-7">Everything you need, and more</h2>
+  <ul class="row justify-content-center gy-5 gx-md-5 gx-xl-7 gy-xl-6 list-unstyled text-center text-lg-start mb-5 mb-lg-6 mb-xl-7">
+    <%= render partial: "usp_list_item", locals: {title: "Dashboard", description: "A motherhood-specific dashboard just for you.", icon: "th-large"} %>
+    <%= render partial: "usp_list_item", locals: {title: "Calendar", description: "Keep track of upcoming live and on-demand classes.", icon: "calendar-alt", icon_style: "far"} %>
+    <%= render partial: "usp_list_item", locals: {title: "Live", description: "Live videos covering workouts, yoga, advice, chats and more.", icon: "video"} %>
+    <% if controller.action_name == "index" %>
+      <%= render partial: "usp_list_item", locals: {title: "Nutrition and recipes", description: "Calorie-counted meal plans for every stage of motherhood.", icon: "apple-alt"} %>
+      <%= render partial: "usp_list_item", locals: {title: "Mind", description: "Meditation, relaxation and more to help manage stress and anxiety.", icon: "brain"} %>
+      <%= render partial: "usp_list_item", locals: {title: "Body", description: "Pregnancy-safe, postpartum rehab, and beyond home workouts.", icon: "heartbeat"} %>
+      <%= render partial: "usp_list_item", locals: {title: "Challenges", description: "Regular challenges helping you keep accountable and motivated.", icon: "trophy"} %>
+      <%= render partial: "usp_list_item", locals: {title: "Community", description: "Join our supportive community of like-minded mums.", icon: "user"} %>
+      <%= render partial: "usp_list_item", locals: {title: "Experts", description: "Advice and resources from our experts to support your motherhood.", icon: "user-graduate"} %>
+      <%= render partial: "usp_list_item", locals: {title: "Journaling", description: "Record your thoughts and feelings throughout your journey.", icon: "book-open"} %>
+      <%= render partial: "usp_list_item", locals: {title: "Buddy up workouts", description: "Find a buddy and reach your goals faster together.", icon: "user-friends"} %>
+    <% elsif controller.action_name == "pregnancy" %>
+      <%= render partial: "usp_list_item", locals: {title: "Nutrition and recipes", description: "To nourish both you and your growing baby.", icon: "apple-alt"} %>
+      <%= render partial: "usp_list_item", locals: {title: "Mind", description: "Meditation, relaxation and more to help manage stress and anxiety.", icon: "brain"} %>
+      <%= render partial: "usp_list_item", locals: {title: "Body", description: "Pregnancy-safe home workouts, yoga and pilates.", icon: "heartbeat"} %>
+      <%= render partial: "usp_list_item", locals: {title: "Fetal development", description: "Week-by-week development of your baby from conception to birth.", icon: "baby"} %>
+      <%= render partial: "usp_list_item", locals: {title: "Community", description: "Join our supportive community of like-minded mums-to-be.", icon: "user"} %>
+      <%= render partial: "usp_list_item", locals: {title: "Experts", description: "Hypnobirthing, antenatal advice and pregnancy-specific resources.", icon: "user-graduate"} %>
+      <%= render partial: "usp_list_item", locals: {title: "Journaling", description: "Record your thoughts and feelings throughout your journey.", icon: "book-open"} %>
+      <%= render partial: "usp_list_item", locals: {title: "Buddy up", description: "Buddy up with other pregnant women and share your experiences.", icon: "user-friends"} %>
+    <% elsif controller.action_name == "postpartum" %>
+      <%= render partial: "usp_list_item", locals: {title: "Nutrition and recipes", description: "To nourish you throughout your recovery and beyond.", icon: "apple-alt"} %>
+      <%= render partial: "usp_list_item", locals: {title: "Mind", description: "Meditation, relaxation and more to help manage stress and anxiety.", icon: "brain"} %>
+      <%= render partial: "usp_list_item", locals: {title: "Body", description: "Postpartum rehabilitation workouts, yoga and pilates.", icon: "heartbeat"} %>
+      <%= render partial: "usp_list_item", locals: {title: "Challenges", description: "Regular challenges helping you keep accountable and motivated.", icon: "trophy"} %>
+      <%= render partial: "usp_list_item", locals: {title: "Community", description: "Join our supportive community of like-minded mums.", icon: "user"} %>
+      <%= render partial: "usp_list_item", locals: {title: "Experts", description: "Advice and resources from our experts to support your motherhood.", icon: "user-graduate"} %>
+      <%= render partial: "usp_list_item", locals: {title: "Journaling", description: "Record your thoughts and feelings throughout your journey.", icon: "book-open"} %>
+      <%= render partial: "usp_list_item", locals: {title: "Buddy up workouts", description: "Find a buddy and reach your goals faster together.", icon: "user-friends"} %>
+    <% elsif controller.action_name == "beyond" %>
+      <%= render partial: "usp_list_item", locals: {title: "Nutrition and recipes", description: "Exclusive calorie and macro-counted meal plans.", icon: "apple-alt"} %>
+      <%= render partial: "usp_list_item", locals: {title: "Mind", description: "Meditation, relaxation and more to help manage stress and anxiety.", icon: "brain"} %>
+      <%= render partial: "usp_list_item", locals: {title: "Body", description: "Aerobic and strength workouts done from the comfort of your home.", icon: "heartbeat"} %>
+      <%= render partial: "usp_list_item", locals: {title: "Challenges", description: "Regular challenges helping you keep accountable and motivated.", icon: "trophy"} %>
+      <%= render partial: "usp_list_item", locals: {title: "Community", description: "Join our supportive community of like-minded mums.", icon: "user"} %>
+      <%= render partial: "usp_list_item", locals: {title: "Experts", description: "Advice and resources from our experts to support your motherhood.", icon: "user-graduate"} %>
+      <%= render partial: "usp_list_item", locals: {title: "Journaling", description: "Record your thoughts, feelings and weight loss progression.", icon: "book-open"} %>
+      <%= render partial: "usp_list_item", locals: {title: "Buddy up workouts", description: "Find a buddy and reach your goals faster together.", icon: "user-friends"} %>
+    <% end %>
+    <%= render partial: "usp_list_item", locals: {title: "Accessible anywhere", description: "Available any time on any device for everything you need.", icon: "mobile-alt"} %>
+  </ul>
+  <div class="text-center">
+    <% if user_signed_in?%>
+      <%= link_to "Go to dashboard", dashboard_root_path, class: "btn btn-secondary btn-lg" %>
+    <% else %>
+      <%= link_to "Try free for #{I18n.t('free_trial.try_for_days')} days", new_user_registration_path, class: "btn btn-secondary btn-lg" %>
+    <% end %>
+  </div>
+</section>

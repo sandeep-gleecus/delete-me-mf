@@ -1,0 +1,76 @@
+.badge {
+	display: inline-flex;
+
+	&-sm {
+    border-radius: $sm-border-radius;
+    font-size: $md-font-size / 1.5; // 12px
+    padding: $spacer / 6 $spacer / 5; // 5px 6px
+	}
+
+  &-primary {
+    background-color: $primary-color-light;
+    color: $primary-color;
+  }
+
+  &-secondary {
+    background-color: $warning-color-light;
+    color: $warning-color;
+  }
+
+  &-secondary-brand {
+    background-color: $secondary-color-lighter;
+    color: $secondary-color-dark;
+  }
+
+  &-success {
+    background-color: $success-color-light;
+    color: $success-color;
+  }
+
+  &-info {
+    background-color: $info-color-light;
+    color: $info-color;
+  }
+
+  &-warning {
+    background-color: $warning-color-light;
+    color: $warning-color;
+  }
+
+  &-danger {
+    background-color: $danger-color-light;
+    color: $danger-color;
+  }
+
+  &-accent {
+    background-color: $accent-color-light;
+    color: $accent-color;
+  }
+
+  &-highlight {
+    background-color: $highlight-color-light;
+    color: $highlight-color;
+  }
+
+  &-icon {
+    background: $primary-color;
+    border-radius: 50%;
+    bottom: 0;
+    color: white;
+    font-size: $xs-font-size;
+    height: rem(25px);
+    line-height: rem(25px);
+    position: absolute;
+    right: 0;
+    text-align: center;
+    transform: translate(25%, 25%);
+    width: rem(25px);
+
+    &-sm {
+      font-size: $lg-font-size / 2; // 10px
+      height: rem(20px);
+      line-height: rem(20px);
+      width: rem(20px);
+    }
+  }
+}

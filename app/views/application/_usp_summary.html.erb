@@ -1,0 +1,51 @@
+<% if video_guide_pregnancy || video_guide_postpartum %>
+  <script src="https://player.vimeo.com/api/player.js"></script>
+<% end %>
+
+<section class="container-xl py-6 py-lg-7 py-xl-8">
+  <div class="row text-center justify-content-center gy-0 mb-5 mb-lg-6 mb-xl-7">
+    <div class="col-lg-20 col-xl-18">
+      <h2><%= title %></h2>
+    </div>
+
+    <% if video_guide_pregnancy %>
+      <div class="col-lg-10 col-xl-11 col-xxl-12 d-flex flex-column">
+        <div class="card p-3 card-animated">
+          <div style="padding:125% 0 0 0;position:relative;">
+            <iframe src="https://player.vimeo.com/video/788959622?h=4a3a957aed&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Mother Fit Guide - Pregnancy"></iframe>
+          </div>
+        </div>
+      </div>
+    <% end %>
+    <% if video_guide_postpartum %>
+      <div class="col-lg-10 col-xl-11 col-xxl-12 d-flex flex-column">
+        <div class="card p-3 card-animated">
+          <div style="padding:125% 0 0 0;position:relative;">
+            <iframe src="https://player.vimeo.com/video/787893028?h=ec3b6f3948&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Mother Fit Guide"></iframe>
+          </div>
+        </div>
+      </div>
+    <% end %>
+
+    <div class="col-lg-20 col-xl-18 pt-3">
+      <p class="lead-xl mb-0"><%= support_text %></p>
+    </div>
+  </div>
+  <div class="row text-center text-md-start row-cols-1 row-cols-md-3 row-cols-xl-3 justify-content-center gy-5 gx-md-5 gx-lg-6 gy-xl-0 gx-xxl-8">
+    <div class="col">
+      <span class="tile tile-primary tile-xl mb-4"><%= icon "fas", "brain" %></span>
+      <h2 class="h3 mb-3">Mind</h2>
+      <p class="lead mb-0"><%= mind_text %></p>
+    </div>
+    <div class="col">
+      <span class="tile tile-primary tile-xl mb-4"><%= icon "fas", "heartbeat" %></span>
+      <h2 class="h3 mb-3">Body</h2>
+      <p class="lead mb-0"><%= body_text %></p>
+    </div>
+    <div class="col">
+      <span class="tile tile-primary tile-xl mb-4"><%= icon "fas", "heart" %></span>
+      <h2 class="h3 mb-3">Soul</h2>
+      <p class="lead mb-0"><%= soul_text %></p>
+    </div>
+  </div>
+</section>

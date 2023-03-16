@@ -1,0 +1,41 @@
+<% meta title: "Dashboard - Food Entries" %>
+<% @page_title = "Food Entries" %>
+
+<div class="row row-cols-1 gy-4">
+  <% if current_user.beyond? %>
+    <div class="col">
+      <section class="bg-white rounded-2 shadow p-4">
+        <div class="d-flex align-items-center">
+          <div class="tile tile-warning tile-lg me-2"><%= icon "fas", "utensils" %></div>
+          <div class="ms-2">
+            <div class="h4 mb-0"><%= number_with_delimiter(@calories_burned_today) %><small class="ms-1">kcal</small></div>
+            <% if current_user.beyond_full_setup? %>
+              <small>of <span class="fw-bolder text-dark"><%= number_with_delimiter(current_user.daily_calorie_goal) %></span> calorie goal</small>
+            <% else %>
+              <div class="x-small lh-base"><%= link_to "Complete your setup", edit_user_registration_path %> to calculate a calorie goal.</div>
+            <% end %>
+          </div>
+        </div>
+      </section>
+    </div>
+  <% end %>
+  <div class="col">
+    <section class="bg-white rounded-2 shadow p-4">
+      <div class="row gy-0">
+        <div class="col-xxl-16">
+          <div class="d-flex justify-content-between mb-3 mb-md-4">
+            <h2 class="h5 mb-0">Recent</h2>
+            <%= link_to "New#{icon "fas", "plus", class: "x-small ms-2"}".html_safe, new_dashboard_food_entry_path, class: "btn btn-link btn-sm shadow-none border-0 p-0" %>
+          </div>
+          <% if @food_entries.exists? %>
+            <div class="row row-cols-1 gy-4">
+              <%= render @food_entries %>
+            </div>
+          <% else %>
+            <p class="small mb-0">You have no food entries. You can add one <%= link_to "here.", new_dashboard_food_entry_path %></p>
+          <% end %>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>

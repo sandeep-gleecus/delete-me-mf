@@ -1,0 +1,18 @@
+.footer {
+
+	&-brand img {
+		height: rem(75px);
+
+		@include media-breakpoint-up(md) {
+			height: rem(75px);
+		}
+
+		@include media-breakpoint-up(lg) {
+			height: rem(88px);
+		}
+	}
+
+	.nav-link {
+		color: $text-color-light;
+	}
+}

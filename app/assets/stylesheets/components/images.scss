@@ -1,0 +1,38 @@
+.image {
+
+  &-centered-shadow {
+    position: relative;
+
+    &::before {
+      border-radius: $md-border-radius * 5; // 50px
+      box-shadow: $lg-box-shadow;
+      content: "";
+      height: calc(100% - 8px);
+      left: 4px;
+      position: absolute;
+      top: 4px;
+      width: calc(100% - 8px);
+      z-index: -1;
+    }
+  }
+
+  &-arrow {
+    top: rem(-160px);
+    left: rem(260px);
+
+    @include media-breakpoint-up(md) {
+      top: rem(-130px);
+      left: rem(390px);
+    }
+
+    @include media-breakpoint-up(lg) {
+      top: rem(-100px);
+      left: rem(50px);
+    }
+
+    @include media-breakpoint-up(xl) {
+      top: rem(-110px);
+      left: rem(90px);
+    }
+  }
+}

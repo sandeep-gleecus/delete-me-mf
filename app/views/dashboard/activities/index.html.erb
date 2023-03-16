@@ -1,0 +1,38 @@
+<% meta title: "Dashboard - Activities" %>
+<% @page_title = "Activities" %>
+
+<div class="row row-cols-1 gy-4">
+  <% if current_user.beyond? %>
+    <div class="col">
+      <section class="bg-white rounded-2 shadow p-4">
+        <div class="d-flex align-items-center">
+          <div class="tile tile-accent tile-lg me-2"><%= icon "fas", "dumbbell" %></div>
+          <div class="ms-2">
+            <div class="h4 mb-0"><%= @activity_time_today %><small class="ms-1">mins</small></div>
+            <small>across <span class="fw-bolder text-dark"><%= current_user.activities.size %></span> activities</small>
+          </div>
+        </div>
+      </section>
+    </div>
+  <% end %>
+  <div class="col">
+    <section class="bg-white rounded-2 shadow p-4">
+      <div class="row gy-0">
+        <div class="col-xxl-16">
+          <div class="d-flex justify-content-between mb-3 mb-md-4">
+            <h2 class="h5 mb-0">Recent</h2>
+            <%= link_to "New#{icon "fas", "plus", class: "x-small ms-2"}".html_safe, new_dashboard_activity_path, class: "btn btn-link btn-sm shadow-none border-0 p-0" %>
+          </div>
+          <% if @activities.exists? %>
+            <div class="row row-cols-1 gy-4">
+              <%= render @activities %>
+            </div>
+          <% else %>
+            <p class="small mb-0">You have no BODY activities added, add one <%= link_to "here", new_dashboard_activity_path %>.</p>
+          <% end %>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+

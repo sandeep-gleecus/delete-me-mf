@@ -1,0 +1,37 @@
+<section class="bg-gradient-secondary-sm py-6 py-lg-7 py-xl-8">
+  <div class="container-xl">
+    <div class="row text-center justify-content-center gy-0 mb-5 mb-lg-6 mb-xl-7">
+      <div class="col-lg-20 col-xl-18">
+        <h2>Join a motherhood community</h2>
+        <p class="lead-xl mb-4 mb-xl-5">Here to support, uplift and guide you through your new motherhood journey, <%= Rails.configuration.name %> connects you with like-minded women to help with your health and happiness.</p>
+        <%= link_to (image_tag "facebook-logo.svg", width: 160), Rails.configuration.facebook_url, target: "_blank", rel: "noopener", class: "d-md-none" %>
+        <%= link_to (image_tag "facebook-logo.svg", width: 190), Rails.configuration.facebook_url, target: "_blank", rel: "noopener", class: "d-none d-md-inline" %>
+      </div>
+    </div>
+  </div>
+  <div class="container-xl image-wrapper">
+    <div class="row row-cols-1 row-cols-md-3 gy-4 gy-md-0 gx-md-3 gx-xl-3 gy-xl-0">
+      <div class="col-md-9 d-flex flex-column">
+        <div class="image-wrapper-image-start-container bg-white flex-grow-1">
+          <%= image_tag "motherhood-community/mother-laughing.jpg", class: "image-wrapper-image-start img-fluid img-cover w-100 h-100 d-md-none" %>
+          <%= image_tag "motherhood-community/mother-laughing-md.jpg", class: "image-wrapper-image-start img-fluid img-cover w-100 h-100 d-none d-md-block" %>
+        </div>
+      </div>
+      <div class="col-md-7 d-flex flex-column">
+        <div class="bg-white flex-grow-1 rounded-3 p-2 p-md-3">
+          <%= image_tag "motherhood-community/mothers-meeting.jpg", class: "img-fluid img-cover w-100 h-100 rounded-2 d-md-none" %>
+          <%= image_tag "motherhood-community/mothers-meeting-md.jpg", class: "img-fluid img-cover w-100 h-100 rounded-2 d-none d-md-block" %>
+        </div>
+      </div>
+      <div class="col-md-8 d-flex flex-column">
+        <div class="image-wrapper-image-end-container bg-white flex-grow-1">
+          <%= image_tag "motherhood-community/mother-carrying-baby.jpg", class: "image-wrapper-image-end img-fluid img-cover w-100 h-100 d-md-none" %>
+          <%= image_tag "motherhood-community/mother-carrying-baby-md.jpg", class: "image-wrapper-image-end img-fluid img-cover w-100 h-100 d-none d-md-block" %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container-xl">
+    <%= render partial: "reviews", locals: {overlap_comments: true} %>
+  </div>
+</section>

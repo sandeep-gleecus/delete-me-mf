@@ -1,0 +1,57 @@
+<div class="<%= "bg-gradient-secondary-sm" unless @minimal_layout || current_page?(defence_case_study_path)  %>">
+  <div class="position-relative mb-5 mb-md-0">
+    <nav class="navbar navbar-expand-xl navbar-<%= @simple_header_layout ? "dark" : "light" %> <%= "pb-0 mb-6 mb-lg-7" if @minimal_layout %>">
+      <div class="container-xl align-items-start">
+        <%= link_to root_path, class: "navbar-brand #{"mx-auto" if @minimal_layout}" do %>
+          <%= image_tag "logo#{"-dark" if @simple_header_layout || @minimal_layout}.png", alt: "#{Rails.configuration.name} logo", title: "#{Rails.configuration.name} logo" %>
+        <% end %>
+        <% unless @minimal_layout %>
+          <button class="navbar-toggler" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample"aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            <span class="navbar-toggler-icon"></span>
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+            <div class="offcanvas-header align-items-start mb-3">
+              <%= link_to root_path, class: "navbar-brand" do %>
+                <%= image_tag "logo-dark.png", alt: "#{Rails.configuration.name} logo", title: "#{Rails.configuration.name} logo" %>
+              <% end %>
+              <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+              <ul class="navbar-nav d-block d-xl-flex align-items-center ms-auto">
+                <% if user_signed_in? %>
+                  <%= link_to "Pregnancy", pregnancy_path, class: "nav-link" %>
+                  <%= link_to "Postpartum", postpartum_path, class: "nav-link" %>
+                  <%= link_to "Beyond", beyond_path, class: "nav-link" %>
+                  <%= link_to "Pricing", pricing_path, class: "nav-link" %>
+                  <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "nav-link mb-3 mb-xl-0" %>
+                  <%= link_to "Admin", rails_admin_path, class: "btn btn-secondary d-block ms-xl-4 mb-3 mb-xl-0" if current_user.admin? %>
+                  <%= link_to "Dashboard", dashboard_root_path, class: "btn btn-primary d-block ms-xl-3" %>
+                <% else %>
+                  <%= link_to "Pregnancy", pregnancy_path, class: "nav-link" %>
+                  <%= link_to "Postpartum", postpartum_path, class: "nav-link" %>
+                  <%= link_to "Beyond", beyond_path, class: "nav-link" %>
+                  <%= link_to "Pricing", pricing_path, class: "nav-link" %>
+                  <%= link_to "Log in", new_user_session_path, class: "nav-link mb-3 mb-xl-0" %>
+                  <%= link_to "Try for free", new_user_registration_path, class: "btn btn-primary d-block ms-xl-4" %>
+                <% end %>
+              </ul>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </nav>
+    <%= yield :hero %>
+  </div>
+
+  <% unless @simple_header_layout || @minimal_layout || current_page?(defence_case_study_path) %>
+    <div class="container-xl d-flex justify-content-center justify-content-md-end">
+      <%= link_to Rails.configuration.trustpilot_url, target: "_blank", class: "d-flex flex-row flex-md-column flex-lg-row align-items-end justify-content-end header-appraisal", rel: "noopener" do %>
+        <%= image_tag "trustpilot/trustpilot-logo.svg", class: "header-appraisal-image me-3 me-md-0 mb-md-3 mb-lg-0 me-lg-3 me-xl-4" %>
+        <%= image_tag "trustpilot/trustpilot-stars.svg", class: "header-appraisal-image " %>
+      <% end %>
+    </div>
+  <% end %>
+  <%= yield :entry_section %>
+</div>

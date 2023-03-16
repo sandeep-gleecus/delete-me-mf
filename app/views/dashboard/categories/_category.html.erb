@@ -1,0 +1,23 @@
+<% horizontal_style ||= false %>
+<% category_completed = category.completed?(current_user) %>
+
+<article class="col">
+  <div class="<%= "row align-items-center g-3 gx-sm-4" if horizontal_style %>">
+    <div class="<%= "col-md-9 col-lg-6" if horizontal_style %>">
+      <%= link_to dashboard_category_path(category), class: "d-block rounded-2 position-relative #{"mb-3" unless horizontal_style}" do %>
+        <% if horizontal_style %>
+          <%= image_tag resize_to_medium_image(category.featured_image), class: "img-fluid rounded-2 #{"opacity-50" if category_completed}" %>
+        <% else %>
+          <%= image_tag resize_to_medium_image(category.featured_image), class: "img-fluid rounded-2 #{"opacity-50" if category_completed}" %>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="<%= "col-md" if horizontal_style %>">
+      <h3 class="<%= horizontal_style ? "h5" : "h6" %> mb-0"><%= link_to category.title, dashboard_category_path(category), class: "text-reset" %></h3>
+      <% if horizontal_style %>
+        <p class="mb-0"><%= category.description %></p>
+      <% end %>
+      <%= "<div class='badge badge-sm badge-success mb-2'>#{icon "fas", "check", class: "fa-fw me-1"}Completed</div>".html_safe if category_completed %>
+    </div>
+  </div>
+</article>

@@ -1,0 +1,5 @@
+<li class="page-item">
+  <span class="first page-link btn">
+    <%= link_to_unless current_page.first?, t('First').html_safe, url, remote: remote %>
+  </span>
+</li>

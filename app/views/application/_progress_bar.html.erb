@@ -1,0 +1,36 @@
+<% start_label ||= false %>
+<% end_label ||= false %>
+<% callout_label ||= false %>
+<% callout_text ||= false %>
+
+<div class="d-flex justify-content-between mb-1">
+  <% if start_label %>
+    <span class="x-small"><%= convert_to_short_date(start_label) %></span>
+  <% end %>
+  <% if end_label %>
+    <span class="x-small"><%= convert_to_short_date(end_label) %></span>
+  <% end %>
+</div>
+<div class="js-progress-bar-wrapper">
+  <div class="progress">
+    <div class="progress-bar rounded-2 bg-primary js-progress-bar" role="progressbar" style="width: <%= percentage %>%" aria-valuenow="<%= percentage %>" aria-valuemin="0" aria-valuemax="100" data-value="<%= percentage %>"></div>
+  </div>
+  <div class="card-tooltip card rounded-2 shadow-lg d-inline-block p-0 js-progress-bar-tooltip">
+    <div class="card-body d-flex align-items-center p-3">
+      <span class="tile tile-primary tile-sm me-3">
+        <%= progress_week_icon(current_user) %>
+      </span>
+      <p class="mb-0">
+        <span class="d-block h6 small text-primary mb-1">
+          <% case current_user.pregnancy_week %>
+          <% when 0, 1, 2 %>
+            Week 0-2
+          <% else  %>
+            <%= callout_label %>
+          <% end %>
+        </span>
+        <span class="d-block x-small lh-1 mb-0"><%= callout_text %></span>
+      </p>
+    </div>
+  </div>
+</div>

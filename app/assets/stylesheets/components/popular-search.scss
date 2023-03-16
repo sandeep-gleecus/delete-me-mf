@@ -1,0 +1,46 @@
+/* search icon (maginifier) relaatd */
+.seach-main {
+  width: 60%;
+  margin: 50px auto;
+}
+.has-search .form-control {
+  padding-left: 2.375rem;
+  padding-left: 3.1rem;
+
+}
+.has-search .form-control-feedback {
+  position: absolute;
+  z-index: 2;
+  display: block;
+  width: 2.375rem;
+  height: 2.375rem;
+  line-height: 2.375rem;
+  text-align: center;
+  pointer-events: none;
+  color: #aaa;
+  margin: 8px;
+  width: 40px;
+  padding-left: 11px;
+}
+
+/* Popular Search related */
+#popular-searches-list.list-group{
+  max-height: 300px;
+  margin-bottom: 10px;
+  overflow:scroll;
+  -webkit-overflow-scrolling: touch;
+}
+
+#popular-searches-list.list-group ul li:hover,
+#popular-searches-list.list-group ul li:hover a {
+  margin-left: -10px;
+  padding-left: 10px;
+  background-color: #13118C;
+  color: white;
+  font-weight: bold;
+  width: 100%;
+}
+
+#popular-searches-list .list-group-item a {
+  color: black !important;
+}

@@ -1,0 +1,19 @@
+<article class="d-flex align-items-center mt-4">
+	<div class="tile tile-primary <%= local_assigns[:preview] ? "tile-lg" : "tile-xl" %> flex-column position-relative me-3 me-md-4">
+    <div class="<%= local_assigns[:preview] ? "h6" : "h5" %> text-primary mb-0"><%= activity.date.day %></div>
+    <div class="<%= local_assigns[:preview] ? "x-small" : "small" %> text-dark fw-bold"><%= activity.date.strftime("%b") %></div>
+    <span class="<%= local_assigns[:preview] ? "badge-icon badge-icon-sm" : "badge-icon" %>">
+      <%= activity_icon(activity.activity_type) %>
+      <span class="visually-hidden">Activity type</span>
+    </span>
+	</div>
+  <div>
+    <% if local_assigns[:preview] %>
+      <h6 class="small mb-0"><%= link_to activity.title, dashboard_activity_path(activity), class: "text-reset" %></h6>
+    <% else %>
+      <h6 class="mb-0"><%= link_to activity.title, dashboard_activity_path(activity), class: "text-reset" %></h6>
+    <% end %>
+    <%= convert_to_badge(:calories_burned, activity.calories_burned, "badge-sm align-self-md-start me-1 mt-2") %>
+    <%= convert_to_badge(:time_recorded, activity.time_spent, "badge-sm align-self-md-start mt-2") %>
+  </div>
+</article>

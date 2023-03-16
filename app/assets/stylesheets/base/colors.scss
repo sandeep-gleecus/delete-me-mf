@@ -1,0 +1,118 @@
+.bg-primary-light {
+	background-color: $primary-color-light;
+}
+
+.bg-secondary-light {
+	background-color: $secondary-color-light;
+}
+
+.bg-gradient-secondary {
+	background: linear-gradient(180deg,  $secondary-color-light 0%, $white 80%);
+
+	&-sm {
+		background: linear-gradient(180deg,  $secondary-color-light 10%, $white 100%);
+	}
+}
+
+.solid-gradient-primary-light-sm {
+	background: linear-gradient(180deg, $white 3%, $primary-color-light 3%);
+
+	@include media-breakpoint-up(md) {
+		background: linear-gradient(180deg, $white 8%, $primary-color-light 8%);
+	}
+
+	@include media-breakpoint-up(lg) {
+		background: linear-gradient(180deg, $white 12%, $primary-color-light 12%);
+	}
+
+	@include media-breakpoint-up(xl) {
+		background: linear-gradient(180deg, $white 15%, $primary-color-light 15%);
+	}
+}
+
+.solid-gradient-primary-light-md {
+	background: linear-gradient(180deg, $white 10%, $primary-color-light 10%);
+
+	@include media-breakpoint-up(md) {
+		background: linear-gradient(180deg, $white 15%, $primary-color-light 15%);
+	}
+
+	@include media-breakpoint-up(lg) {
+		background: linear-gradient(180deg, $white 20%, $primary-color-light 20%);
+	}
+
+	@include media-breakpoint-up(xl) {
+		background: linear-gradient(180deg, $white 30%, $primary-color-light 30%);
+	}
+}
+
+.text-color-light {
+	color: $text-color-light;
+}
+
+.link-instagram {
+	color: $instagram-color;
+	transition: $transition;
+
+	&:hover,
+	&:active {
+		color: darken($instagram-color, 8%);
+	}
+}
+
+.link-facebook {
+	color: $facebook-color;
+	transition: $transition;
+
+	&:hover,
+	&:active {
+		color: darken($facebook-color, 8%);
+	}
+}
+
+.link-twitter {
+	color: $twitter-color;
+	transition: $transition;
+
+	&:hover,
+	&:active {
+		color: darken($twitter-color, 8%);
+	}
+}
+
+.link-youtube {
+	color: $youtube-color;
+	transition: $transition;
+
+	&:hover,
+	&:active {
+		color: darken($youtube-color, 8%);
+	}
+}
+
+.link-linkedin {
+  color: $linkedin-color;
+
+  &:hover,
+  &:focus {
+    color: darken($linkedin-color, 10%);
+  }
+}
+
+.link-reddit {
+  color: $reddit-color;
+
+  &:hover,
+  &:focus {
+    color: darken($reddit-color, 10%);
+  }
+}
+
+.link-whatsapp {
+  color: $whatsapp-color;
+
+  &:hover,
+  &:focus {
+    color: darken($whatsapp-color, 10%);
+  }
+}

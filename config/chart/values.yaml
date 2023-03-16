@@ -1,0 +1,51 @@
+global:
+  storageClass: civo-volume
+
+image:
+  repository: "registry.gitlab.com/motherfit/website"
+  tag: "latest"
+  pullSecretDockerConfig: ""
+
+intercom:
+  accessToken: ""
+
+sendgrid:
+  apiKey: ""
+
+stripe:
+  monthlyPlanId: ""
+  publishableKey: ""
+  secretKey: ""
+  webhookSecretKey: ""
+  yearlyPlanId: ""
+
+recaptcha_v3:
+  siteKey: ""
+  secretKey: ""
+
+postgresql-ha:
+  postgresql:
+    database: mother_fit_production
+    username: mother_fit
+    password: be04d04cfb3534565b8dbbdcd53808ed5a
+    repmgrPassword: 1cf8afe9e49d6f8843e6d8d0e0f0725df63e
+    podAntiAffinityPreset: hard
+  pgpool:
+    adminPassword: 3e0a8aa59f7954c675c0f74bf9dc
+
+ingress:
+  domain: motherfit.co.uk
+
+minio:
+  mode: standalone
+  resources:
+    requests:
+      memory: 2Gi
+  persistence:
+    size: 50Gi
+  rootUser: rootuser
+  rootPassword: bbe927f0a9bd6ee07d9e990cfb1f452882b20312de400d266
+  buckets:
+  - name: bucket1
+    policy: none
+    purge: false

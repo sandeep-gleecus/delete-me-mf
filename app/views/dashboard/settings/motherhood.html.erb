@@ -1,0 +1,107 @@
+<% meta title: "Dashboard – Settings" %>
+<% @page_title = "Settings" %>
+
+<section class="bg-white shadow rounded-2 p-4">
+  <%= render partial: "dashboard/settings/nav_tabs" %>
+  <div class="row gy-0">
+    <div class="col-xl-20 col-xxl-15">
+      <h2 class="h5 mb-1 mb-md-2">Motherhood</h2>
+      <p class="mb-4 mb-lg-5">Review your motherhood stage and change information about your journey.</p>
+      <%= render "layouts/alerts" %>
+      <%= simple_form_for current_user,
+                          url: dashboard_update_motherhood_settings_path(current_user),
+                          method: :put, validate: true,
+                          html: {class: "js-form"}, defaults: {wrapper: false} do |f| %>
+        <h3 class="h6 mb-3">What stage of motherhood are you at?</h3>
+        <nav class="form-radio-toolbar row gy-3 gx-md-3 gy-md-0 nav nav-pills mb-4 mb-lg-5 js-radio-toolbar" id="nav-pregnancyTab" role="tablist">
+          <% User::MOTHERHOOD_STAGES.each do |motherhood_stage| %>
+            <div class="col-md">
+              <%= f.radio_button :motherhood_stage, motherhood_stage, checked: f.object.motherhood_stage == motherhood_stage.to_s, class: "btn-check" %>
+              <%= f.label "#{:motherhood_stage}_#{motherhood_stage}", data: {"bs-toggle": "tab", "bs-target": "#nav-#{motherhood_stage}"}, role: "tab", aria: {controls: "nav-#{motherhood_stage}"}, id: "nav-#{motherhood_stage}-tab", class: "btn btn-form-control w-100 #{"active" if f.object.motherhood_stage == motherhood_stage.to_s}" do %>
+                <div class="text-primary mb-1"><%= get_motherhood_stage_icon(motherhood_stage.to_s) %></div>
+                <%= motherhood_stage.capitalize %>
+              <% end %>
+            </div>
+            <p class="invalid-feedback mb-0">Please choose one of the above</p>
+          <% end %>
+        </nav>
+        <div class="tab-content mb-4" id="nav-pregnancyTabContent">
+          <div class="tab-pane fade <%= "active show" if f.object.motherhood_stage == "pregnancy" %> mt-3" id="nav-pregnancy" role="tabpanel" aria-labelledby="nav-pregnancy-tab">
+            <div class="row gy-0">
+              <div class="col-md-13 col-xl-15 col-xxl-14">
+                <%= f.label :pregnancy_due_date, "When is your due date?", class: "form-label" %>
+                <div class="input-group has-validation">
+                  <span class="input-group-text"><%= icon "fas", "calendar-alt" %></span>
+                  <%= f.input :pregnancy_due_date, as: :string, label: false, input_html: {autocomplete: "off", class: "js-datepicker js-birth-date", value: (f.object.pregnancy_due_date.to_date.strftime("%d/%m/%Y") rescue nil), data: {"start-view": "days"}} %>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane fade <%= "active show" if f.object.motherhood_stage == "postpartum" %> mt-3" id="nav-postpartum" role="tabpanel" aria-labelledby="nav-postpartum-tab">
+            <div class="row gy-0">
+              <div class="col-md-13 col-xl-15 col-xxl-14">
+                <%= f.label :birth_date, "When did you give birth?", class: "form-label" %>
+                <div class="input-group has-validation">
+                  <span class="input-group-text"><%= icon "fas", "calendar-alt" %></span>
+                  <%= f.input :birth_date, as: :string, label: false, input_html: {autocomplete: "off", class: "js-datepicker js-birth-date", value: (f.object.birth_date.to_date.strftime("%d/%m/%Y") rescue nil), data: {"max-date": DateTime.now.to_s} } %>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane fade <%= "active show" if f.object.motherhood_stage == "beyond" %> mt-3" id="nav-beyond" role="tabpanel" aria-labelledby="nav-beyond-tab">
+            <h3 class="h6 mb-3">About your journey<span class="fw-normal text-muted ms-1">optional</span></h3>
+            <div class="row gy-3 gx-md-3 mb-3">
+              <div class="col-md-12">
+                <%= f.label :most_recent_birth_date, "When was your last baby?", class: "form-label" %>
+                <div class="input-group has-validation">
+                  <span class="input-group-text"><%= icon "fas", "calendar-alt" %></span>
+                  <%= f.input :most_recent_birth_date, as: :string, label: false, input_html: {autocomplete: "off", class: "js-datepicker js-birth-date", value: (f.object.most_recent_birth_date.to_date.strftime("%d/%m/%Y") rescue nil), data: {"max-date": DateTime.now.to_s} } %>
+                </div>
+              </div>
+              <div class="col-md-12">
+                <%= f.label :date_of_birth, "What is your date of birth?", class: "form-label" %>
+                <div class="input-group has-validation">
+                  <span class="input-group-text"><%= icon "fas", "calendar-alt" %></span>
+                  <%= f.input :date_of_birth, as: :string, label: false, input_html: {autocomplete: "off", class: "js-datepicker js-birth-date", value: (f.object.date_of_birth.to_date.strftime("%d/%m/%Y") rescue nil), data: {"max-date": DateTime.now.to_s} } %>
+                </div>
+              </div>
+              <div class="col-md-12">
+                <%= f.input :height, label: "Height (cm)", class: "form-control" %>
+              </div>
+              <div class="col-md-12">
+                <%= f.simple_fields_for :weight_entries, current_user.weight_entries.build do |weight_form| %>
+                  <%= weight_form.input :weight, label: "Weight (kg)", input_html: {value: (current_user.weight_entries.where.not(id: nil).last.weight rescue nil), class: "form-control"} %>
+                <% end %>
+              </div>
+            </div>
+            <%= f.label :fitness_goal, "What’s your fitness goal?", class: "form-label" %>
+            <div class="row gy-3 gx-md-3 gy-md-0 mb-3">
+              <% User::FITNESS_GOAL.each do |fitness_goal| %>
+                <div class="col-md">
+                  <%= f.radio_button :fitness_goal, fitness_goal, checked: f.object.fitness_goal == fitness_goal.to_s, class: "btn-check" %>
+                  <%= f.label "#{:fitness_goal}_#{fitness_goal}", class: "btn btn-form-control w-100" do %>
+                    <div class="text-primary mb-1"><%= get_fitness_goal_icon(fitness_goal) %></div>
+                    <%= fitness_goal.capitalize.to_s.gsub("_", " ") %>
+                  <% end %>
+                </div>
+              <% end %>
+            </div>
+            <%= f.label :activity_multiplier, "How active are you?", class: "form-label" %>
+            <div class="row gy-3 gx-md-3 gy-md-0">
+              <% User::ACTIVITY_MULTIPLIER.each do |activity_multiplier| %>
+                <div class="col-md">
+                  <%= f.radio_button :activity_multiplier, activity_multiplier, checked: f.object.activity_multiplier == activity_multiplier.to_s, class: "btn-check" %>
+                  <%= f.label "#{:activity_multiplier}_#{activity_multiplier}", class: "btn btn-form-control w-100" do %>
+                    <div class="text-primary mb-1"><%= get_activity_multiplier_icon(activity_multiplier) %></div>
+                    <%= activity_multiplier.capitalize %>
+                  <% end %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <div class="text-end"><%= f.button :button, "#{icon "fas", "save", class: "fa-fw me-2"}Save".html_safe, class: "btn btn-primary" %></div>
+      <% end %>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,41 @@
+<section class="bg-primary-light py-6 py-lg-7 py-xxl-8">
+  <div class="container-xl">
+    <div class="row text-center justify-content-center gy-0 mb-5 mb-lg-6 mb-xl-7">
+      <div class="col-lg-20 col-xl-18">
+        <h2 class="<%= "mb-0" unless local_assigns[:text] %>"><%= heading %></h2>
+        <%= "<p class='lead-xl mb-0'>#{text}</p>".html_safe if local_assigns[:text] %>
+      </div>
+    </div>
+  </div>
+  <div class="splide js-workouts-slider">
+    <div class="splide__track">
+      <ul class="splide__list">
+        <% if controller.action_name == "pregnancy" %>
+          <%= render partial: "card", locals: {title: "Upper body", image_path: "classes/upper-body.jpg", is_slider_item: true, classes: "h-100"} %>
+          <%= render partial: "card", locals: {title: "Lower body", image_path: "classes/lower-body.jpg", is_slider_item: true, classes: "h-100"} %>
+          <%= render partial: "card", locals: {title: "Pilates", image_path: "classes/pilates.jpg", is_slider_item: true, classes: "h-100"} %>
+          <%= render partial: "card", locals: {title: "Yoga", image_path: "classes/yoga.jpg", is_slider_item: true, classes: "h-100"} %>
+          <%= render partial: "card", locals: {title: "Meditation", image_path: "classes/meditation.jpg", is_slider_item: true, classes: "h-100"} %>
+          <%= render partial: "card", locals: {title: "Resistance bands", image_path: "classes/resistance-bands.jpg", is_slider_item: true, classes: "h-100"} %>
+          <%= render partial: "card", locals: {title: "Breathwork", image_path: "classes/breathwork-2.jpg", is_slider_item: true, classes: "h-100"} %>
+        <% elsif controller.action_name == "postpartum" %>
+          <%= render partial: "card", locals: {title: "Upper body", image_path: "classes/upper-body-1.jpg", is_slider_item: true, classes: "h-100"} %>
+          <%= render partial: "card", locals: {title: "Lower body", image_path: "classes/lower-body.jpg", is_slider_item: true, classes: "h-100"} %>
+          <%= render partial: "card", locals: {title: "With your child", image_path: "classes/with-your-child.jpg", is_slider_item: true, classes: "h-100"} %>
+          <%= render partial: "card", locals: {title: "Yoga", image_path: "classes/yoga.jpg", is_slider_item: true, classes: "h-100"} %>
+          <%= render partial: "card", locals: {title: "Breathwork", image_path: "classes/breathwork.jpg", is_slider_item: true, classes: "h-100"} %>
+          <%= render partial: "card", locals: {title: "Core", image_path: "classes/core.jpg", is_slider_item: true, classes: "h-100"} %>
+        <% elsif controller.action_name == "beyond" %>
+          <%= render partial: "card", locals: {title: "Upper body", image_path: "classes/upper-body-1.jpg", is_slider_item: true, classes: "h-100"} %>
+          <%= render partial: "card", locals: {title: "Lower body", image_path: "classes/lower-body.jpg", is_slider_item: true, classes: "h-100"} %>
+          <%= render partial: "card", locals: {title: "HIIT", image_path: "classes/hiit.jpg", is_slider_item: true, classes: "h-100"} %>
+          <%= render partial: "card", locals: {title: "Full body workout", image_path: "classes/full-body.jpg", is_slider_item: true, classes: "h-100"} %>
+          <%= render partial: "card", locals: {title: "Breathwork", image_path: "classes/breathwork.jpg", is_slider_item: true, classes: "h-100"} %>
+          <%= render partial: "card", locals: {title: "Yoga", image_path: "classes/yoga.jpg", is_slider_item: true, classes: "h-100"} %>
+          <%= render partial: "card", locals: {title: "Core", image_path: "classes/core.jpg", is_slider_item: true, classes: "h-100"} %>
+          <%= render partial: "card", locals: {title: "Arms and abs", image_path: "classes/arms-and-abs.jpg", is_slider_item: true, classes: "h-100"} %>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</section>

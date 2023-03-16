@@ -1,0 +1,79 @@
+<% meta title: "Cancelation" %>
+<% @minimal_layout = true %>
+
+<div class="container-xl">
+  <div class="row justify-content-center">
+    <div class="col col-lg-19 text-center">
+      <div id="onboardingCarousel" class="carousel slide js-onboarding-carousel" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <section class="step step-visible step-started js-onboarding-step" data-step="1">
+              <h1 class="h4 mb-2">We're sorry to see you go</h1>
+              <p>Would you be able to leave us some feedback to help us improve <%= Rails.configuration.name %> for the future</p>
+              <div class="row row-cols-2 row-cols-lg-3 g-3 mb-3">
+                <div class="col">
+                  <div class="btn btn-form-control w-100 h-100">
+                    <div class="text-primary mb-1"><%= icon "fas", "briefcase-medical" %></div>
+                    <p class="mb-0">injury/medical reasons</p>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="btn btn-form-control w-100 h-100">
+                    <div class="text-primary mb-1"><%= icon "fas", "tools" %></div>
+                    Technical issues
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="btn btn-form-control w-100 h-100">
+                    <div class="text-primary mb-1"><%= icon "fas", "stopwatch" %></div>
+                    I don't use <%= Rails.configuration.name %> enough
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="btn btn-form-control w-100 h-100">
+                    <div class="text-primary mb-1"><%= icon "fas", "money-bill" %></div>
+                    <%= Rails.configuration.name %> is too expensive
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="btn btn-form-control w-100 h-100">
+                    <div class="text-primary mb-1"><%= icon "fas", "undo" %></div>
+                    Im leaving but i intend to return
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="btn btn-form-control w-100 h-100">
+                    <div class="text-primary mb-1"><%= icon "fas", "comment-dots" %></div>
+                    Other
+                  </div>
+                </div>
+              </div>
+              <div class="form-control mb-4">
+              </div>
+              <button type="button" class="btn btn-primary" data-action="click->onboarding#nextStep">Continue<%= icon "fas", "angle-right", class: "fa-sm ms-1" %></button>
+              <%#= link_to "Continue #{icon "fas", "angle-right", class: "fa-sm ms-1"}".html_safe, "/canceltwo", class: "btn btn-primary" %>
+            </section>
+          </div>
+          <div class="carousel-item">
+            <section class="step js-onboarding-step" data-step="2">
+              <div class="row g-0">
+                <div class="col-lg-9 mb-7 mb-lg-0 me-lg-7">
+                  <%= image_tag "motherhood-community/mother-holding-happy-baby.jpg", class: "img-fluid w-100 rounded-2 d-lg-none" %>
+                  <%= image_tag "motherhood-community/mother-holding-happy-baby-lg.jpg", class: "img-fluid w-100 rounded-2 d-none d-lg-block" %>
+                </div>
+                <div class="col text-center text-lg-start align-self-center">
+                  <%= icon "fas", "gift", class: "text-primary h3 mb-2" %>
+                  <h1 class="h4 mb-4">We would like to offer you an <span class="text-primary">free two week extention</span> of your membership</h1>
+                  <div class="d-flex">
+                    <%= button_tag( "I want to stay", class:"btn btn-primary me-3 w-100") %>
+                    <%= button_tag( "I want to cancel", class:"btn btn-cancel text-primary w-100") %>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

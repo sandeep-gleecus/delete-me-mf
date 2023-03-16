@@ -1,0 +1,72 @@
+<% meta title: "Cancellation" %>
+<% @minimal_layout = true %>
+
+<%= simple_form_for current_user, url: subscriptions_update_path(current_user), html: {class: "js-cancelation-form"} do |f| %>
+  <div class="container-xl">
+    <div class="row justify-content-center">
+      <div class="col-lg-18 text-center">
+        <div id="cancelationCarousel" class="carousel slide js-cancelation-carousel">
+          <section class="carousel-inner px-2 py-1">
+            <div class="carousel-item active">
+              <h1 class="h4 mb-2">We're sorry to see you go</h1>
+              <p class="mb-4 mb-md-5">Would you be able to leave us some feedback to help us improve <%= Rails.configuration.name %> for the future</p>
+              <%= f.simple_fields_for :cancellations, current_user.cancellations.build do |cancellation_form| %>
+                <%# TODO: remove below content as we checking detail is only mandatory %>
+                <!--<div class="form-radio-toolbar row row-cols-1 row-cols-md-3 justify-content-center g-3 mb-3 js-radio-toolbar">
+                  <%# Cancellation::REASON.each do |k, reason| %>
+                    <div class="col">
+                      <%#= cancellation_form.radio_button :reason, k, checked: false, class: "btn-check" %>
+                      <%#= cancellation_form.label "reason_#{k}", class: "btn btn-form-control w-100 h-100" do %>
+                        <div class="text-primary mb-1"><%#= icon "fas", reason[:icon] %></div>
+                        <p class="mb-0"><%#= reason[:text] %></p>
+                      <%# end %>
+                    </div>
+                  <%# end %>
+                  <p class="invalid-feedback mt-3 mb-0">Please choose one of the above</p>
+                </div>-->
+                <%= cancellation_form.text_area :detail, rows: 5,
+                                                placeholder: "Please, give us more details, so that we can keep improving our platform.",
+                                                class: "form-control mb-4 mb-md-0",
+                                                required: true,
+                                                minlength: 20,
+                                                maxlength: 500
+                %>
+                <p id="cancellation-details-invalid" class="invalid-feedback mt-1 mb-2">field is mandatory with minimum of 20 and maximum of 500 characters</p>
+              <% end %>
+              <button type="button" class="btn btn-primary mt-3" data-bs-target="#cancelationCarousel" data-bs-slide="next">
+                Continue<%= icon "fas", "angle-right", class: "fa-sm ms-1" %>
+              </button>
+            </div>
+            <div class="carousel-item">
+              <div class="row gx-lg-5 gx-xl-7 gy-5 gy-lg-0">
+                <div class="col-lg-11">
+                  <%= image_tag "motherhood-community/mother-holding-happy-baby.jpg", class: "img-fluid w-100 rounded-2 d-lg-none" %>
+                  <%= image_tag "motherhood-community/mother-holding-happy-baby-lg.jpg", class: "img-cover w-100 h-100 rounded-2 d-none d-lg-block" %>
+                </div>
+                <div class="col text-center text-lg-start align-self-center">
+                  <% trialing = current_user.subscription['status'].eql?('trialing') %>
+                  <% if trialing && !current_user.free_subscription_extended? %>
+                    <span class="tile tile-primary tile-xl mb-4"><%= icon "fas", "gift" %></span>
+                    <h2 class="h4">Two weeks of <%= Rails.configuration.name %> for <span class="text-primary">free!</span></h2>
+                    <p class="lead mb-4">As a thank you for being a part of the <%= Rails.configuration.name %> community, we'd like to offer you a free <span class="fw-bold text-dark">two week extension</span> if you decide to stay.</p>
+                    <div class="d-flex justify-content-center justify-content-lg-start">
+                      <%= f.button :submit, "I want to stay", name: 'go_for_extension', class: "btn btn-primary me-2" %>
+                      <%= f.button :submit, "I want to cancel now", name: "cancel_now", class: "btn btn-link" %>
+                    </div>
+                  <% else %>
+                    <h2 class="h4">Thank you for being part of <%= Rails.configuration.name %>  <span class="text-primary">family!</span></h2>
+                    <p class="lead mb-4">We hope to see you back here soon.</p>
+                    <div class="d-flex justify-content-center justify-content-lg-start">
+                      <%= f.button :submit, "I want to stay", name: 'want_to_stay', class: "btn btn-primary me-2" %>
+                      <%= f.button :submit, "I want to cancel now", name: "cancel_now", class: "btn btn-link" %>
+                    </div>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

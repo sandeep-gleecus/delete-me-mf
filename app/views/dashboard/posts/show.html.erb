@@ -1,0 +1,17 @@
+<% meta title: "Blog - #{@post.get_meta_title}" %>
+<% meta description: @post.get_meta_description %>
+<% @page_title = "Blog" %>
+
+<section class="bg-white shadow rounded-2 p-4 mb-4">
+  <div class="row">
+    <div class="col-xxl-12">
+      <h2 class="h3 mb-4"><%= @post.title.html_safe %></h2>
+      <%= image_tag resize_to_medium_image(@post.featured_image), class: "img-fluid rounded-2 mb-4 d-md-none" %>
+      <%= image_tag resize_to_large_image(@post.featured_image), class: "img-fluid rounded-2 mb-5 d-none d-md-block" %>
+      <div class="mb-4"><%= @post.body %></div>
+      <%= render partial: "author_strip", locals: {sharing: true, object: @post} %>
+      <div class="mb-3"><%= render partial: "likes/button", locals: {likeable: @post} %></div>
+      <%= render partial: "discussion", locals: {commentable: @post} %>
+    </div>
+  </div>
+</section>

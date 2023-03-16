@@ -1,0 +1,79 @@
+<% if @minimal_layout %>
+  <hr class="mt-6 mt-lg-7">
+  <div class="container-xl py-4">
+    <div class="row gy-3 gy-md-0">
+      <div class="col-md">
+        <div class="text-color-light small text-center text-md-start">&copy; <%= Date.current.year %> <%= Rails.configuration.name %></div>
+      </div>
+      <div class="col-md-auto">
+        <nav class="nav justify-content-center">
+          <%= link_to "Terms", terms_path, class: "nav-link text-color-light" %>
+          <%= link_to "Privacy", privacy_path, class: "nav-link text-color-light mx-4" %>
+          <%= link_to "Cookies", cookies_path, class: "nav-link text-color-light" %>
+        </nav>
+      </div>
+    </div>
+  </div>
+<% else %>
+  <hr>
+  <div class="footer container-xl py-6 py-lg-7 py-xl-8">
+    <div class="row justify-content-center justify-content-md-between gy-5 gy-xl-0 mb-6 mb-lg-7 mb-xl-8">
+      <div class="col-auto">
+        <%= link_to root_path, class: "footer-brand" do %>
+          <%= image_tag "logo-dark.png" %>
+        <% end %>
+      </div>
+      <div class="col-md-auto">
+        <div class="d-flex flex-column flex-md-row text-center text-md-start">
+          <div class="mb-5 mb-md-0">
+            <h6 class="small mb-2 mb-md-3"><%= Rails.configuration.name %></h6>
+            <nav class="nav flex-column">
+              <%= link_to "Pregnancy", pregnancy_path, class: "nav-link mb-2" %>
+              <%= link_to "Postpartum", postpartum_path, class: "nav-link mb-2" %>
+              <%= link_to "Beyond", beyond_path, class: "nav-link mb-2" %>
+              <%= link_to "Pricing", pricing_path, class: "nav-link" %>
+            </nav>
+          </div>
+          <div class="mb-5 mb-md-0 mx-md-6 mx-lg-7 mx-xl-8">
+            <h6 class="small mb-2 mb-md-3">More</h6>
+            <nav class="nav flex-column">
+              <%= link_to "About", about_path, class: "nav-link mb-2" %>
+              <%= link_to "FAQs", faqs_path, class: "nav-link mb-2" %>
+              <%= link_to "Blog", posts_path, class: "nav-link mb-2" %>
+              <%= link_to "Casestudies", defence_case_study_path, class: "nav-link" %>
+            </nav>
+          </div>
+          <div>
+            <h6 class="small mb-2 mb-md-3">Legal</h6>
+              <nav class="nav flex-column">
+                <%= link_to "Terms", terms_path, class: "nav-link mb-2" %>
+                <%= link_to "Privacy", privacy_path, class: "nav-link mb-2" %>
+                <%= link_to "Cookies", cookies_path, class: "nav-link" %>
+              </nav>
+          </div>
+        </div>
+      </div>
+      <div class="col-auto">
+        <div class="d-flex flex-column">
+          <%= image_tag "trustpilot/trustpilot-logo.svg", height: 26, class: "ms-md-auto mb-3 d-lg-none" %>
+          <%= image_tag "trustpilot/trustpilot-logo.svg", height: 34, class: "ms-auto mb-4 d-none d-lg-inline-block" %>
+          <%= image_tag "trustpilot/trustpilot-stars.svg", height: 28, class: "d-lg-none" %>
+          <%= image_tag "trustpilot/trustpilot-stars.svg", height: 38, class: "d-none d-lg-inline-block" %>
+        </div>
+      </div>
+    </div>
+    <div class="row align-items-center justify-content-center justify-content-md-between gy-4 gy-md-0">
+      <div class="col-md-auto">
+        <div class="text-color-light small text-center text-md-start">&copy; <%= Date.current.year %> <%= Rails.configuration.name %></div>
+      </div>
+      <div class="col-md-auto">
+        <div class="d-flex lead justify-content-center">
+          <%= link_to icon("fab", "facebook-f"), Rails.configuration.facebook_url, target: "_blank", rel: "noopener", class: "link-facebook me-4 me-md-5" %>
+          <%= link_to icon("fab", "twitter"), Rails.configuration.twitter_url, target: "_blank", rel: "noopener", class: "link-twitter me-4 me-md-5" %>
+          <%= link_to icon("fab", "youtube"), Rails.configuration.youtube_url, target: "_blank", rel: "noopener", class: "link-youtube me-4 me-md-5" %>
+          <%= link_to icon("fab", "instagram"), Rails.configuration.instagram_url, target: "_blank", rel: "noopener", class: "link-instagram" %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

@@ -1,0 +1,61 @@
+<%= form.error_notification %>
+<%= form.error_notification message: form.object.errors[:base].to_sentence if form.object.errors[:base].present? %>
+
+<div class="row gy-3 mb-4">
+  <div class="col-24">
+    <%= form.label "Type", class: "form-label" %>
+    <div class="form-radio-toolbar row row-cols-1 row-cols-md-2 row-cols-md-4 gy-3 gx-md-3 js-radio-toolbar">
+      <% Activity::TYPES.each do |activity_type| %>
+        <div class="col">
+          <%= form.radio_button :activity_type, activity_type, checked: form.object.activity_type == activity_type.to_s, class: "btn-check" %>
+          <%= form.label "#{:activity_type}_#{activity_type}", class: "btn btn-form-control w-100 h-100" do %>
+            <div class="text-primary mb-1"><%= activity_icon(activity_type) %></div>
+            <%= activity_type.to_s.gsub("_", " ").titleize %>
+          <% end %>
+        </div>
+      <% end %>
+      <p class="invalid-feedback mb-0">Please choose one of the above</p>
+    </div>
+  </div>
+  <div class="col-24">
+    <%= form.input :title %>
+  </div>
+  <div class="col-24">
+    <%= form.label :description, class: "form-label" %>
+    <%= form.text_area :description, class: "form-control" %>
+  </div>
+  <div class="col-md-12">
+    <%= form.label :date, label: "Date", class: "form-label" %>
+    <div class="input-group">
+      <span class="input-group-text"><%= icon "fas", "calendar-alt" %></span>
+      <%= form.input :date, label: false, wrapper: false, input_html: {value: @date, autocomplete: "off", placeholder: "DD/MM/YYYY", data: {"max-date": DateTime.now.to_s, "start-view": "days"}, class: "js-datepicker js-date-field"} %>
+    </div>
+  </div>
+  <div class="col-md-12">
+    <%= form.label :time, label: "Time", class: "form-label" %>
+    <div class="input-group">
+      <span class="input-group-text"><%= icon "fas", "clock" %></span>
+      <%= form.input :time, label: false, wrapper: false, input_html: {value: @time, autocomplete: "off", placeholder: "HH:MM", class: "js-time-field"} %>
+    </div>
+  </div>
+  <div class="col-24">
+    <%= form.label :time_spent, label: "Time spent (Mins)", class: "form-label" %>
+    <div class="input-group">
+      <span class="input-group-text"><%= icon "fas", "clock" %></span>
+      <%= form.input :time_spent, label: false, wrapper: false %>
+    </div>
+  </div>
+  <div class="col-24">
+    <%= form.label :calories_burned, label: "Calories burned", class: "form-label" %>
+    <div class="input-group">
+      <span class="input-group-text"><%= icon "fas", "fire" %></span>
+      <%= form.input :calories_burned, label: false, wrapper: false %>
+    </div>
+  </div>
+  <div class="col-24">
+    <%= form.input :featured_image, as: :file %>
+  </div>
+</div>
+<div class="form-actions text-end">
+  <%= form.button :submit, class: "btn-primary" %>
+</div>

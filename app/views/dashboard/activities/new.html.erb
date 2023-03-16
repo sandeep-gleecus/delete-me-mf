@@ -1,0 +1,14 @@
+<% meta title: "Dashboard - New activity" %>
+<% @page_title = "Activities" %>
+
+<section class="bg-white rounded-2 shadow p-4">
+  <h2 class="h5 mb-3 mb-md-4">New activity</h2>
+  <div class="row">
+    <div class="col-xxl-16">
+      <%= render "layouts/alerts" %>
+      <%= simple_form_for @activity, url: dashboard_activities_path, validate: true, html: {class: "js-form"} do |form| %>
+        <%= render partial: "form", locals: {form: form} %>
+      <% end %>
+    </div>
+  </div>
+</section>

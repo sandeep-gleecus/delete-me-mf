@@ -1,0 +1,6 @@
+<%= form_with(model: [:dashboard, commentable, current_user.comments.build], local: true) do |f| %>
+  <%= f.text_area :content, class: "form-control", placeholder: "Add a comment" %>
+  <div class="text-end mt-3 mt-md-4">
+    <%= f.submit "Comment", class: "btn btn-outline-primary" %>
+  </div>
+<% end %>

@@ -1,0 +1,12 @@
+.cc {
+
+  &-btn {
+    width: 100%;
+    transition: $transition;
+
+    &:hover,
+    &:focus {
+      background-color: darken($secondary-color, 5%) !important;
+    }
+  }
+}

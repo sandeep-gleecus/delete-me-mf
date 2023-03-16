@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-debug
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: {{ .Release.Name }}-debug
+  template:
+    metadata:
+      labels:
+        name: {{ .Release.Name }}-debug
+    spec:
+      imagePullSecrets:
+        - name: gitlab-pull-secret
+      containers:
+        - name: app
+          image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+          imagePullPolicy: Always
+          command: [ "/bin/sh", "-c", "--" ]
+          args: [ "while true; do sleep 30; done;" ]
+          env:
+            {{- include "env" . | nindent 12 }}

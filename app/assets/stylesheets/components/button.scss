@@ -1,0 +1,165 @@
+.btn {
+
+  &-primary {
+    @include button-variant(
+      $background: $primary-color,
+      $border: $primary-color,
+      $color: $white,
+      $hover-background: darken($primary-color, 5%),
+      $hover-border: darken($primary-color, 5%),
+      $hover-color: $white,
+    );
+  }
+
+  &-secondary {
+    @include button-variant(
+      $background: $secondary-color,
+      $border: $secondary-color,
+      $color: $black,
+      $hover-background: darken($secondary-color, 5%),
+      $hover-border: darken($secondary-color, 5%),
+      $hover-color: $black,
+    );
+  }
+
+  &-outline-primary:hover {
+    color: $white;
+  }
+
+  &-step {
+    @include button-variant(
+      $background: rgba($primary-color, 0.1),
+      $border: transparent,
+      $color: $primary-color,
+      $hover-background: darken($primary-color, 5%),
+      $hover-border: darken($primary-color, 5%),
+      $hover-color: $white,
+      $active-background: $primary-color,
+      $active-border: $primary-color,
+      $active-color: $white,
+    );
+    line-height: 1.2;
+    opacity: 0.5;
+    padding-bottom: $spacer-2;
+
+    @include media-breakpoint-up(md) {
+      display: flex;
+      line-height: 1.5;
+      padding-bottom: $spacer-1;
+      padding-left: $spacer-1;
+    }
+
+    &:not(.active):hover,
+    &:not(.active):active,
+    &:not(.active):focus {
+      background-color: rgba($primary-color, 0.1);
+      border-color: transparent;
+      color: $primary-color;
+      opacity: 0.5;
+      box-shadow: none;
+    }
+
+    .step {
+      background-color: rgba($white, 0.2);
+      border-radius: $sm-border-radius;
+      display: block;
+      margin-bottom: $spacer-2;
+
+      @include media-breakpoint-up(md) {
+        flex-grow: 1;
+        height: 100%;
+        line-height: rem(24px);
+        margin-bottom: 0;
+        margin-right: $spacer-2;
+        width: rem(20px);
+      }
+    }
+
+    .btn-check:checked + &,
+    .btn-check:active + &,
+    &:active,
+    &.active,
+    .show > &.dropdown-toggle {
+      opacity: 1;
+    }
+  }
+
+  &.btn-step {
+    cursor: default;
+
+    &.step-started {
+      cursor: pointer;
+    }
+  }
+
+	&-form-control {
+		@include button-variant(
+      $background: $inputs-bg,
+      $border: $inputs-border-color,
+      $color: $text-color,
+      $hover-background: $inputs-bg,
+      $hover-border: $inputs-border-color,
+      $hover-color: $text-color,
+      $active-background: $primary-color-light,
+      $active-border: $primary-color,
+      $active-color: $primary-color,
+    );
+
+    font-family: $font-family;
+    font-weight: $fw-normal;
+
+    .btn-check:checked + &,
+    .btn-check:active + &,
+    &:active,
+    &.active {
+      font-weight: $fw-medium;
+    }
+	}
+
+  &-check:focus + .btn-form-control {
+    box-shadow: none;
+  }
+
+  &-complete {
+    color: $dark-color;
+
+    &:hover {
+      color: $success-color;
+    }
+  }
+
+  &-facebook {
+    @include button-variant(
+      $background: $facebook-color,
+      $border: $facebook-color,
+      $color: $white,
+      $hover-background: darken($facebook-color, 5%),
+      $hover-border: darken($facebook-color, 5%),
+      $hover-color: $white,
+    );
+  }
+
+  &-google {
+    @include button-variant(
+      $background: $google-color,
+      $border: $google-color,
+      $color: $white,
+      $hover-background: darken($google-color, 5%),
+      $hover-border: darken($google-color, 5%),
+      $hover-color: $white,
+    );
+  }
+
+  &-square {
+    border-radius: $md-border-radius;
+    font-size: $sm-font-size;
+    height: rem(42px);
+    left: 50%;
+    line-height: rem(38px);
+    padding: 0;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: rem(42px);
+  }
+}

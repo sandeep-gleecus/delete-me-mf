@@ -1,0 +1,88 @@
+<% meta title: "Community" %>
+<% @page_title = "Community" %>
+
+<div class="row row-cols-1 gy-4 gx-xl-4">
+  <% if current_user.admin? && current_user.email == "kurtis@fehrlabs.com" %>
+    <div class="col-xxl-8">
+      <section class="bg-white shadow rounded-2 p-4">
+        <h2 class="h5 mb-2">Most completed</h2>
+        <p class="small mb-3 mb-md-4">The mothers that have completed the most this week.</p>
+        <%= render partial: "dashboard/leaderboards/row", collection: @most_completed_lessons, as: :user, locals: {leaderboard: "Most completed"} %>
+      </section>
+    </div>
+    <div class="col-xxl-8">
+      <section class="bg-white shadow rounded-2 p-4">
+        <h2 class="h5 mb-2">Time spent</h2>
+        <p class="small mb-3 mb-md-4">The mums who just can’t get enough Mother Fit this week.</p>
+        <div class="leaderboard">
+          <%= render partial: "dashboard/leaderboards/row", collection: @most_time_spent, as: :user, locals: {leaderboard: "Time spent"} %>
+        </div>
+      </section>
+    </div>
+    <div class="col-xxl-8">
+      <section class="bg-white shadow rounded-2 p-4">
+        <h2 class="h5 mb-2">Calories burned</h2>
+        <p class="small mb-3 mb-md-4">Find out who’s been burning the most calories this week.</p>
+        <%= render partial: "dashboard/leaderboards/row", collection: @most_calories_burned, as: :user, locals: {leaderboard: "Calories burned"} %>
+      </section>
+    </div>
+  <% end %>
+  <div class="col-xxl">
+    <section class="bg-white shadow rounded-2 p-4 h-100">
+      <h2 class="h5 mb-2">Inspiration</h2>
+      <p class="small mb-4 mb-md-4">See how <%= Rails.configuration.name %> has helped other mums.</p>
+      <% mothers = ["ali", "claire", "holly", "sophie"].shuffle %>
+      <% mother = mothers[0] %>
+      <div class="row gx-4 gy-4 gy-md-0">
+        <div class="col-md-auto">
+          <div id="carouselInspirationFade" class="carousel-inspiration carousel slide carousel-fade" data-bs-ride="carousel">
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <%= image_tag "inspiration/#{mother}-before.jpg", class: "img-fluid rounded-2 d-md-none" %>
+                <%= image_tag "inspiration/#{mother}-before-md.jpg", class: "img-fluid rounded-2 d-none d-md-block d-xl-none" %>
+                <%= image_tag "inspiration/#{mother}-before-xl.jpg", class: "img-fluid rounded-2 d-none d-xl-block" %>
+              </div>
+              <div class="carousel-item">
+                <%= image_tag "inspiration/#{mother}-after.jpg", class: "img-fluid rounded-2 d-md-none" %>
+                <%= image_tag "inspiration/#{mother}-after-md.jpg", class: "img-fluid rounded-2 d-none d-md-block d-xl-none" %>
+                <%= image_tag "inspiration/#{mother}-after-xl.jpg", class: "img-fluid rounded-2 d-none d-xl-block" %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <%= icon "fas", "quote-left", class: "lead-xl text-primary mb-2" %>
+          <% if mother == "ali" %>
+            <p>I cannot begin to emphasise exactly how life changing the past 8 weeks have been for me. The first night of training I thought to myself “dear god what have I done?!” Anyone who knows me knows I don’t like being a novice and I found myself so embarrassed with where my fitness level was after pregnancy. Michelle is, in my opinion, the epitome of what a trainer should be: knowledgeable and encouraging. Michelle made me feel more myself again and I couldn’t have done it without her.</p>
+          <% elsif mother == "claire" %>
+            <p>I completely lost my way with my diet during lockdown and Mother Fit’s Reset was perfect to get me back on track. Being part of a really supportive online community, helping with meal ideas and recipes, motivation on tough days and praise for successes, has been invaluable. Excited to see what the coming months bring!</p>
+          <% elsif mother == "holly" %>
+            <p>Michelle has taught me that you do have time to exercise even if you have a busy schedule, you just need to want to do it. I really did this time and it’s thanks to Michelle that I have achieved what I have. I have never entered into the Christmas season feeling healthier and fitter. I really cannot recommend this more, it’s life changing and best of all it has been a lot of fun.</p>
+          <% elsif mother == "sophie" %>
+            <p>This is no quick fix but it most definitely works. Michelle is knowledgeable, encouraging and incredibly supportive. She has changed the way I think about food and reminded me how much I love to exercise, although she’ll never get me to enjoy doing a burpee! I have not only lost weight, I feel fitter, healthier and stronger and, more importantly, I feel happy and confident in myself again.</p>
+          <% end %>
+          <h3 class="h6 lead mb-1"><%= mother.titleize %></h3>
+          <p class="lh-1 mb-0">Inspirational Mother</p>
+        </div>
+      </div>
+    </section>
+  </div>
+  <div class="col-xl-12 col-xxl-auto">
+    <section class="bg-white shadow rounded-2 p-4 h-100">
+      <h2 class="h5 mb-2">Join us</h2>
+      <p class="small mb-4 mb-md-4">Join our private Facebook community page.</p>
+      <div class="text-center">
+        <%= link_to (image_tag "facebook-logo.svg", height: 32), Rails.configuration.facebook_url, target: "_blank", class: "d-md-none" %>
+        <%= link_to (image_tag "facebook-logo.svg", height: 36), Rails.configuration.facebook_url, target: "_blank", class: "d-none d-md-inline-block d-xl-none" %>
+        <%= link_to (image_tag "facebook-logo.svg", height: 32), Rails.configuration.facebook_url, target: "_blank", class: "d-none d-xl-inline-block" %>
+      </div>
+      <div class="text-center my-4 my-md-5">
+        <%= link_to (image_tag "community.svg", class: "w-100 d-md-none"), Rails.configuration.facebook_url, target: "_blank" %>
+        <%= link_to (image_tag "community.svg", class: "w-75 d-none d-md-inline-block d-xl-none"), Rails.configuration.facebook_url, target: "_blank" %>
+        <%= link_to (image_tag "community.svg", class: "w-100 d-none d-xl-inline-block d-xxl-none"), Rails.configuration.facebook_url, target: "_blank" %>
+        <%= link_to (image_tag "community.svg", height: 200, class: "d-none d-xxl-inline-block"), Rails.configuration.facebook_url, target: "_blank" %>
+      </div>
+      <%= link_to "Join our community", Rails.configuration.facebook_url, class: "btn btn-facebook w-100", target: "_blank" %>
+    </section>
+  </div>
+</div>

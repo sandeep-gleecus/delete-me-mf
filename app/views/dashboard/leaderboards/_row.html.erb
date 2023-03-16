@@ -1,0 +1,25 @@
+<% motherhood_stage = user.motherhood_stage %>
+<%
+  if leaderboard == "Most completed"
+    value = user.completed_lessons.size
+  elsif leaderboard == "Calories burned"
+    value = "#{number_with_delimiter(user.activities.sum(&:calories_burned)) rescue 0} kcal"
+  elsif leaderboard == "Time spent"
+    value = "#{user.activities.sum(&:time_spent) rescue 0} mins"
+  end
+%>
+
+<div class="<%= "bg-primary-light" if user_counter.even? %> rounded-2 p-2 d-flex align-items-center">
+  <div class="avatar me-3">
+    <%= display_avatar(user) %>
+    <span class="avatar-badge">
+      <%= get_motherhood_stage_icon(motherhood_stage) %>
+    </span>
+  </div>
+  <div>
+    <h3 class="small mb-0 d-md-none"><%= shortened_name(user.name) %></h3>
+    <h3 class="small mb-0 d-none d-md-block"><%= user.name %></h3>
+    <div class="x-small lh-1 mt-1"><%= motherhood_stage.titleize %> Mother</div>
+  </div>
+  <div class="fw-bolder text-primary px-2 px-md-3 ms-auto"><%= value %></div>
+</div>

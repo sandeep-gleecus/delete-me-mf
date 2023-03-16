@@ -1,0 +1,114 @@
+<%
+  meta title: "Postpartum",
+  description: ""
+%>
+
+<%= content_for :hero do %>
+  <div class="container-xl">
+    <div class="row gy-lg-0">
+      <div class="col-md-18 col-lg-16 col-xl-13 col-xxl-12">
+        <div class="bg-secondary header-hero">
+          <h1 class="mb-2 mb-md-3">Postpartum Exercise Programme</h1>
+          <p class="lead-xl mb-3 mb-md-4">
+            <%= Rails.configuration.name %> offers an all-encompassing
+            postpartum fitness programme, designed to help
+            you recover & rehabilitate from childbirth.
+          </p>
+          <%= render partial: "hero_membership_numbers" %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+<%= content_for :entry_section do %>
+  <%= render partial: "usp_summary",
+    locals: {
+      title: "Home postpartum exercise programme",
+      support_text: "Helping you rebuild your core and strength physically after birth and focus on your overall wellbeing with leading expert advice and resources.",
+      mind_text: "Postpartum expertise to support your postpartum exercise journey, plus support for your new baby.",
+      body_text: "6-fundamental programmes for your postpartum exercise rehabilitation to support your recovery.",
+      soul_text: "Nourish your soul with our private community and connect with other new mums.",
+      video_guide_pregnancy: false,
+      video_guide_postpartum: true,
+      video_guide_beyond: false
+    }
+  %>
+<% end %>
+<section class="container-xl image-wrapper-start py-6 py-lg-7 py-xl-8">
+  <div class="row align-items-center gy-4 gy-md-5 gx-lg-6 gy-lg-0 gx-xl-7 gx-xxl-8">
+    <div class="col-lg-10 col-xl-11 col-xxl-12">
+      <%= image_tag "postpartum/fourth-trimester.jpg", class: "image-wrapper-start-image img-fluid d-lg-none" %>
+      <%= image_tag "postpartum/fourth-trimester-lg.jpg", class: "image-wrapper-start-image img-fluid d-none d-lg-block d-xl-none" %>
+      <%= image_tag "postpartum/fourth-trimester-xl.jpg", class: "image-wrapper-start-image img-fluid d-none d-xl-block" %>
+    </div>
+    <div class="col-lg">
+      <h2>The Fourth Trimester</h2>
+      <p class="lead-xl">
+        The 4th Trimester Programme will teach you how to do Kegels,
+        check yourself for diastasis recti, learn why deep breathing is
+        so important, how you can improve rib flare, and implement
+        myofascial release.
+      </p>
+      <p class="lead-xl mb-0">
+        The Rebuild Your Core Programme will re-establish a
+        mind-to-muscle connection between your deep abdominals
+        and pelvic floor, aiding your recovery after childbirth
+        and preparing you to return to exercise.
+      </p>
+    </div>
+  </div>
+</section>
+<section class="container-xl image-wrapper-end py-6 py-lg-7 py-xl-8">
+  <div class="row align-items-center gy-4 gy-md-5 gx-lg-6 gy-lg-0 gx-xl-7 gx-xxl-8">
+    <div class="col-lg-10 col-xl-11 col-xxl-12">
+      <%= image_tag "postpartum/mother-workoing-out.jpg", class: "image-wrapper-end-image img-fluid d-lg-none" %>
+      <%= image_tag "postpartum/mother-workoing-out-lg.jpg", class: "image-wrapper-end-image img-fluid d-none d-lg-block d-xl-none" %>
+      <%= image_tag "postpartum/mother-workoing-out-xl.jpg", class: "image-wrapper-end-image img-fluid d-none d-xl-block" %>
+    </div>
+    <div class="order-lg-first col-lg">
+      <h2>The Programme</h2>
+      <p class="lead-xl">
+        The 9-Week Post-Pregnancy Workout Plan will guide you
+        through workouts, stretches, yoga and advice on
+        implementing walking intervals.
+      </p>
+      <p class="lead-xl mb-0">
+        This programme will keep your return to exercise at a sensible
+        pace and exertion, keeping you safe throughout. The
+        Programme will become more vigorous as you work your way
+        through it, still being mindful of what your body has been
+        through.
+      </p>
+    </div>
+  </div>
+</section>
+<section class="container-xl image-wrapper-start py-6 py-lg-7 py-xl-8">
+  <div class="row align-items-center gy-4 gy-md-5 gx-lg-6 gy-lg-0 gx-xl-7 gx-xxl-8">
+    <div class="col-lg-10 col-xl-11 col-xxl-12">
+      <div class="image-centered-shadow">
+        <%= image_tag "postpartum/personalized-approach.png", class: "image-wrapper-start-image img-fluid d-lg-none" %>
+        <%= image_tag "postpartum/personalized-approach-lg.png", class: "image-wrapper-start-image img-fluid d-none d-lg-block d-xl-none" %>
+        <%= image_tag "postpartum/personalized-approach-xl-cropped.png", class: "image-wrapper-start-image image-wrapper-image-dashboard-cropped img-fluid" %>
+        <%= image_tag "postpartum/personalized-approach-xl-uncropped.png", class: "image-wrapper-start-image image-wrapper-image-dashboard-uncropped img-fluid" %>
+      </div>
+    </div>
+    <div class="col-lg">
+      <h2>A personalised approach</h2>
+      <p class="lead-xl">When signing up you’ll create a unique profile which will ensure you gain access to everything relevant to your specific stage of motherhood.</p>
+      <p class="lead-xl mb-4">Once you’ve completed the postpartum programme, you’ll be guided through additional fitness classes, to ease you transition into beyond.</p>
+      <% if user_signed_in? %>
+        <%= link_to "Go to dashboard", dashboard_root_path, class: "btn btn-secondary btn-lg" %>
+      <% else %>
+        <%= link_to "Try free for #{I18n.t('free_trial.try_for_days')} days", new_user_registration_path, class: "btn btn-secondary btn-lg" %>
+      <% end %>
+    </div>
+  </div>
+</section>
+<div class="container-xl pb-6 pb-lg-7 pb-xl-8">
+  <%= render partial: "publications", locals: {heading_color: "muted"} %>
+</div>
+<%= render partial: "classes_slider", locals: {heading: "Postpartum-focused classes and workouts"} %>
+<%= render partial: "usp_list" %>
+<%= render partial: "motherhood_community" %>
+<%= render partial: "blog_section" %>
+<%= render partial: "cta_section" %>

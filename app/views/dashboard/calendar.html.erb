@@ -1,0 +1,43 @@
+<% meta title: "Calendar Dashboard" %>
+<% @page_title = "Calendar" %>
+
+<div class="row gy-4 gy-xxl-0">
+  <div class="col-xxl-16">
+    <section class="bg-white rounded-2 p-4">
+      <% if @lessons %>
+        <%= month_calendar events: @lessons do |date, lesson| %>
+          <div><%= date.strftime("%e") %></div>
+          <div class="day-actions d-inline-block mt-2 js-day-classes">
+            <% lesson.each do |lesson| %>
+              <%= link_to dashboard_lesson_path(lesson), class: "js-class-link", data: {"lesson-image": url_for(resize_to_tile(lesson.featured_image)), "lesson-title": lesson.title, "lesson-description": lesson.description, "lesson-start-time": lesson.start_time.strftime("%d/%m/%Y %H:%M"), "lesson-category": lesson.lesson_type.to_sym.capitalize} do %>
+                <%= category_type_image(lesson.lesson_type) %>
+              <% end %>
+            <% end %>
+          </div>
+        <% end %>
+      <% else %>
+        <div class="col-md">
+          <div class="badge badge-secondary badge-md align-self-md-start me-1 mt-2">
+            No classes are scheduled.
+          </div>
+        </div>
+      <% end %>
+    </section>
+  </div>
+  <div class="col-xxl-8">
+    <section class="bg-white rounded-2 p-4 mb-4">
+      <div class="js-calendar-preview">
+        <h3 class="h5 mb-3 mb-md-4 js-calendar-preview-title">Lessons today</h3>
+        <div class="js-calendar-preview-content">
+          <% if @today_lessons && @today_lessons.any? %>
+            <div class="row row-cols-1 gy-4">
+              <%= render @today_lessons %>
+            </div>
+          <% else %>
+            <p class="small mb-0">There are no classes today.</p>
+          <% end %>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>

@@ -1,0 +1,96 @@
+.datepicker {
+
+  &.active {
+    animation: datepickerFadeInDown 300ms cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  &-picker {
+    background-color: lighten($inputs-bg, 5%);
+    border-radius: $md-border-radius;
+    border: rem(1px) solid lighten($inputs-border-color, 5%);
+  }
+
+  &-cell {
+
+    transition: all 0.08s ease-in;
+
+    &:not(.disabled):hover {
+      background-color: lighten($inputs-bg, 12%);
+    }
+
+    &.year,
+    &.month {
+      border-radius: $md-border-radius;
+    }
+
+    &.day {
+      border-radius: 50%;
+    }
+
+    &.selected,
+    &.focused:not(.selected) {
+      background-color: $primary-color;
+      color: $white;
+      font-weight: $fw-extra-bold;
+
+      &:hover {
+        background-color: lighten($primary-color, 5%);
+        color: $white;
+      }
+    }
+
+
+
+    &.prev:not(.disabled),
+    &.next:not(.disabled) {
+      color: $text-color;
+    }
+
+    &.disabled {
+      color: $text-color-muted;
+      cursor: not-allowed;
+      opacity: 0.6;
+    }
+  }
+
+  &-header &-controls {
+    .button {
+      background-color: transparent;
+      border-radius: $md-border-radius;
+      font-weight: $fw-medium;
+
+      &.prev-btn,
+      &.next-btn {
+        font-weight: 400;
+
+        &:disabled,
+        &:disabled:hover {
+          color: $text-color-muted;
+          cursor: not-allowed;
+          opacity: 0.6;
+
+          &:hover {
+            background-color: transparent;
+          }
+        }
+      }
+
+      &:hover {
+        background-color: lighten($inputs-bg, 12%);
+      }
+    }
+  }
+}
+
+@keyframes datepickerFadeInDown {
+
+  from {
+    opacity: 0;
+    transform: translate3d(0, -20px, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}

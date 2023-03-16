@@ -1,0 +1,195 @@
+<%
+  meta title: "Pricing",
+  description: "Your motherhood journey starts here! Start your subscription with everything you need to help you through your journey."
+%>
+
+<% @simple_header_layout = true %>
+
+<%= content_for :hero do %>
+  <div class="container-xl">
+    <div class="row text-center justify-content-center g-0 py-6 py-lg-7 py-xl-8">
+      <div class="col-lg-20">
+        <h1>Your motherhood journey starts here</h1>
+        <p class="lead-xl mb-0">Start your subscription with everything you need to help you through your journey.</p>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<div class="solid-gradient-primary-light-md pb-6 pb-lg-7 pb-xl-8">
+  <div class="container-xl">
+    <section class="bg-white shadow-lg rounded-2 p-4 p-xl-5 p-xxl-6 my-5" data-controller="pricing-switch" data-pricing-switch-monthly-billing-value="£<%= I18n.t('free_trial.after_monthly_free_trial_price') %>" data-pricing-switch-yearly-billing-value="£39.99">
+      <div class="row align-items-center gy-5 gx-md-4 gx-lg-6 gx-xl-4 gx-xxl-6">
+        <div class="col-xl-8">
+          <div class="row align-items-md-end gy-3 mb-3 mb-md-4">
+            <div class="col-md-12 col-lg-auto col-xl-24">
+              <div class="d-flex align-items-center mb-1">
+                <span class="fw-black text-dark">Bill yearly</span>
+                <div class="form-switch-inversed form-check form-switch mb-0 mx-3">
+                  <input type="checkbox" checked id="flexSwitchCheckDefault" class="form-check-input mt-0"
+                         data-action="pricing-switch#showMonthlyPrice" data-pricing-switch-target="switch" onclick='handleYearlyMonthlySwitch(this);'>
+                </div>
+                <span class="fw-black text-dark">Bill monthly</span>
+              </div>
+            </div>
+            <div class="col-md-12 col-lg col-xl-24 yearly-pricing-modal d-block" id="yearly-pricing-modal">
+              <div class="mb-1 h3 lh-2 pb-1">
+                LIMITED OFFER <br/>
+                YEARLY <del class="text-primary">£ 79.99</del>
+              </div>
+              <div class="d-flex align-items-end">
+                <h2 class="membership-amount-title lh-1 me-3 mb-0 text-primary" data-pricing-switch-target="price">£39.99</h2>
+                <div class="fw-bold text-dark lh-lg">/yearly</div>
+              </div>
+              <p id='billed-billed-amount'>After your free trail</p>
+            </div>
+
+            <div class="col-md-12 col-lg col-xl-24 monthly-pricing-modal d-none" id="monthly-pricing-modal">
+              <div class="mb-1 h3 lh-2 pb-1">
+                <div>BILLED</div>
+                <div>MONTHLY</div>
+                <div>
+                  <span class="text-primary">£<%=I18n.t('free_trial.after_monthly_free_trial_price') %></span> /monthly
+                </div>
+              </div>
+              <p id='billed-billed-amount'>After your free trail</p>
+            </div>
+
+            <% if user_signed_in?%>
+              <%= link_to "Go to dashboard", dashboard_root_path, class: "btn btn-secondary btn-lg" %>
+            <% else %>
+              <%= link_to "Try free for #{I18n.t('free_trial.try_for_days')} days", new_user_registration_path, class: "btn btn-secondary btn-lg" %>
+            <% end %>
+            <div class="col-md-24">
+              <p class="x-small mb-0">For more information on sign up, subscriptions, refunds and cancellations, read our <%= link_to "terms and conditions", terms_path %>.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-8 col-lg-10 order-xl-first col-xl d-none d-md-block">
+          <%= image_tag "pricing/mother-with-child-md.jpg", class: "img-fluid rounded-2 d-none d-md-block d-lg-none" %>
+          <%= image_tag "pricing/mother-with-child-lg.jpg", class: "img-fluid rounded-2 d-none d-lg-block d-xl-none" %>
+          <%= image_tag "pricing/mother-with-child-xl.jpg", class: "img-fluid rounded-2 d-none d-xl-block" %>
+        </div>
+        <div class="col-md col-xl-9">
+          <div class="d-md-flex mb-4 mb-lg-5">
+            <div class="tile tile-primary tile-lg mb-3 me-md-4 mb-md-0"><%= icon "fas", "calendar-alt" %></div>
+            <div>
+              <h3 class="h6 mb-1">Free cancellation</h3>
+              <p class="small mb-0">Motherhood is an unpredictable time. That’s why we offer free instant cancellation.</p>
+            </div>
+          </div>
+          <div class="d-md-flex">
+            <div class="tile tile-primary tile-lg mb-3 me-md-4 mb-md-0"><%= icon "fas", "pound-sign" %></div>
+            <div>
+              <h3 class="h6 mb-1">No hidden or additional fees</h3>
+              <p class="small mb-0">You will not be charged at any time outside of your agreed subscription.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+<section class="bg-primary-light pb-6 pb-lg-7 pb-xl-8">
+  <div class="container-xl">
+    <div class="row justify-content-center gy-0">
+      <div class="col-lg-20 col-xl-18">
+        <h2 class="text-center mb-5 mb-lg-6 mb-xl-7">FAQs</h2>
+        <div class="accordion" id="pregnantAccordion">
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingPregnantEight">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePregnantEight" aria-expanded="false" aria-controls="collapsePregnantEight">How do I sign up for a <%= I18n.t('free_trial.try_for_days') %> day FREE trial?</button>
+            </h2>
+            <div id="collapsePregnantEight" class="accordion-collapse collapse" aria-labelledby="headingPregnantEight" data-bs-parent="#pregnantAccordion">
+              <div class="accordion-body">
+                <p class="mb-0">Hit the button on the website to sign up. You will be asked to enter your payment details, but no money will be taken until you finish your free trial.  If you wish not to be charged, please cancel before the end of the trial and you will not be charged.</p>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingPregnantNine">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePregnantNine" aria-expanded="false" aria-controls="collapsePregnantNine">Can I cancel my membership?</button>
+            </h2>
+            <div id="collapsePregnantNine" class="accordion-collapse collapse" aria-labelledby="headingPregnantNine" data-bs-parent="#pregnantAccordion">
+              <div class="accordion-body">
+                <p>Hit the button on the website to sign up. You will be asked to enter your payment details, but no money will be taken until you finish your free trial.  If you wish not to be charged, please cancel before the end of the trial and you will not be charged.</p>
+                <p>Once your free trial period has ended you will be charged for the period you selected in full (e.g. monthly or yearly) and you may cancel at any time afterwards.</p>
+                <p class="mb-0">Your membership is rolling (e.g. if you are on a monthly membership it will automatically renew each month unless you cancel via your settings)</p>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingPregnantTen">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePregnantTen" aria-expanded="false" aria-controls="collapsePregnantTen">Can I get a refund because I forgot to cancel within the free trial period?</button>
+            </h2>
+            <div id="collapsePregnantTen" class="accordion-collapse collapse" aria-labelledby="headingPregnantTen" data-bs-parent="#pregnantAccordion">
+              <div class="accordion-body">
+                <p>At the time of signing up, you would have been asked to accept or decline our terms of business (also available on our website) which state that by creating an account, you are accepting an automatic renewal of your membership until a time where you cancel or request cancellation of your membership before your current billing period ends, and your new one begins. Either monthly or annually.</p>
+                <p>As you have requested cancellation of your account after your free trial has ended, we are unable to offer a refund for the current month’s/year renewal.</p>
+                <p class="mb-0">If you wish to cancel your membership before your next month’s renewal please do so by logging into your account and do so via you're dashboard settings.</p>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingPregnantEleven">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePregnantEleven" aria-expanded="false" aria-controls="collapsePregnantEleven">I can't find my login code?</button>
+            </h2>
+            <div id="collapsePregnantEleven" class="accordion-collapse collapse" aria-labelledby="headingPregnantEleven" data-bs-parent="#pregnantAccordion">
+              <div class="accordion-body">
+                <p class="mb-0">You would have been emailed a login code for the Members Area. If it isn’t in your inbox, please check your spam. If you still haven’t got this please contact us via web chat.</p>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingPregnantTwelve">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePregnantTwelve" aria-expanded="false" aria-controls="collapsePregnantTwelve">I've forgotten my password</button>
+            </h2>
+            <div id="collapsePregnantTwelve" class="accordion-collapse collapse" aria-labelledby="headingPregnantTwelve" data-bs-parent="#pregnantAccordion">
+              <div class="accordion-body">
+                <p class="mb-0">Please request a new password via your dashboard settings.</p>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingPregnantThirteen">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePregnantThirteen" aria-expanded="false" aria-controls="collapsePregnantThirteen">How do I contact someone?</button>
+            </h2>
+            <div id="collapsePregnantThirteen" class="accordion-collapse collapse" aria-labelledby="headingPregnantThirteen" data-bs-parent="#pregnantAccordion">
+              <div class="accordion-body">
+                <p class="mb-0">Please contact us via web chat or via <a href="mailto:michelle@motherfit.co.uk">michelle@motherfit.co.uk</a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<%= render partial: "cta_section" %>
+
+<script>
+    function handleYearlyMonthlySwitch(switchCheckboxEle) {
+      let yearlyPricingModalEle = document.getElementById("yearly-pricing-modal");
+      let monthlyPricingModalEle = document.getElementById("monthly-pricing-modal");
+
+      if (switchCheckboxEle.checked) {
+        // yearly-pricing-modal
+        // Show yearly price
+        yearlyPricingModalEle.classList.remove("d-none");
+        yearlyPricingModalEle.classList.add('d-block');
+
+        // Hide yearly price
+        monthlyPricingModalEle.classList.remove("d-block");
+        monthlyPricingModalEle.classList.add("d-none");
+      } else {
+        //monthly-pricing-modal
+        // Show monthly price
+        monthlyPricingModalEle.classList.remove("d-none");
+        monthlyPricingModalEle.classList.add('d-block');
+
+        // Hide yearly price
+        yearlyPricingModalEle.classList.remove("d-block");
+        yearlyPricingModalEle.classList.add("d-none");
+      }
+    }
+</script>

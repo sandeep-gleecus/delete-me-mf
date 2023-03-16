@@ -1,0 +1,34 @@
+<% if user_signed_in? %>
+  <%= link_to "Go to dashboard", dashboard_root_path, class: "btn btn-primary btn-lg mb-4 mb-md-5" %>
+  <p class="h6 mb-3 mb-md-4">Membership includes</p>
+<% else %>
+  <% if header_image_pricing_display? %>
+    <div class="h3 lh-2 pb-1">
+      <div class="text-primary">Yearly <del>£ 79.99</del></div>
+      <div>LIMITED OFFER</div>
+      <div>ONLY £<%= I18n.t('free_trial.billed_annually') %></div>
+    </div>
+  <% end %>
+  <%= link_to "Try free for #{I18n.t('free_trial.try_for_days')} days", new_user_registration_path, class: "btn btn-primary btn-lg mb-4 mb-md-5" %>
+  <% unless header_image_pricing_display? %>
+    <p class="h6 mb-3 mb-md-4">Free trial includes</p>
+  <% end %>
+<% end %>
+<ul class="list-unstyled row row-cols-2 row-cols-lg-4 g-3 g-lg-4 gx-xl-5 gy-xl-0 mb-0">
+  <li class="col">
+    <div class="h3 lh-1 mb-1 mb-md-2">500+</div>
+    <div class="small">Workouts, challenges & programs</div>
+  </li>
+  <li class="col">
+    <div class="h3 lh-1 mb-1 mb-md-2">100+</div>
+    <div class="small">Yoga, recipes, mediation & breathwork</div>
+  </li>
+  <li class="col">
+    <div class="h3 lh-1 mb-1 mb-md-2">20</div>
+    <div class="small">Motherhood Experts</div>
+  </li>
+  <li class="col">
+    <div class="h3 lh-1 mb-1 mb-md-2">1</div>
+    <div class="small">Community</div>
+  </li>
+</ul>

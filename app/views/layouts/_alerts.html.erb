@@ -1,0 +1,8 @@
+<% if notice.present? || alert.present? %>
+  <% if notice.present? %>
+    <p class="alert alert-success text-center mb-4"><%= notice %></p>
+  <% end %>
+  <% if alert.present? %>
+    <p class="alert alert-danger text-center mb-4"><%= alert %></p>
+  <% end %>
+<% end %>

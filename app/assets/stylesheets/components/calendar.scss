@@ -1,0 +1,126 @@
+.simple-calendar {
+
+  table {
+    -webkit-border-horizontal-spacing: 0px;
+    -webkit-border-vertical-spacing: 0px;
+    // border: 1px solid rgb(221, 221, 221);
+    background-color: rgba(0, 0, 0, 0);
+    border-collapse: collapse;
+    box-sizing: border-box;
+    max-width: 100%;
+    width: 100%;
+
+		& > :not(:first-child) {
+			border: none;
+		}
+  }
+
+  tr {
+    border-collapse: collapse;
+
+		&:not(:first-child) td {
+			border-top: 1px solid rgba($black, 0.03);
+		}
+  }
+
+  th {
+    border-bottom: 1px solid rgba($black, 0.03);
+    color: $text-color-muted;
+    font-weight: $fw-normal;
+    height: rem(50px);
+    box-sizing: border-box;
+    font-size: $xs-font-size;
+    padding: 6px;
+    text-align: left;
+    vertical-align: top;
+
+		&:not(:first-child) {
+			border-left: 1px solid rgba($black, 0.03);
+		}
+  }
+
+  td {
+    border-bottom: none;
+    font-size: $xs-font-size;
+    padding: 6px;
+    vertical-align: top;
+    width: 14%;
+
+		&:not(:first-child) {
+			border-left: 1px solid rgba($black, 0.03);
+		}
+  }
+
+  &.js-calendar {
+
+    td {
+      cursor: pointer;
+
+      &:hover {
+        background-color: $secondary-color-light;
+      }
+    }
+  }
+
+  .day {
+    font-weight: $fw-bold;
+    height: rem(48px);
+    padding: $spacer-1;
+
+    &-actions {
+      font-size: $base-font-size * 0.625; // 10px
+    }
+  }
+
+  // .wday-0 {}
+  // .wday-1 {}
+  // .wday-2 {}
+  // .wday-3 {}
+  // .wday-4 {}
+  // .wday-5 {}
+  // .wday-6 {}
+
+  .today {
+    background: $primary-color-light;
+    color: $primary-color;
+  }
+
+  // .past {}
+
+  // .future {}
+
+  // .start-date {}
+
+  .prev-month,
+  .next-month {
+    filter: grayscale(50%);
+    opacity: 0.25;
+  }
+
+  // .current-month {}
+
+  // .has-events {}
+
+  &-overlay {
+    background-color: rgba($white, 0.90);
+    height: 100%;
+    left: 0;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    transition: opacity 0.1s;
+    visibility: hidden;
+    width: 100%;
+
+    &.show {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    &-btn-close {
+      background-size: rem(25px);
+      height: rem(25px);
+      width: rem(25px);
+    }
+  }
+}

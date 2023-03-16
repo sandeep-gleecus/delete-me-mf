@@ -1,0 +1,38 @@
+.list {
+
+	&-primary {
+		padding-left: $spacer / 1.6666666667; // 18px
+
+		li::marker {
+			color: $primary-color;
+			display: block;
+			position: relative;
+		}
+	}
+
+	&-counter {
+		counter-reset: item;
+	  list-style-type: none;
+	  margin: 0;
+	  padding: 0;
+
+	  li {
+	  	padding-left: 0;
+
+	  	&::before {
+	  		display: none;
+	  	}
+	  }
+
+	  > li {
+	  	counter-increment: item;
+	    display: table;
+
+	    &::before {
+	      content: counters(item, '.') '.';
+	      display: table-cell;
+	      padding-right: $spacer / 2; // 15px
+	    }
+	  }
+	}
+}

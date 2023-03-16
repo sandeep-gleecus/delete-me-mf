@@ -1,0 +1,11 @@
+.publications {
+
+  &-heading {
+    font-family: $font-family-accent;
+    font-weight: $fw-normal;
+
+    @include media-breakpoint-up(md) {
+      transform: rotate(-5deg);
+    }
+  }
+}

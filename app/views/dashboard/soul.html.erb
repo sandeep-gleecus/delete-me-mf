@@ -1,0 +1,44 @@
+<% meta title: "Soul Dashboard" %>
+<% @page_title = "Soul" %>
+<%= render 'search_form' %>
+<div class="row gy-4 gx-xxl-4">
+  <div class="col-xxl-16">
+    <section class="bg-white shadow rounded-2 p-4 mb-4">
+      <div class="d-flex">
+        <h2 class="h5 me-auto mb-0">Journal</h2>
+        <%= link_to "New#{icon "fas", "plus", class: "x-small ms-2"}".html_safe, new_dashboard_journal_entry_path, class: "btn btn-link btn-sm shadow-none border-0 p-0 d-flex align-items-center me-3 me-md-4" %>
+        <%= link_to "View all#{icon "fas", "angle-right", class: "ms-2"}".html_safe, dashboard_journal_entries_path, class: "btn btn-link btn-sm shadow-none border-0 p-0 d-flex align-items-center" %>
+      </div>
+      <% if @recent_journal_entries.exists? %>
+        <%= render @recent_journal_entries, preview: true %>
+      <% else %>
+        <p class="small mt-3 mb-0">You have no journal entries. You can add one <%= link_to "here.", new_dashboard_journal_entry_path %></p>
+      <% end %>
+    </section>
+    <section class="bg-white shadow rounded-2 p-4">
+      <h2 class="h5 mb-3 mb-md-4">Resources</h2>
+      <div class="row row-cols-1 row-cols-lg-3 gy-4 gx-lg-4">
+        <% if @resources %>
+          <%= render @resources %>
+        <% else %>
+          <div class="badge badge-secondary badge-md align-self-md-start me-1 mt-2">
+            No resources available.
+          </div>
+        <% end  %>
+      </div>
+    </section>
+  </div>
+  <%= render 'dashboard/book_a_call_and_review' %>
+  <div class="col-xxl-8">
+    <%= render 'dashboard/book_a_call_and_review_top' %>
+    <section class="bg-white shadow rounded-2 p-4">
+      <div class="d-flex justify-content-between mb-3 mb-md-4">
+        <h2 class="h5 mb-0">Read of the day</h2>
+        <%= link_to "View all#{icon "fas", "angle-right", class: "ms-2"}".html_safe, dashboard_posts_path, class: "btn btn-link btn-sm shadow-none border-0 p-0 d-flex align-items-center" %>
+      </div>
+      <div class="row row-cols-1">
+        <%= render @read_of_the_day %>
+      </div>
+    </section>
+  </div>
+</div>

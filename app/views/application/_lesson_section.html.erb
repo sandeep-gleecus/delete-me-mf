@@ -1,0 +1,33 @@
+<% category_name ||= nil %>
+
+<section class="bg-primary-light py-6 py-lg-7 py-xxl-8">
+  <div class="container-xl">
+    <div class="row g-4 justify-content-center mb-5 mb-xl-6">
+      <% @recent_lessons.each do |lesson| %>
+        <article class="col-sm-18 col-md-12 col-lg-10 col-xl-8">
+          <div class="card">
+            <%= link_to lesson_path(lesson), class: "" do %>
+              <%= display_thumbnail_on_public(lesson) %>
+            <% end %>
+            <div class="card-body">
+              <div class="small text-primary fw-black my-2"><%= lesson.category.title %></div>
+              <h3 class="h4">
+                <%= link_to lesson.title, lesson_path(lesson), class: "link-dark text-decoration-none" %>
+              </h3>
+              <p><%= lesson.description.truncate(100)%></p>
+              <div class="small text-primary fw-black my-2"><%= lesson.user.name %></div>
+            </div>
+          </div>
+        </article>
+      <% end %>
+      </div>
+      <div class="text-center">
+        <% if category_name.present? %>
+          <%= link_to "View our #{category_name} Classes", lessons_path(category: category_name), class: "btn btn-link btn-lg text-decoration-underline p-0" %>
+        <% else %>
+          <%= link_to "View all our Classes", lessons_path, class: "btn btn-link btn-lg text-decoration-underline p-0" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>

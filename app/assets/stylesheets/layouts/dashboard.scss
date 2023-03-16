@@ -1,0 +1,65 @@
+body.dashboard {
+
+  .container-fluid {
+
+    @include media-breakpoint-up(md) {
+      padding-left: $spacer-5;
+      padding-right: $spacer-5;
+    }
+  }
+
+  .dashboard-header {
+    background-color: $secondary-color;
+    margin-bottom: $spacer-4;
+    padding-bottom: $spacer-3;
+    padding-top: $spacer-3;
+
+    @include media-breakpoint-up(lg) {
+      background-color: transparent;
+      margin-bottom: 0;
+      padding-bottom: $spacer / 1.5; // 20px
+      padding-top: $spacer / 1.5; // 20px
+    }
+  }
+
+  .dashboard-header,
+  .dashboard-content {
+
+    @include media-breakpoint-up(lg) {
+      margin-left: $spacer * 7.6666666667; // 230px
+    }
+  }
+
+  .navbar-toggler {
+    padding-left: $spacer-1;
+    padding-right: $spacer-1;
+
+    &-icon {
+      background-color: $dark-color;
+      border-radius: $md-border-radius / 5; // 2px
+      display: block;
+      height: rem(4px);
+      width: rem(38px);
+
+      + .navbar-toggler-icon {
+        margin-top: $spacer-2;
+      }
+    }
+
+    @include media-breakpoint-up(lg) {
+      display: none;
+    }
+  }
+
+  .dashboard-logo img {
+    height: rem(60px);
+
+    @include media-breakpoint-up(md) {
+      height: rem(66px);
+    }
+
+    @include media-breakpoint-up(xl) {
+      height: rem(88px);
+    }
+  }
+}

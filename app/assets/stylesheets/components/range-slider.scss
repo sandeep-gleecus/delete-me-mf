@@ -1,0 +1,28 @@
+@mixin track() {
+  background: linear-gradient(90deg, #{$primary-color} var(--slider-progress), #{$input-bg} var(--slider-progress));
+}
+
+.range {
+  position: relative;
+
+  &-slider {
+    &::-webkit-slider-runnable-track { @include track }
+    &::-moz-range-track { @include track }
+    &::-ms-track { @include track }
+
+    &-tooltip {
+      position: absolute;
+      top: calc(#{$form-range-thumb-width} + #{rem(3px)});
+      left: var(--slider-progress);
+      z-index: 1;
+      transform: translateX(-50%);
+      transition: opacity 0.2s;
+      opacity: 1;
+
+      &-hidden {
+        @include visually-hidden;
+        opacity: 0;
+      }
+    }
+  }
+}

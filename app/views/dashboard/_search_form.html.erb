@@ -1,0 +1,23 @@
+<div class="search-main mb-3">
+  <%= form_tag search_dashboard_path, method: :get do %>
+    <div class="form-group has-search">
+      <span class="fa fa-search form-control-feedback"></span>
+      <input type="text" class="form-control input-popular-search"
+             id="input-popular-search"
+             name='query' placeholder="Search on Mother Fit"
+             autocomplete="off">
+      <% if @popular_searches.present? %>
+        <ul class="list-group mb-3 d-none" id="popular-searches-list" data-bs-spy="scroll">
+          <li class="list-group-item"><strong>Popular Searches</strong></li>
+          <% @popular_searches.each do |p| %>
+            <li class="list-group-item list-group-mine">
+              <a href="<%= search_dashboard_path(query: p.name&.strip) %>" class='popular-searches-list-item'>
+                <%= p.name&.strip %>
+              </a>
+            </li>
+          <% end %>
+        </ul>
+      <% end %>
+    </div>
+  <% end %>
+</div>

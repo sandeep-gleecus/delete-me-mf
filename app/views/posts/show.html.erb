@@ -1,0 +1,27 @@
+<% meta title: "Blog - #{@post.get_meta_title}" %>
+<% meta description: @post.get_meta_description %>
+<% @simple_header_layout = true %>
+
+<%= content_for :hero do %>
+  <div class="container-xl">
+    <div class="row text-center justify-content-center g-0 py-6 py-lg-7 py-xl-8">
+      <div class="col-lg-20 col-xl-18">
+        <div class="lead text-primary fw-black mb-2"><%= @post.category.title %></div>
+        <h1><%= @post.title.html_safe %></h1>
+        <p class="lead-xl mb-5 mb-xl-6"><%= @post.excerpt %></p>
+        <%= image_tag resize_to_medium_image(@post.featured_image), class: "img-fluid rounded-2 shadow-lg d-md-none" %>
+        <%= image_tag resize_to_large_image(@post.featured_image), class: "img-fluid rounded-2 shadow-lg d-none d-md-block" %>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<section class="container-xl pb-6 pb-lg-7 pb-xl-8">
+  <div class="row justify-content-center gy-0">
+    <div class="col-lg-20 col-xl-18 col-xxl-16">
+      <%= render partial: "author_strip", locals: {object: @post} %>
+      <div class="mb-5 mb-xl-6"><%= @post.body %></div>
+      <%= render partial: "author_strip", locals: {sharing: true, object: @post} %>
+    </div>
+  </div>
+</section>

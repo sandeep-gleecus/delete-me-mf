@@ -1,0 +1,149 @@
+// Color palette – private
+$white: #fff;              // body color
+$black: #000;              // body color
+$lavender-blush: #fff8f9;  // shade of primary
+$bridal-heath: #ffeec8;    // shade of secondary
+$brightsun: #fec642;       // shade of secondary (darker)
+$eggsour: #fff9ee;         // shade of secondary (lighter)
+$polar: #edfbf4;           // shade of sucesss
+$aqua-spring: #f2fbfa;     // shade of info
+$seashell-peach: #fff6ef;  // shade of warning
+$wisppink: #fef4f5;        // shade of danger
+$magnolia: #f8f6ff;        // shade of accent
+$aliceblue: #f1f9fe;       // shade of highlight
+
+$eternity: #0d0b05;        // headings color
+$metallic-bronze: #473917; // text color
+$zorba: #a19c92;           // text color muted
+$chicago: #64615b;         // text color light
+$oslogray: #86878c;        // placeholder color
+
+$french-rose: #ef476f;     // brand primary
+$golden-tainoi: #ffd166;   // brand secondary
+$malachite: #00CC66;   		 // success color
+$puerto-rico: #3ec4bd;     // info color
+$neon-carrot: #ff9440;     // warning color
+$maximum-red: #e21124;     // danger color
+$heliotrope: #967efd;      // accent color
+$bluejeans: #4fb2f3;       // highlight color
+
+$alabaster: #f4f4f4;       // inputs bg + border
+
+// Spacing
+$spacer: rem(30px);
+$spacer-1: $spacer / 6;            // 5px
+$spacer-2: $spacer / 3;            // 10px
+$spacer-3: $spacer / 2;            // 15px
+$spacer-4: $spacer;                // 30px
+$spacer-5: $spacer * 1.3333333333; // 40px
+$spacer-6: $spacer * 2;            // 60px
+$spacer-7: $spacer * 2.6666666667; // 80px
+$spacer-8: $spacer * 4;            // 120px
+
+// Typography
+$sans-serif-fallback: 'Helvetica Neue', Helvetica, Arial, sans-serif; // private
+$fira-sans: 'Fira Sans', #{$sans-serif-fallback}; // private
+$roboto: 'Roboto', #{$sans-serif-fallback}; // private
+$kalam: 'Kalam', #{$sans-serif-fallback}; // private
+$font-family: $roboto;
+$font-family-accent: $kalam;
+$headings-font-family: $fira-sans;
+$buttons-font-family: $fira-sans;
+
+// Font weights
+$fw-normal: 400;
+$fw-medium: 500;
+$fw-bold: 700;
+$fw-extra-bold: 800;
+$fw-black: 900;
+
+// Font sizes
+$base-font-size: 1rem; // 16px
+
+$h1-font-size: $base-font-size * 3.6875; // 59px
+$h2-font-size: $base-font-size * 3.0625; // 49px
+$h3-font-size: $base-font-size * 2.4375; // 39px
+$h4-font-size: $base-font-size * 1.9375; // 31px
+$h5-font-size: $base-font-size * 1.5625; // 25px
+$h6-font-size: $base-font-size * 1.25;   // 20px
+
+$xl-font-size: $base-font-size * 1.5625; // 25px
+$lg-font-size: $base-font-size * 1.25;   // 20px
+$md-font-size: $base-font-size * 1.125;  // 18px
+$sm-font-size: $base-font-size;          // 16px
+$xs-font-size: $base-font-size * 0.875;  // 14px
+
+// Color system
+$primary-color: $french-rose;
+$primary-color-light: $lavender-blush;
+$secondary-color: $golden-tainoi;
+$secondary-color-light: $bridal-heath;
+$secondary-color-dark: $brightsun;
+$secondary-color-lighter: $eggsour;
+$success-color: $malachite;
+$success-color-light: $polar;
+$info-color: $puerto-rico;
+$info-color-light: $aqua-spring;
+$warning-color: $neon-carrot;
+$warning-color-light: $seashell-peach;
+$danger-color: $maximum-red;
+$danger-color-light: $wisppink;
+$dark-color: $black;
+$accent-color: $heliotrope;
+$accent-color-light: $magnolia;
+$highlight-color: $bluejeans;
+$highlight-color-light: $aliceblue;
+
+$body-bg-color: $white;
+
+$heading-color: $eternity;
+$text-color: $metallic-bronze;
+$text-color-light: $chicago;
+$text-color-dark: $black;
+$text-color-muted: $zorba;
+
+$box-shadow-color: $metallic-bronze;
+$input-box-shadow: rem(0 0 0 4px) rgba($primary-color, 0.25);
+
+$facebook-color: #1877f2;
+$google-color: #e74e3e;
+$instagram-color: #E1306C;
+$linkedin-color: #0077b5;
+$reddit-color: #ff4500;
+$twitter-color: #1da1f2;
+$whatsapp-color: #25d366;
+$youtube-color: #FF0000;
+
+// Components
+$border-width: rem(1px);
+$hr-height: rem(1px);
+
+$base-border-radius: rem(10px); // private
+
+$lg-border-radius: $base-border-radius * 2; // 20px
+$md-border-radius: $base-border-radius;     // 10px
+$sm-border-radius: $base-border-radius / 2; // 5px
+
+$md-box-shadow: rem(0px 0px 30px 0px) rgba($box-shadow-color, 0.05);
+$lg-box-shadow: rem(0px 0px 60px 0px) rgba($box-shadow-color, 0.10);
+
+$transition-duration: 0.15s;
+$transition: all $transition-duration ease-in-out;
+
+// Buttons + Forms
+$inputs-bg: $alabaster;
+
+$inputs-border-color: $inputs-bg;
+$inputs-placeholder-color: $oslogray;
+
+$inputs-btn-padding-y-sm: rem(5px);
+$inputs-btn-padding-x-sm: rem(15px);
+$inputs-btn-font-size-sm: $sm-font-size;
+
+$inputs-btn-padding-y: rem(7px);
+$inputs-btn-padding-x: rem(12px);
+$inputs-btn-font-size: $md-font-size;
+
+$inputs-btn-padding-y-lg: rem(14px);
+$inputs-btn-padding-x-lg: rem(27px);
+$inputs-btn-font-size-lg: $xl-font-size;

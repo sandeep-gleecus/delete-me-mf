@@ -1,0 +1,112 @@
+<%= content_for :facebook_domain_verification do %>
+ <meta name="facebook-domain-verification" content="qesw5hjy64wbefv7cau4lvtk46j7fd"/>
+<% end %>
+
+<%
+  meta title: "Home Exercise Programmes for Women",
+  description: "Mother Fit provides pregnancy exercise & postpartum exercise programmes, expert advice, resources, live classes and nutrition, challenging maternal myths."
+%>
+
+<%= content_for :hero do %>
+  <div class="container-xl">
+    <div class="row gy-lg-0">
+      <div class="col-md-18 col-lg-16 col-xl-13 col-xxl-12">
+        <div class="bg-secondary header-hero">
+          <h1 class="mb-2 mb-md-3">Home Exercise Programmes for Women</h1>
+          <p class="lead-xl mb-3 mb-md-4">
+            Mother Fit provides pregnancy exercise & postpartum exercise programmes, expert advice, resources, live classes and nutrition, challenging maternal myths.
+          </p>
+          <%= render partial: "hero_membership_numbers" %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<%= content_for :entry_section do %>
+  <section class="container-xl py-6 py-lg-7 py-xl-8">
+    <div class="row text-center justify-content-center gy-0 mb-5 mb-lg-6 mb-xl-7">
+      <div class="col-lg-20 col-xl-18">
+        <h2>All-encompassing home exercise programmes for all stages of motherhood</h2>
+        <p class="lead-xl mb-0">
+        </p>
+      </div>
+    </div>
+    <div class="row justify-content-center gy-4 gx-md-4 gy-md-0 gx-md-4 mb-5 mb-lg-6 mb-xl-7">
+      <div class="col-md col-xl-7 d-flex flex-column">
+        <%= render partial: "card", locals: {title: "Pregnancy", text: "40-week SAFE pregnancy exercise programme", image_path: "home/pregnancy-card.jpg", image_lg_path: "home/pregnancy-card-lg.jpg", path: pregnancy_path, classes: "card-animated" } %>
+      </div>
+      <div class="col-md col-xl-7 d-flex flex-column">
+        <%= render partial: "card", locals: {title: "Postpartum", text: "6-part rehabilitation & postnatal exercise programme", image_path: "home/postpartum-card.jpg", image_lg_path: "home/postpartum-card-lg.jpg", path: postpartum_path, classes: "card-animated" } %>
+      </div>
+      <div class="col-md col-xl-7 d-flex flex-column">
+        <%= render partial: "card", locals: {title: "Beyond", text: "Home workouts, programmes, challenges & nutrition", image_path: "home/beyond-card.jpg", image_lg_path: "home/beyond-card-lg.jpg", path: beyond_path, classes: "card-animated" } %>
+      </div>
+    </div>
+    <div class="text-center">
+      <% if user_signed_in? %>
+        <%= link_to "Go to dashboard", dashboard_root_path, class: "btn btn-secondary btn-lg" %>
+      <% else %>
+        <%= link_to "Try free for #{I18n.t('free_trial.try_for_days')} days", new_user_registration_path, class: "btn btn-secondary btn-lg" %>
+      <% end %>
+    </div>
+  </section>
+<% end %>
+<%= render partial: "usp_summary",
+  locals: {
+    title: "Covering all areas of women’s health",
+    support_text: "Looking after your mind, body and soul, we place an emphasis on all-around well-being, with the end result being a happier, healthier and more active you.",
+    mind_text: "Expertise and advice to support you as a woman. Get a clear focus on our priorities, goals and confidence.",
+    body_text: "Changing maternal myths discovering a safe exercise programme, taking simple steps towards a healthier life.",
+    soul_text: "Nourish your soul with our private community, here to support your healthy habits.",
+    video_guide_pregnancy: false,
+    video_guide_postpartum: false,
+    video_guide_beyond: false
+  }
+%>
+<section class="solid-gradient-primary-light-sm pb-6 pb-lg-7 pb-xl-8">
+  <div class="container-xl image-wrapper mb-4 mb-md-2 mb-lg-2 mb-xl-3">
+    <div class="row justify-content-center gy-0 gx-md-5 gx-lg-6 gx-xl-7">
+      <div class="col">
+        <%= image_tag "home/mother-exercising.jpg", class: "img-fluid rounded shadow d-md-none" %>
+        <%= image_tag "home/mother-exercising-md.jpg", class: "image-wrapper-image-start img-fluid shadow d-none d-md-block" %>
+      </div>
+      <div class="col d-none d-md-block">
+        <%= image_tag "home/mother-laying-with-baby-md.jpg", class: "image-wrapper-image-end img-fluid shadow mt-md-6 mt-lg-7 mt-xl-8" %>
+      </div>
+    </div>
+  </div>
+  <section class="container-xl pb-5 pb-lg-6 pb-xl-7">
+    <%= render partial: "publications", locals: {heading_color: "primary"} %>
+  </section>
+  <div class="container-xl">
+    <div class="row text-center justify-content-center gy-0 pt-6 pt-lg-7 pt-xl-8 mb-5 mb-lg-6 mb-xl-7">
+      <div class="col-lg-20 col-xl-18">
+        <h2>With a team of experts behind you</h2>
+        <p class="lead-xl mb-0">Making life just a little bit easier.</p>
+      </div>
+    </div>
+    <ul class="row justify-content-center gy-3 gy-md-4 gx-md-4 list-unstyled mb-5 mb-lg-6 mb-xl-7">
+      <%= render partial: "expert_card", locals: {image: "fitness-nutrition.jpg", founder: true, expertise: "Fitness & Nutrition"} %>
+      <%= render partial: "expert_card", locals: {image: "lactation-consultant.jpg", expertise: "Lactation Consultant"} %>
+      <%= render partial: "expert_card", locals: {image: "midwife.jpg", expertise: "Midwife"} %>
+      <%= render partial: "expert_card", locals: {image: "pelvic-health.jpg", expertise: "Pelvic Health"} %>
+      <%= render partial: "expert_card", locals: {image: "doula.jpg", expertise: "Doula"} %>
+      <%= render partial: "expert_card", locals: {image: "c-section-scar-therapist.jpg", expertise: "C-Section Scar Therapist"} %>
+      <%= render partial: "expert_card", locals: {image: "hypnobirthing.jpg", expertise: "Hypnobirthing"} %>
+      <%= render partial: "expert_card", locals: {image: "yoga-instructor.jpg", expertise: "Yoga Instructor"} %>
+      <%= render partial: "expert_card", locals: {image: "pilates-instructor.jpg", expertise: "Pilates Instructor"} %>
+    </ul>
+    <div class="text-center">
+      <% if user_signed_in?%>
+        <%= link_to "Go to dashboard", dashboard_root_path, class: "btn btn-secondary btn-lg" %>
+      <% else %>
+        <%= link_to "Try free for #{I18n.t('free_trial.try_for_days')} days", new_user_registration_path, class: "btn btn-secondary btn-lg" %>
+      <% end %>
+    </div>
+  </div>
+</section>
+<%= render partial: "usp_list" %>
+<%= render partial: "motherhood_community" %>
+<%= render partial: "blog_section" %>
+<%= render partial: "cta_section" %>

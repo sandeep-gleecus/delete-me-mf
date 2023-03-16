@@ -1,0 +1,27 @@
+.membership-amount-title {
+  font-size: rem(60px);
+
+  @include media-breakpoint-up(md) {
+    font-size: rem(70px);
+  }
+
+  @include media-breakpoint-up(xl) {
+    font-size: rem(80px);
+  }
+}
+
+.lead-xl {
+  @include font-size($xl-font-size);
+}
+
+.x-small {
+  @include font-size($xs-font-size);
+}
+
+.fw-medium {
+  font-weight: $fw-medium;
+}
+
+.fw-black {
+  font-weight: $fw-black;
+}

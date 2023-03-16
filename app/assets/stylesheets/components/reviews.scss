@@ -1,0 +1,13 @@
+.reviews {
+
+  &-comments {
+
+    @include media-breakpoint-up(lg) {
+      margin-top: -$spacer * 2.5; // 75px
+    }
+
+    @include media-breakpoint-up(xl) {
+      margin-top: -$spacer * 3.3333333333; // 100px
+    }
+  }
+}

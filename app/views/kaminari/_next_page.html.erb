@@ -1,0 +1,5 @@
+<li class="page-item">
+  <span class="next page-link btn">
+    <%= link_to_unless current_page.last?, t('Next').html_safe, url, rel: 'next', remote: remote %>
+  </span>
+</li>

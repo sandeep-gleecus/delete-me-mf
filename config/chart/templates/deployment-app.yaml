@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-web
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: {{ .Release.Name }}-web
+  template:
+    metadata:
+      labels:
+        name: {{ .Release.Name }}-web
+    spec:
+      imagePullSecrets:
+        - name: gitlab-pull-secret
+      containers:
+        - name: app
+          image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3000
+          env:
+            {{- include "env" . | nindent 12 }}

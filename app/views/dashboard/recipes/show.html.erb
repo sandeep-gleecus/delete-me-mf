@@ -1,0 +1,17 @@
+<% meta title: "Recipe - #{@recipe.get_meta_title}" %>
+<% meta description: @recipe.get_meta_description %>
+<% @page_title = "Recipes" %>
+
+<section class="bg-white shadow rounded-2 p-4 mb-4">
+  <div class="row">
+    <div class="col-xxl-12">
+      <h2 class="h3 mb-3"><%= @recipe.title.html_safe %></h2>
+      <%= image_tag resize_to_medium_image(@recipe.featured_image), class: "img-fluid rounded-2 d-md-none mb-5" %>
+      <%= image_tag resize_to_large_image(@recipe.featured_image), class: "img-fluid rounded-2 d-none d-md-block mb-5" %>
+      <div class="mb-6"><%= @recipe.body %></div>
+      <%= render partial: "author_strip", locals: {object: @recipe, sharing: true} %>
+      <div class="mb-3"><%= render partial: "likes/button", locals: {likeable: @recipe} %></div>
+      <%= render partial: "discussion", locals: {commentable: @recipe} %>
+    </div>
+  </div>
+</section>

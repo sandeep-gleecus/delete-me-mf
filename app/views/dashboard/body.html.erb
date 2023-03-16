@@ -1,0 +1,89 @@
+<% meta title: "Body Dashboard" %>
+<% @page_title = "Body" %>
+<%= render 'search_form' %>
+<div class="row gy-4 gx-xxl-4">
+  <div class="col-xxl-16">
+    <section class="bg-white shadow rounded-2 p-4">
+      <h2 class="h5 mb-3 mb-md-4">
+        <% if current_user.pregnancy? %>
+          <% if current_user.pregnancy_trimester_1? %>
+            Trimester 1
+          <% elsif current_user.pregnancy_trimester_2? %>
+            Trimester 2
+          <% elsif current_user.pregnancy_trimester_3? %>
+            Trimester 3
+          <% end %>
+        <% elsif current_user.postpartum? %>
+          <%= "#{shortened_name(current_user.name)}'s Programs" %>
+        <% elsif current_user.beyond? %>
+          Challenges and programs
+        <% end %>
+      </h2>
+      <div class="row row-cols-1 row-cols-lg-3 gy-4 gx-lg-4">
+        <% if current_user.postpartum? %>
+          <!-- To display categories inline with postpartum designs -->
+          <%= render 'categories' %>
+        <% else  %>
+          <% if @primary.empty? %>
+            <div class="badge badge-secondary badge-md align-self-md-start me-1 mt-4">
+               No classes available.
+            </div>
+          <% else %>
+            <%= render @primary %>
+          <% end %>
+        <% end %>
+      </div>
+    </section>
+    <% if current_user.beyond? %>
+      <section class="bg-white shadow rounded-2 p-4 mt-4">
+        <h2 class="h5 mb-3 mb-md-4">Workouts</h2>
+        <div class="row row-cols-1 row-cols-lg-3 gy-4 gx-lg-4">
+          <%= render @secondary %>
+        </div>
+      </section>
+    <% end %>
+  </div>
+  <%= render 'dashboard/book_a_call_and_review' %>
+  <div class="col-xxl-8">
+    <div class="row gy-4 gx-xl-4 gx-xxl-0">
+      <div class="col-xl-12 col-xxl-24">
+        <%= render 'dashboard/book_a_call_and_review_top' %>
+        <section class="bg-white shadow rounded-2 p-4">
+          <div class="d-flex justify-content-between mb-3 mb-md-4">
+            <h2 class="h5 mb-0">Recipe of the day</h2>
+            <%= link_to "View all#{icon "fas", "angle-right", class: "ms-2"}".html_safe, dashboard_recipes_path, class: "btn btn-link btn-sm shadow-none border-0 p-0 d-flex align-items-center" %>
+          </div>
+          <div class="row row-cols-1">
+            <%= render @recipe_of_the_day %>
+          </div>
+        </section>
+      </div>
+      <div class="col-xl-12 col-xxl-24">
+        <section class="bg-white shadow rounded-2 p-4 h-100">
+          <div class="d-flex justify-content-between">
+            <h2 class="h5 mb-0">Recent activity</h2>
+            <%= link_to "View all#{icon "fas", "angle-right", class: "ms-2"}".html_safe, dashboard_activities_path, class: "btn btn-link btn-sm shadow-none border-0 p-0 d-flex align-items-center" %>
+          </div>
+          <% if @activities.exists? %>
+            <%= render @activities, preview: true %>
+          <% else %>
+            <p class="small mt-3 mb-0">You have no <i>Body</i> activities logged. You can add one <%= link_to "here.", new_dashboard_activity_path %></p>
+          <% end %>
+        </section>
+      </div>
+      <div class="col-xl-12 col-xxl-24">
+        <section class="bg-white shadow rounded-2 p-4 h-100">
+          <div class="d-flex justify-content-between">
+            <h2 class="h5 mb-0">Food diary</h2>
+            <%= link_to "View all#{icon "fas", "angle-right", class: "ms-2"}".html_safe, dashboard_food_entries_path, class: "btn btn-link btn-sm shadow-none border-0 p-0 d-flex align-items-center" %>
+          </div>
+          <% if @food_entries.exists? %>
+            <%= render @food_entries, preview: true %>
+          <% else %>
+            <p class="small mt-3 mb-0">You have no entries logged in your food diary. You can add one <%= link_to "here.", new_dashboard_food_entry_path %></p>
+          <% end %>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>

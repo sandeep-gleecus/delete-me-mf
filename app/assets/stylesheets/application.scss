@@ -1,0 +1,64 @@
+// Sass functions
+@use "sass:color";
+@use "sass:math";
+
+// Import core variables for use in Bootstrap and application
+@import "base/mixins";
+@import "base/variables";
+@import "base/bootstrap-variables";
+@import 'actiontext';
+
+// Bootstrap
+@import 'bootstrap/scss/bootstrap';
+
+// Required assets
+$fa-font-path: '@fortawesome/fontawesome-free/webfonts';
+@import '@fortawesome/fontawesome-free/scss/fontawesome';
+@import '@fortawesome/fontawesome-free/scss/solid';
+@import '@fortawesome/fontawesome-free/scss/regular';
+@import '@fortawesome/fontawesome-free/scss/brands';
+@import '@fortawesome/fontawesome-free/scss/v4-shims';
+// @import "cookieconsent/build/cookieconsent.min";
+@import "vanillajs-datepicker/sass/datepicker";
+@import "@splidejs/splide/dist/css/splide.min";
+
+// Base
+@import "base/base";
+@import "base/colors";
+@import "base/typography";
+@import "base/utilities";
+
+// Layout
+@import "layouts/header";
+@import "layouts/main";
+@import "layouts/publications";
+@import "layouts/dashboard";
+@import "layouts/sidebar";
+@import "layouts/footer";
+
+// Components
+@import "components/accordions";
+@import "components/action-text";
+@import "components/alert";
+@import "components/avatar";
+@import "components/badge";
+@import "components/button";
+@import "components/calendar";
+@import "components/card";
+@import "components/carousel";
+@import "components/cookie-consent";
+@import "components/datepicker";
+@import "components/form";
+@import "components/image-wrapper";
+@import "components/images";
+@import "components/list";
+@import "components/nav";
+@import "components/navbar";
+@import "components/offcanvas";
+@import "components/payment-card";
+@import "components/range-slider";
+@import "components/reviews";
+@import "components/splide-slider";
+@import "components/tiles";
+@import "components/popular-search";
+@import "components/mobile-book-a-calls";

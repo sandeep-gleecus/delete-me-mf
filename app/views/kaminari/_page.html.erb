@@ -1,0 +1,6 @@
+<li class="page-item <%= 'active' if page.current? %>">
+  <span class="page page-link btn">
+    <%= link_to_unless page.current?, page, url, {remote: remote, rel: page.rel} %>
+  </span>
+</li>
+

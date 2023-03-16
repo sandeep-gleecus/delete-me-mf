@@ -1,0 +1,18 @@
+<% category_name ||= nil %>
+
+<section class="bg-primary-light py-6 py-lg-7 py-xl-8">
+  <div class="container-xl">
+    <div class="row text-center justify-content-center gy-0 mb-5 mb-lg-6 mb-xl-7">
+      <div class="col-lg-20 col-xl-18">
+        <h2>Helping you every step of the way</h2>
+        <p class="lead-xl mb-0">Discover recipes, advice and life hacks, from the best way to get rid of bingo wings to healthier lunch recipes for kids. The <%= Rails.configuration.name %> blog – helping make life that bit easier.</p>
+      </div>
+    </div>
+    <div class="row row-cols-1 row-cols-lg-2 row-cols-lg-3 gy-4 mb-5 mb-lg-6 mb-xl-7">
+      <%= render @recent_posts %>
+    </div>
+    <div class="text-center">
+      <%= link_to "View all our blogs", posts_path, class: "btn btn-link btn-lg text-decoration-underline p-0" %>
+    </div>
+  </div>
+</section>

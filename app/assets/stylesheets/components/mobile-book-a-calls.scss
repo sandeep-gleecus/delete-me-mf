@@ -1,0 +1,9 @@
+/* Media Query for Mobile Devices */
+@media (max-width: 480px) {
+  .book-a-call-and-review{
+    display: none !important;
+  }
+  .mobile-leave-us-review {
+    display: block !important;
+  }
+}

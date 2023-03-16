@@ -1,0 +1,22 @@
+@function get-breakpoints($key) {
+  @return map-get($container-max-widths, $key);
+}
+
+.container,
+.container-xl,
+.container-xxl {
+
+  @include media-breakpoint-up(md) {
+    padding-left: $spacer-5;
+    padding-right: $spacer-5;
+  }
+
+  @include media-breakpoint-up(xl) {
+    padding-left: $spacer-4;
+    padding-right: $spacer-4;
+  }
+}
+
+.img-cover {
+  object-fit: cover;
+}

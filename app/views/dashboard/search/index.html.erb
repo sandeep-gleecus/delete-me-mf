@@ -1,0 +1,77 @@
+<% meta title: "Search Results" %>
+<% @page_title = "Search Results" %>
+<% horizontal_style ||= true %>
+<div class="row row-cols-1 gy-4 gx-xl-4 px-4">
+  <h4><%= pluralize(@search_results.total_count, 'result') %> matching "<%= params[:query] %>"</h4>
+</div>
+<div class="row row-cols-1 gy-4 gx-xl-4 px-3">
+  <div class="col-xxl">
+    <div class="d-flex justify-content-center pb-4">
+      <div class="btn-group shadow-0" role="group" aria-label="Basic example">
+        <a href="<%= popular_search_url('Classes')%>"
+           type="button" class="btn btn-outline-secondary <%= params[:filter_by].eql?('Classes') ? 'active' : nil %>"
+           data-mdb-color="dark">Classes</a>
+        <a href="<%= popular_search_url('Recipes')%>"
+           type="button" class="btn btn-outline-secondary <%= params[:filter_by].eql?('Recipes') ? 'active' : nil %>"
+           data-mdb-color="dark">Recipes</a>
+        <a href="<%= popular_search_url('Posts')%>"
+           type="button" class="btn btn-outline-secondary <%= params[:filter_by].eql?('Posts') ? 'active' : nil %>"
+           data-mdb-color="dark">Posts</a>
+      </div>
+    </div>
+    <% if @search_results.blank? %>
+      <section class="rounded-2 p-2 h-10 text-center">
+        <div class="alert alert-danger" role="alert">
+          No results Found. <a href="/dashboard" class="alert-link text-white text-decoration-underline">click here</a> to go back.
+        </div>
+      </section>
+    <% end %>
+    <% unless @search_results.blank?%>
+      <section class="bg-white shadow rounded-2 p-4 h-10'">
+        <% @search_results.each do |search_result| %>
+          <% search_result_completed = search_result.class.name.eql?('Lesson') ? search_result.completed?(current_user) : nil %>
+          <% dashboard_search_result_path = '/' %>
+          <% if search_result.class.name.eql?('Lesson') %>
+            <% dashboard_search_result_path = "/dashboard/classes/#{search_result.id}" %>
+          <% elsif search_result.class.name.eql?('Post') %>
+            <% dashboard_search_result_path = "/dashboard/blog/#{search_result.id}" %>
+          <% elsif search_result.class.name.eql?('Recipe') %>
+            <% dashboard_search_result_path = "/dashboard/recipes/#{search_result.id}" %>
+          <% end  %>
+          <article class="col pb-4">
+            <div class="<%= "row align-items-center g-3 gx-sm-4" if horizontal_style %>">
+              <div class="<%= "col-md-9 col-lg-6" if horizontal_style %>">
+                <%= link_to dashboard_search_result_path, class: "d-block rounded-2 position-relative #{"mb-3" unless horizontal_style}" do %>
+                  <% if horizontal_style %>
+                    <%= image_tag resize_to_medium_image(search_result.featured_image), class: "img-fluid rounded-2 #{"opacity-50" if search_result_completed}" %>
+                  <% else %>
+                    <%= image_tag resize_to_medium_image(search_result.featured_image), class: "img-fluid rounded-2 #{"opacity-50" if search_result_completed}" %>
+                  <% end %>
+                <% end %>
+              </div>
+              <div class="<%= "col-md" if horizontal_style %>">
+                <h3 class="<%= horizontal_style ? "h5" : "h6" %> mb-0">
+                  <%= link_to highlight(search_result.title, params[:query]), dashboard_search_result_path, class: "text-reset" %>
+                </h3>
+                <% if horizontal_style %>
+                  <p class="mb-0">
+                    <% if params[:filter_by].eql?('Posts') || params[:filter_by].eql?('Recipes') %>
+                      <%= highlight(search_result.excerpt, params[:query]) %>
+                    <% else  %>
+                      <%= highlight(search_result.description, params[:query]) %>
+                    <% end  %>
+                  </p>
+                <% end %>
+                <%= "<div class='badge badge-sm badge-success mb-2'>#{icon "fas", "check", class: "fa-fw me-1"}Completed</div>".html_safe if search_result_completed %>
+              </div>
+            </div>
+          </article>
+        <% end  %>
+      </section>
+    <% end %>
+  </div>
+</div>
+<div class="d-flex flex-row-reverse pt-2 px-3">
+  <%= paginate @search_results %>
+</div>
+

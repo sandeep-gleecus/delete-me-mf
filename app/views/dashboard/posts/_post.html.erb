@@ -1,0 +1,13 @@
+<article class="col">
+  <%= link_to dashboard_post_path(post), class: "d-block rounded-2 position-relative mb-3" do %>
+    <%= image_tag resize_to_medium_image(post.featured_image), class: "img-fluid rounded-2" %>
+  <% end %>
+  <div>
+    <h3 class="h6 mb-1">
+      <%= link_to post.title.truncate(60, separator: '..'), dashboard_post_path(post), class: "text-reset" %>
+    </h3>
+    <% unless @discard_resource_excerpt %>
+      <p class="mb-0"><%= post.excerpt.truncate(100, separator: ' ') %></p>
+    <% end %>
+  </div>
+</article>

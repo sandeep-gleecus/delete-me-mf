@@ -1,0 +1,22 @@
+<ul class="nav nav-pills align-items-stretch mb-4 mb-lg-5">
+  <li class="nav-item flex-grow-1 flex-xl-grow-0">
+    <%= link_to dashboard_settings_personal_path, class: "nav-link d-flex flex-column flex-xl-row justify-content-center align-items-center #{"active" if current_page?(dashboard_settings_personal_path)}" do %>
+      <%= icon "fas", "user", class: "fa-fw mb-md-1 mb-xl-0 me-xl-2" %><span class="d-none d-md-inline">Personal</span>
+    <% end %>
+  </li>
+  <li class="nav-item flex-grow-1 flex-xl-grow-0">
+    <%= link_to dashboard_settings_motherhood_path, class: "nav-link d-flex flex-column flex-xl-row justify-content-center align-items-center #{"active" if current_page?(dashboard_settings_motherhood_path)}" do %>
+      <%= icon "fas", "baby-carriage", class: "fa-fw mb-md-1 mb-xl-0 me-xl-2" %><span class="d-none d-md-inline">Motherhood</span>
+    <% end %>
+  </li>
+  <li class="nav-item flex-grow-1 flex-xl-grow-0">
+    <%= link_to dashboard_settings_subscription_path, class: "nav-link d-flex flex-column flex-xl-row justify-content-center align-items-center #{"active" if current_page?(dashboard_settings_subscription_path)}" do %>
+      <%= icon "fas", "credit-card", class: "fa-fw mb-md-1 mb-xl-0 me-xl-2" %><span class="d-none d-md-inline">Subscription</span>
+    <% end %>
+  </li>
+  <li class="nav-item flex-grow-1 flex-xl-grow-0">
+    <%= link_to edit_user_registration_path, class: "nav-link d-flex flex-column flex-xl-row justify-content-center align-items-center #{"active" if current_page?(edit_user_registration_path)}" do %>
+      <%= icon "fas", "key", class: "fa-fw mb-md-1 mb-xl-0 me-xl-2" %><span class="d-none d-md-inline">Security</span>
+    <% end %>
+  </li>
+</ul>

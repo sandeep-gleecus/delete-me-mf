@@ -1,0 +1,14 @@
+<article class="d-flex align-items-center mt-4">
+  <div class="tile tile-primary <%= local_assigns[:preview] ? "tile-lg" : "tile-xl" %> flex-column me-3 me-md-4">
+    <div class="<%= local_assigns[:preview] ? "h6" : "h5" %> text-primary mb-0"><%= food_entry.date.day %></div>
+    <div class="<%= local_assigns[:preview] ? "x-small" : "small" %> text-dark fw-bold"><%= food_entry.date.strftime("%b") %></div>
+  </div>
+  <div>
+    <% if local_assigns[:preview] %>
+      <h6 class="small mb-0"><%= link_to food_entry.title, dashboard_food_entry_path(food_entry), class: "text-reset" %></h6>
+    <% else %>
+      <h6 class="mb-0"><%= link_to food_entry.title, dashboard_food_entry_path(food_entry), class: "text-reset" %></h6>
+    <% end %>
+    <%= convert_to_badge(:calories_consumed, food_entry.calories_consumed, "badge-sm align-self-start mt-2") %>
+  </div>
+</article>

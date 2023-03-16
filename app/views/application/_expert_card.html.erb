@@ -1,0 +1,17 @@
+<% image ||= false %>
+<% founder ||= false %>
+<% expertise ||= false %>
+
+<li class="col-md-12 col-lg-8 col-xl-7">
+  <div class="card rounded-2 shadow-lg">
+    <div class="card-body d-flex align-items-center">
+      <%= image_tag "experts/#{image}", alt: "#{expertise} Expert", title: "#{expertise} Expert", height: 80, class: "tile tile-xl me-1" %>
+      <div class="ms-3">
+        <% if founder %>
+          <h4 class="small text-primary mb-1">Founder</h4>
+        <% end %>
+        <h3 class="h6 lh-sm mb-0"><%= expertise %></h3>
+      </div>
+    </div>
+  </div>
+</li>

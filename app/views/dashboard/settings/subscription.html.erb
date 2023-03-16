@@ -1,0 +1,109 @@
+<% meta title: "Dashboard – Settings" %>
+<% @page_title = "Settings" %>
+
+<section class="bg-white shadow rounded-2 p-4">
+  <%= render partial: "dashboard/settings/nav_tabs" %>
+  <%# START: Display user that card is Expiring in below 30 days %>
+  <% card_expiry_txt = card_expiry_txt_msg(@payment_method) %>
+  <% if @stripe_customer && card_expiry_txt %>
+    <div class="alert alert-warning alert-dismissible fade show mb-3 mt-2" role="alert">
+      <i class="fas fa-exclamation-triangle mr-4"></i> <%= card_expiry_txt %>
+      <button type="button" class="btn-close bg-white"  data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  <% end %>
+  <%# END: Display user that card is Expiring in below 30 days %>
+
+  <% fail_event_data = current_user.invoice_payment_fail_wh %>
+  <%# success_event_data = current_user.invoice_payment_success_wh %>
+  <% if fail_event_data %>
+    <% unless fail_event_data['paid'] %>
+      <div class="col-xl-25 col-xxl-25">
+        <% failed_at = date_and_time(Time.zone.at(fail_event_data['created'])) %>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+          <i class="fas fa-exclamation-triangle mr-2"></i>
+          <span class="fs-6">your last payment failed at <%= failed_at %>.</span>
+          <br/>
+          <strong>Reason:</strong> <%= fail_event_data['description'] %>
+          <button type="button" class="btn-close bg-white" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+  <div class="row gy-0">
+    <div class="col-xl-20 col-xxl-15">
+      <h2 class="h5 mb-1 mb-md-2">Subscription</h2>
+      <p class="mb-4 mb-lg-5">An overview of your subscription on <%= Rails.configuration.name %>.</p>
+      <% if current_user.sub_cancel_end_date %>
+        <div class="alert alert-warning" role="alert">
+          <%= I18n.t('subscription.end_message') %>
+        </div>
+      <% else %>
+        <%= render "layouts/alerts" %>
+      <% end %>
+      <section>
+        <div class="row gy-4 gx-xl-4 gx-xxl-5">
+          <div class="col-md-16 col-lg-18 col-xl-14 col-xxl-auto d-xl-flex flex-xl-column">
+            <h3 class="h6 mb-3">Your subscription</h3>
+            <div class="bg-light rounded-2 p-4 flex-xl-grow-1 d-flex flex-column">
+              <div class="d-md-flex align-items-md-center <%= "mb-4" if @stripe_customer %>">
+                <%= display_avatar(current_user, 50, "d-none d-md-block") %>
+                <div class="ms-md-4">
+                  <h4 class="lead mb-1"><%= current_user.name %></h4>
+                  <div class="small">
+                    <% if @stripe_customer %>
+                      <%= convert_to_short_date(Time.at(@subscription.start_date).to_datetime) %>
+                    <% else %>
+                      Free Subscription
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+              <% if @stripe_customer %>
+                <div class="d-md-flex align-items-end mt-auto">
+                  <div class="mb-2 mb-md-0 me-3 me-xl-4">
+                    <h4 class="h6 mb-2">Overview</h4>
+                    <div class="small lh-1">Next billing date <span class="text-nowrap"><%= convert_to_short_date(Time.at(@subscription.current_period_end).to_datetime) %></span></div>
+                  </div>
+                  <div class="h4 ms-md-auto lh-1 mb-0"><%= number_to_currency((@subscription.plan.amount.to_f / 100), unit: "£") %></div>
+                </div>
+              <% end %>
+            </div>
+          </div>
+          <% if @stripe_customer && @payment_method %>
+            <div class="col-auto">
+              <div class="d-flex align-items-center mb-3">
+                <h3 class="h6 mb-0">Payment details</h3>
+                <%#= link_to "#{icon "fas", "edit", class: "me-2"}Edit".html_safe, root_path, class: "btn btn-link shadow-none border-0 ms-auto mb-0 p-0" %>
+              </div>
+              <div class="payment-card">
+                <div class="payment-card-chip">
+                  <%= image_tag "payment-card-chip.svg", height: 36, class: "payment-card-chip-image" %>
+                </div>
+                <div class="payment-card-provider">
+                  <%= image_tag "card-providers/#{@payment_method.card.brand}.svg", class: "payment-card-provider-logo payment-card-provider-logo-#{@payment_method.card.brand}" %>
+                </div>
+                <div class="payment-card-number"><span class="me-3">****</span><span class="me-3">****</span><span class="me-3">****</span><%= @payment_method.card.last4 %></div>
+                <div class="payment-card-holder"><%= @stripe_customer.name %></div>
+                <div class="payment-card-expiry"><%= "%02i" % @payment_method.card.exp_month %>/<%= @payment_method.card.exp_year.to_s[2..3] %></div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+        <% if subscription_trial_days_txt %>
+          <hr class="my-lg-4 my-5"/>
+          <div class="small mt-2 mb-3 text-muted fw-bold">
+            <%= subscription_trial_days_txt %>
+          </div>
+        <% end  %>
+        <% if current_user.free_subscription == false && !current_user.subscription_cancelled? %>
+          <hr class="my-5 my-lg-4"/>
+          <div>
+            <h3 class="h6 mb-1 mb-md-2">Cancel your subscription</h3>
+            <p class="small mb-3">If you wish to end your subscription to <%= Rails.configuration.name %> you can do so by pressing the button below.</p>
+            <%= link_to "Cancel subscription#{icon "fas", "angle-right", class: "ms-1"}".html_safe, subscriptions_cancellation_path, class: "btn btn-link text-danger shadow-none border-0 p-0" %>
+          </div>
+        <% end %>
+      </section>
+    </div>
+  </div>
+</section>

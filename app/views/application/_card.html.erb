@@ -1,0 +1,14 @@
+<% classes ||= "" %>
+
+<%= "<li class='splide__slide'>".html_safe if local_assigns[:is_slider_item] %>
+  <%= "<a href='#{path}' class='text-body'>".html_safe if local_assigns[:path] %>
+    <div class="card p-3 <%= classes %>">
+      <%= image_tag image_path, class: "card-img-top #{"d-lg-none" if local_assigns[:image_lg_path]}", alt: "#{title}", title: "#{title}" %>
+      <%= image_tag image_lg_path, class: "card-img-top d-none d-lg-block", alt: "#{title}", title: "#{title}" if local_assigns[:image_lg_path] %>
+      <div class="card-body text-center pt-4">
+        <h3 class="h5 text-center lh-1 <%= local_assigns[:text] ? "mb-2" : "mb-1" %>"><%= title %></h3>
+        <%= tag.p text, class: "lead mb-0" if local_assigns[:text] %>
+      </div>
+    </div>
+  <%= "</a>".html_safe if local_assigns[:path] %>
+<%= "</li>".html_safe if local_assigns[:is_slider_item] %>

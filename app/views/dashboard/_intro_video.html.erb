@@ -1,0 +1,35 @@
+<% if lesson %>
+  <% horizontal_style ||= false %>
+  <% horizontal_image_width ||= 80 %>
+  <% lesson_completed = intro_video_completed %>
+  <article class="col d-flex <%= horizontal_style ? "flex-row align-items-center" : "flex-column" %>">
+    <%= link_to dashboard_lesson_path(lesson), class: "d-block flex-shrink-0 rounded-2 position-relative #{"mb-3" unless horizontal_style}" do %>
+      <% if lesson.try(:video?) && horizontal_style == false %>
+        <% if lesson_completed %>
+          <%= tag.div icon("fas", "undo"), class: "btn btn-secondary text-dark btn-square z-index-1" %>
+          <div class="badge badge-sm bg-secondary text-dark position-absolute end-0 z-index-1 mt-2 me-2"><%= lesson.try(:duration) %></div>
+        <% else %>
+          <%= tag.div icon("fas", "play"), class: "btn btn-primary btn-square" %>
+          <div class="badge badge-sm bg-primary position-absolute end-0 mt-2 me-2"><%= lesson.try(:duration) %></div>
+        <% end %>
+      <% end %>
+      <% if horizontal_style %>
+        <%= image_tag(resize_to_small_image(lesson.featured_image), width: 80, class: "img-fluid rounded-1 d-sm-none #{"opacity-50" if lesson_completed}") %>
+        <%= image_tag(resize_to_small_image(lesson.featured_image), width: horizontal_image_width, class: "img-fluid rounded-1 d-none d-sm-block #{"opacity-50" if lesson_completed}") %>
+      <% else %>
+        <%= image_tag resize_to_medium_image(lesson.featured_image), class: "img-fluid rounded-2 #{"opacity-50" if lesson_completed}" %>
+      <% end %>
+    <% end %>
+    <div class="<%= "ms-3 ms-md-4 flex-grow-1" if horizontal_style %>">
+      <div class="d-flex">
+        <%= convert_to_badge(:time_live, time(lesson.start_time), "badge-sm mt-2 me-2") if lesson.start_time && lesson.start_time > Date.current %>
+        <%= convert_to_badge(:time_length, lesson.duration, "badge-sm align-self-md-start mt-2 me-2") if horizontal_style && lesson.try(:duration)%>
+        <%= completed_badge if lesson_completed %>
+      </div>
+    </div>
+  </article>
+<% else %>
+  <div class="badge badge-secondary badge-md align-self-md-start me-1 mt-6">
+    No Intro video available now.
+  </div>
+<% end %>

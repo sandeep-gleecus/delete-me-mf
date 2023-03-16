@@ -1,0 +1,29 @@
+<% @noindex ||= false %>
+<% @minimal_layout ||= false %>
+<% @simple_header_layout ||= false %>
+
+<!doctype html>
+
+<html lang="en">
+  <head>
+    <%= render "layouts/head" %>
+    <%= yield :facebook_domain_verification %>
+    <%= yield :recaptcha_v3_js %>
+  </head>
+  <body class="<%= controller_name %> <%= "d-flex flex-column vh-100" if controller.action_name == "new" || "onboarding" %>">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K62G58B"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <header class="header <%= controller.action_name %> <%= "no-bg-image" if @simple_header_layout %>">
+      <%= render "layouts/header" %>
+    </header>
+    <main class="main <%= "flex-grow-1" if controller.action_name = "new" || "onboarding" %>">
+      <%= yield %>
+    </main>
+    <footer>
+      <%= render "layouts/footer" %>
+    </footer>
+    <%= render partial: "intercom" %>
+  </body>
+</html>

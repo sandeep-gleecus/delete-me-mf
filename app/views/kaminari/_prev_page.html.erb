@@ -1,0 +1,5 @@
+<li class="page-item">
+  <span class="prev page-link btn">
+    <%= link_to_unless current_page.first?, t('Previous').html_safe, url, rel: 'prev', remote: remote %>
+  </span>
+</li>

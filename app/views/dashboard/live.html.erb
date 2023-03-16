@@ -1,0 +1,96 @@
+<% meta title: "LIVE Dashboard" %>
+<% @page_title = "LIVE" %>
+
+<div class="row gy-4 gx-xxl-4">
+  <div class="col-xxl-16">
+    <section class="bg-white shadow rounded-2 p-4 mb-4">
+      <h2 class="h5 mb-3 mb-md-4">Next</h2>
+      <% if @next_live %>
+        <article class="row gy-4 gx-md-5 gy-md-0">
+
+          <div class="col-md-10">
+            <%= link_to image_tag(resize_to_medium_image(@next_live.featured_image), class: "img-fluid rounded-2"), dashboard_lesson_path(@next_live) %>
+          </div>
+          <div class="col-md">
+            <div>Next LIVE in</div>
+            <div class="h2 text-primary my-1 js-countdown" data-countdown-end-date="<%= @next_live.start_time %>">00:00:00:00</div>
+            <h2 class="h4 mb-2"><%= link_to @next_live.title, dashboard_lesson_path(@next_live), class: "text-reset" %></h2>
+            <p class="mb-2 mb-md-3"><%= @next_live.description %></p>
+            <%= convert_to_badge(:time_live, time(@next_live.start_time)) %>
+          </div>
+        </article>
+      <% else %>
+        <!--<div class="mb-2 mb-md-3 alert alert-primary" role="alert">There are no Live events.</div>-->
+        <div class="badge badge-secondary badge-md align-self-md-start me-1 mt-2">
+          No Live classes available.
+        </div>
+      <% end %>
+    </section>
+    <section class="bg-white shadow rounded-2 p-4">
+      <h2 class="h5 mb-3 mb-md-4">Upcoming</h2>
+      <% if @upcoming_live %>
+        <div class="row row-cols-1 row-cols-lg-3 gy-4 gx-lg-4">
+          <%= render @upcoming_live %>
+        </div>
+      <% else %>
+        <div class="badge badge-secondary badge-md align-self-md-start me-1 mt-2">
+          No more upcoming Live classes available.
+        </div>
+      <% end %>
+    </section>
+  </div>
+  <div class="col-xxl-8">
+    <div class="row gy-4 gx-xl-4">
+      <div class="col-xl-12 col-xxl-24">
+        <section class="bg-white shadow rounded-2 p-4">
+          <div class="d-flex justify-content-between mb-3 mb-md-4">
+            <h2 class="h5 mb-0">Calendar</h2>
+            <%= link_to "View calendar#{icon "fas", "angle-right", class: "ms-2"}".html_safe, dashboard_calendar_path, class: "btn btn-link btn-sm shadow-none border-0 p-0 d-flex align-items-center" %>
+          </div>
+          <div class="position-relative js-calendar-wrapper" data-preview-type="overlay">
+            <div class="simple-calendar-overlay js-calendar-overlay">
+              <div class="d-flex justify-content-between mb-3">
+                <p class="h6 mb-0 me-2 js-calendar-overlay-title"></p>
+                <button type="button" class="simple-calendar-overlay-btn-close btn-close p-0 js-calendar-overlay-close-btn" aria-label="Close"></button>
+              </div>
+              <div class="js-calendar-overlay-content"></div>
+            </div>
+            <% if @calendar_lessons %>
+              <%= month_calendar(events: @calendar_lessons) do |date, lessons| %>
+                <div>
+                  <div><%= date.strftime("%e") %></div>
+                  <div class="day-actions d-inline-block mt-2 js-day-classes">
+                    <% lessons.each do |lesson| %>
+                    <span class="text-primary">
+                      <%= category_type_image(lesson.lesson_type) %>
+                    </span>
+                    <% end %>
+                  </div>
+                  <% if lessons.present? %>
+                    <div class="card-tooltip-calendar js-calendar-tooltip" role="tooltip">
+                      <%= render partial: "dashboard/calendar_tooltip", locals: {lessons: lessons} %>
+                    </div>
+                  <% end %>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+        </section>
+      </div>
+      <div class="col-xl-12 col-xxl-24">
+        <section class="bg-white shadow rounded-2 p-4">
+          <h2 class="h5 mb-3 mb-md-4">Previous</h2>
+          <% if @previous_live %>
+            <div class="row row-cols-1 gy-4">
+              <%= render @previous_live, horizontal_style: true %>
+            </div>
+          <% else %>
+            <div class="badge badge-secondary badge-md align-self-md-start me-1 mt-2">
+              No Live class recordings are available.
+            </div>
+          <% end  %>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>

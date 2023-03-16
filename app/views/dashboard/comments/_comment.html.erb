@@ -1,0 +1,16 @@
+<article class="d-flex mb-2 mb-md-3">
+  <div class="avatar">
+    <%= display_avatar(comment.user) %>
+    <span class="avatar-badge">
+      <%= get_motherhood_stage_icon(comment.user.motherhood_stage) %>
+    </span>
+  </div>
+  <div class="ms-3 ms-md-4">
+    <div class="d-md-flex align-items-baseline">
+      <strong class="text-dark"><%= comment.user.name %></strong>
+      <small class="x-small text-muted ms-1"><%= time_ago_in_words(comment.created_at) %> ago</small>
+      <%= link_to (icon "fas", "trash-alt", class: "fa-xs text-danger ms-1"), dashboard_comment_path(comment), method: :delete if comment.user == current_user %>
+    </div>
+    <%= simple_format(comment.content, class: "small mb-2") %>
+  </div>
+</article>

@@ -1,0 +1,178 @@
+<% meta title: "Onboarding" %>
+<% @minimal_layout = true %>
+
+<%= simple_form_for current_user, url: onboarding_path, validate: true, defaults: {wrapper: false}, html: {data: {controller: "onboarding", "onboarding-step-value": 1}, class: "js-form"} do |f| %>
+  <div class="container-xl">
+    <div id="onboardingCarousel" class="carousel slide js-onboarding-carousel" data-bs-ride="carousel">
+      <nav class="d-flex justify-content-center mb-5 mb-lg-6">
+        <%# <button type="button" class="btn-step btn btn-sm active step-started js-onboarding-step-btn" data-bs-target="#onboardingCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Step 1" data-step="1"><span class="step">1</span>About you</button>
+        <button type="button" class="btn-step btn btn-sm mx-3 js-onboarding-step-btn" data-bs-target="#onboardingCarousel" data-bs-slide-to="1" aria-label="Step 2" data-step="2"><span class="step">2</span>Your motherhood</button>
+        <button type="button" class="btn-step btn btn-sm js-onboarding-step-btn" data-bs-target="#onboardingCarousel" data-bs-slide-to="2" aria-label="Step 3" data-step="3"><span class="step">3</span>Your stage</button> %>
+
+        <button type="button" class="btn-step btn btn-sm active step-started js-onboarding-step-btn" data-step="1"><span class="step">1</span>About you</button>
+        <button type="button" class="btn-step btn btn-sm mx-3 js-onboarding-step-btn" data-step="2"><span class="step">2</span>Your motherhood</button>
+        <button type="button" class="btn-step btn btn-sm js-onboarding-step-btn" data-step="3"><span class="step">3</span>Your stage</button>
+      </nav>
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <section class="step step-visible step-started js-onboarding-step" data-step="1">
+            <header class="row justify-content-center gy-0 text-center mb-5 mb-lg-6">
+              <hgroup class="col-lg-16 col-xl-13 col-xxl-12">
+                <h2 class="small text-primary mb-2">About you</h2>
+                <p class="h5 mb-2">Tell us about yourself</p>
+                <p class="mb-0">Before we set up your dashboard, you’ll need to go through our onboarding process. This helps us provide a more personalised experience.</p>
+              </hgroup>
+            </header>
+            <div class="row justify-content-center gy-0 text-center text-md-start mb-6 mb-lg-7">
+              <div class="col-20 col-md-18 col-lg-14 col-xl-11 col-xxl-10 d-md-flex align-items-md-center">
+                <div class="js-avatar-upload">
+                  <%= f.label :avatar, class: "avatar avatar-lg form-avatar-upload form-label mb-4 me-md-4 mb-md-0 js-avatar-upload-label" do %>
+                    <%= image_tag "avatar-default.jpg", alt: "Upload your avatar", class: "avatar js-avatar-upload-image" %>
+                    <div class="avatar-badge"><%= icon "fas", "camera" %></div>
+                  <% end %>
+                  <%= f.input :avatar, as: :file, label: false, input_html: {class: "visually-hidden js-avatar-upload-input"} %>
+                </div>
+                <div class="flex-grow-1">
+                  <%= f.input :name, label: "What’s your name?", required: true, input_html: {autocomplete: "name", placeholder: "Name", class: "text-center text-md-start mb-2"} %>
+                  <%= f.input :phone_number, label: "What’s your phone number?", required: true,
+                               input_html: { type: 'number', autocomplete: "phone", placeholder: "Phone number",
+                                              class: "text-center text-md-start"} %>
+                </div>
+              </div>
+            </div>
+            <div class="d-flex justify-content-center">
+              <button type="button" class="btn btn-primary" data-action="click->onboarding#nextStep">Continue<%= icon "fas", "angle-right", class: "fa-sm ms-1" %></button>
+            </div>
+          </section>
+        </div>
+        <div class="carousel-item">
+          <section class="step js-onboarding-step" data-step="2">
+            <header class="row justify-content-center gy-0 text-center mb-5 mb-lg-6">
+              <hgroup class="col-lg-16 col-xl-13 col-xxl-12">
+                <h2 class="small text-primary mb-2">Your motherhood</h2>
+                <p class="h5 mb-2">And about your journey</p>
+                <p class="mb-0">Choose your current motherhood stage from the options below. This information helps us tailor your <%= Rails.configuration.name %> dashboard to you.</p>
+              </hgroup>
+            </header>
+            <div class="row justify-content-center mb-6 mb-lg-7">
+              <div class="col-20 col-md-18 col-lg-14 col-xl-11 col-xxl-10 text-center">
+                <%= f.label "What stage of motherhood are you at?", class: "form-label" %>
+                <nav class="form-radio-toolbar row justify-content-center gy-3 gx-md-3 gy-md-0 nav nav-pills js-radio-toolbar" id="nav-pregnancyTab" role="tablist">
+                  <% User::MOTHERHOOD_STAGES.each do |motherhood_stage| %>
+                    <div class="col-md-8">
+                      <%= f.radio_button :motherhood_stage, motherhood_stage, checked: false, class: "btn-check" %>
+                      <%= f.label "#{:motherhood_stage}_#{motherhood_stage}", data: {"bs-toggle": "tab", "bs-target": "#nav-#{motherhood_stage}"}, role: "tab", aria: {controls: "nav-#{motherhood_stage}"}, id: "nav-#{motherhood_stage}-tab", class: "btn btn-form-control w-100" do %>
+                        <div class="text-primary mb-1"><%= get_motherhood_stage_icon(motherhood_stage.to_s) %></div>
+                        <%= motherhood_stage.capitalize %>
+                      <% end %>
+                    </div>
+                  <% end %>
+                  <p class="invalid-feedback mb-0">Please choose one of the above</p>
+                </nav>
+              </div>
+            </div>
+            <div class="d-flex justify-content-center">
+              <button type="button" class="btn btn-outline-primary me-3" data-action="click->onboarding#prevStep"><%= icon "fas", "angle-left", class: "fa-sm me-1" %>Back</button>
+              <button type="button" class="btn btn-primary" data-action="click->onboarding#nextStep">Continue<%= icon "fas", "angle-right", class: "fa-sm ms-1" %></button>
+            </div>
+          </section>
+        </div>
+        <div class="carousel-item">
+          <section class="step js-onboarding-step" data-step="3">
+            <header class="row justify-content-center gy-0 text-center mb-5 mb-lg-6">
+              <hgroup class="col-lg-16 col-xl-13 col-xxl-12">
+                <h2 class="small text-primary mb-2">Your stage</h2>
+                <p class="h5 mb-2">Some final bits and pieces</p>
+                <p class="mb-0">We just need a little more information on your motherhood stage to get your <%= Rails.configuration.name %> dashboard set up and ready to go.</p>
+              </hgroup>
+            </header>
+            <div class="tab-content" id="nav-pregnancyTabContent">
+              <div class="tab-pane fade mb-6 mb-lg-7" id="nav-pregnancy" role="tabpanel" aria-labelledby="nav-pregnancy-tab">
+                <div class="row justify-content-center gy-0">
+                  <div class="col-19 col-md-11 col-lg-9 col-xl-7 col-xxl-6 text-center">
+                    <%= f.label :pregnancy_due_date, "When is your due date?", class: "form-label" %>
+                    <div class="input-group has-validation">
+                      <span class="input-group-text"><%= icon "fas", "calendar-alt" %></span>
+                      <%= f.input :pregnancy_due_date, as: :string, label: false, input_html: {autocomplete: "off", class: "js-datepicker js-birth-date js-needs-manual-validation", data: {"start-view": "days", "min-date": DateTime.now.to_s, "max-date": (DateTime.now + 40.weeks).to_s}} %>
+                      <span class="invalid-feedback">Due date can’t be blank</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane fade mb-6 mb-lg-7" id="nav-postpartum" role="tabpanel" aria-labelledby="nav-postpartum-tab">
+                <div class="row justify-content-center gy-0">
+                  <div class="col-20 col-md-10 col-lg-8 col-xl-7 col-xxl-6 text-center">
+                    <%= f.label :birth_date, "When did you give birth?", class: "form-label" %>
+                    <div class="input-group has-validation">
+                      <span class="input-group-text"><%= icon "fas", "calendar-alt" %></span>
+                      <%= f.input :birth_date, as: :string, label: false, input_html: {autocomplete: "off", class: "js-datepicker js-birth-date js-needs-manual-validation", data: {"max-date": DateTime.now.to_s}} %>
+                      <span class="invalid-feedback">Birth date can’t be blank</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane fade mb-6 mb-lg-7" id="nav-beyond" role="tabpanel" aria-labelledby="nav-beyond-tab">
+                <div class="row justify-content-center gy-0">
+                  <div class="col-20 col-md-23 col-lg-18 col-xl-14 col-xxl-13">
+                    <div class="row row-cols-1 row-cols-md-2 gy-3 gx-md-3 mb-3">
+                      <div class="col">
+                        <%= f.label :date_of_birth, "What is your date of birth?<small class='fw-normal text-muted ms-1'>optional</small>".html_safe, class: "form-label" %>
+                        <div class="input-group has-validation">
+                          <span class="input-group-text"><%= icon "fas", "calendar-alt" %></span>
+                          <%= f.input :date_of_birth, as: :string, label: false, input_html: {autocomplete: "off", class: "js-datepicker js-birth-date", data: {"max-date": DateTime.now.to_s}} %>
+                        </div>
+                      </div>
+                      <div class="col">
+                        <%= f.label :most_recent_birth_date, "When was your last baby?<small class='fw-normal text-muted ms-1'>optional</small>".html_safe, class: "form-label" %>
+                        <div class="input-group has-validation">
+                          <span class="input-group-text"><%= icon "fas", "calendar-alt" %></span>
+                          <%= f.input :most_recent_birth_date, as: :string, label: false, input_html: {autocomplete: "off", class: "js-datepicker js-birth-date", data: {"max-date": DateTime.now.to_s}} %>
+                        </div>
+                      </div>
+                      <div class="col">
+                        <%= f.input :height, label: "Height (cm)<small class='fw-normal text-muted ms-1'>optional</small>".html_safe, class: "form-control" %>
+                      </div>
+                      <div class="col">
+                        <%= f.simple_fields_for :weight_entries, current_user.weight_entries.build do |weight_form| %>
+                          <%= weight_form.input :weight, label: "Weight (kg)<small class='fw-normal text-muted ms-1'>optional</small>".html_safe, input_html: {class: "form-control"} %>
+                        <% end %>
+                      </div>
+                    </div>
+                    <%= f.label :fitness_goal, "What’s your fitness goal?<small class='fw-normal text-muted ms-1'>optional</small>".html_safe, class: "form-label" %>
+                    <div class="row gy-3 gx-md-3 gy-md-0 mb-3">
+                      <% User::FITNESS_GOAL.each do |fitness_goal| %>
+                        <div class="col-md-8">
+                          <%= f.radio_button :fitness_goal, fitness_goal, checked: false, class: "btn-check" %>
+                          <%= f.label "#{:fitness_goal}_#{fitness_goal}", class: "btn btn-form-control w-100" do %>
+                            <div class="text-primary mb-1"><%= get_fitness_goal_icon(fitness_goal) %></div>
+                            <%= fitness_goal.capitalize.to_s.gsub("_", " ") %>
+                          <% end %>
+                        </div>
+                      <% end %>
+                    </div>
+                    <%= f.label :activity_multiplier, "How active are you?<small class='fw-normal text-muted ms-1'>optional</small>".html_safe, class: "form-label" %>
+                    <div class="row gy-3 gx-md-3 gy-md-0">
+                      <% User::ACTIVITY_MULTIPLIER.each do |activity_multiplier| %>
+                        <div class="col-md">
+                          <%= f.radio_button :activity_multiplier, activity_multiplier, checked: false, class: "btn-check" %>
+                          <%= f.label "#{:activity_multiplier}_#{activity_multiplier}", class: "btn btn-form-control w-100" do %>
+                            <div class="text-primary mb-1"><%= get_activity_multiplier_icon(activity_multiplier) %></div>
+                            <%= activity_multiplier.capitalize %>
+                          <% end %>
+                        </div>
+                      <% end %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="d-flex justify-content-center">
+              <button type="button" class="btn btn-outline-primary me-3" data-action="click->onboarding#prevStep"><%= icon "fas", "angle-left", class: "fa-sm me-1" %>Back</button>
+              <%= f.button :button, "Let’s go!#{icon "fas", "angle-right", class: "fa-sm ms-1"}".html_safe, class: "btn btn-primary", data: {action: "click->onboarding#submitForm", "onboarding-user-email-param": current_user.email} %>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

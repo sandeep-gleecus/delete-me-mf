@@ -1,0 +1,202 @@
+$header-bg-gradient: (180deg, rgba($text-color, 0.5) 0%, rgba($text-color, 0) 100%);
+
+.header {
+  background-position: center;
+  background-size: cover;
+  position: relative;
+
+  &:not(.no-bg-image) {
+
+    &::before {
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      content: "";
+      height: 100%;
+      max-height: rem(340px);
+      position: absolute;
+      width: 100%;
+
+      @include media-breakpoint-up(md) {
+        max-height: rem(720px);
+      }
+
+      @include media-breakpoint-up(xl) {
+        border-bottom-right-radius: $lg-border-radius;
+        width: calc(100% - $spacer);
+      }
+
+      @media only screen and (min-width: 1441px) {
+        max-height: rem(900px);
+      }
+    }
+
+    &.index::before {
+      background-image: linear-gradient($header-bg-gradient), url("home/hero.jpg");
+
+      @include media-breakpoint-up(md) {
+        background-image: linear-gradient($header-bg-gradient), url("home/hero-md.jpg");
+        background-position: center, rem(-400px -50px);
+        background-size: 100%, auto 110%;
+      }
+
+      @include media-breakpoint-up(lg) {
+        background-position: center, rem(-225px -50px);
+        background-size: 100%, auto 110%;
+      }
+
+      @include media-breakpoint-up(xl) {
+        background-position: center, center top;
+        background-size: cover;
+      }
+
+      @media only screen and (min-width: 1441px) {
+        background-image: linear-gradient($header-bg-gradient), url("home/hero-xxl.jpg");
+      }
+    }
+
+    &.pregnancy::before {
+      background-image: linear-gradient($header-bg-gradient), url("pregnancy/hero.jpg");
+
+      @include media-breakpoint-up(md) {
+        background-image: linear-gradient($header-bg-gradient), url("pregnancy/hero-md.jpg");
+        background-position: center, rem(-280px 0);
+      }
+
+      @include media-breakpoint-up(lg) {
+        background-position: center;
+      }
+
+      @media only screen and (min-width: 1441px) {
+        background-image: linear-gradient($header-bg-gradient), url("pregnancy/hero-xxl.jpg");
+      }
+    }
+
+    &.postpartum::before {
+      background-image: linear-gradient($header-bg-gradient), url("postpartum/hero.jpg");
+
+      @include media-breakpoint-up(md) {
+        background-image: linear-gradient($header-bg-gradient), url("postpartum/hero-md.jpg");
+        background-position: center, top 0 right rem(-260px);
+      }
+
+      @include media-breakpoint-up(lg) {
+        background-position: center, top 0 right rem(-130px);
+      }
+
+      @include media-breakpoint-up(xl) {
+        background-position: center, top 0 right 0;
+      }
+
+      @media only screen and (min-width: 1441px) {
+        background-image: linear-gradient($header-bg-gradient), url("postpartum/hero-xxl.jpg");
+        background-position: center, center;
+      }
+    }
+
+    &.beyond::before {
+      background-image: linear-gradient($header-bg-gradient), url("beyond/hero.jpg");
+
+      @include media-breakpoint-up(md) {
+        background-image: linear-gradient($header-bg-gradient), url("beyond/hero-md.jpg");
+        background-position: center, right rem(-250px) top 0;
+      }
+
+      @include media-breakpoint-up(lg) {
+        background-position: center center;
+      }
+
+      @media only screen and (min-width: 1441px) {
+        background-image: linear-gradient($header-bg-gradient), url("beyond/hero-xxl.jpg");
+      }
+    }
+
+    &.defence {
+      min-height: rem(360px);
+
+      @include media-breakpoint-up(md) {
+        min-height: rem(400px);
+      }
+
+      @include media-breakpoint-up(lg) {
+        min-height: rem(500px);
+      }
+
+      @include media-breakpoint-up(xl) {
+        min-height: rem(600px);
+      }
+
+      &::before {
+        border-radius: 0;
+        width: 100%;
+        background-image: linear-gradient($header-bg-gradient), url("case_studies/defence/hero.jpg");
+
+        @include media-breakpoint-up(md) {
+          background-image: linear-gradient($header-bg-gradient), url("case_studies/defence/hero-md.jpg");
+          background-position: center center;
+        }
+
+        @media only screen and (min-width: 1441px) {
+          background-position: 0px -200px;
+          background-image: linear-gradient($header-bg-gradient), url("case_studies/defence/hero-xxl.jpg");
+        }
+      }
+    }
+  }
+
+  &-hero {
+    @include border-radius($md-border-radius);
+    margin-top: $spacer * 4.8333333333; // 145px
+    padding: $spacer-4;
+
+    @include media-breakpoint-up(md) {
+      @include border-start-radius(0);
+      margin-top: $spacer-7;
+      padding: $spacer-5;
+      transform: translateX(-40px);
+    }
+
+    @include media-breakpoint-up(lg) {
+      margin-top: $spacer-8;
+      padding: $spacer-6;
+    }
+
+    @include media-breakpoint-up(xl) {
+      margin-top: $spacer * 5.3333333333; // 160px
+      transform: translateX(-70px);
+    }
+
+    @media only screen and (min-width: 1441px) {
+      @include border-start-radius($md-border-radius);
+      transform: translateX(0px);
+    }
+  }
+
+  &-appraisal {
+
+    @include media-breakpoint-up(md) {
+      position: absolute;
+      top: rem(750px); // header&:not(.no-bg-image)::before height + 30px vertical margin
+    }
+
+    @media only screen and (min-width: 1441px) {
+      top: rem(940px); // header&:not(.no-bg-image)::before height + 40px vertical margin
+    }
+
+    &-image {
+      width: rem(146px);
+
+      @include media-breakpoint-up(xl) {
+        width: rem(161px);
+      }
+
+      & + & {
+        width: rem(144px);
+
+        @include media-breakpoint-up(xl) {
+          width: rem(159px);
+        }
+      }
+    }
+  }
+}

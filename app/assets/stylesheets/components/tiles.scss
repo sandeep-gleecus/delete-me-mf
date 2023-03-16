@@ -1,0 +1,97 @@
+.tile {
+  align-items: center;
+  background-color: rgba($text-color, 0.05);
+  border-radius: $sm-border-radius;
+  color: $text-color;
+  display: inline-flex;
+  font-size: $xl-font-size;
+  height: rem(50px);
+  justify-content: center;
+  min-height: rem(50px);
+  min-width: rem(50px);
+  width: rem(50px);
+
+  &-sm {
+    font-size: $lg-font-size;
+    height: rem(40px);
+    min-height: rem(40px);
+    min-width: rem(40px);
+    width: rem(40px);
+  }
+
+  &-lg {
+    border-radius: $md-border-radius;
+    font-size: $h4-font-size;
+    height: rem(60px);
+    min-height: rem(60px);
+    min-width: rem(60px);
+    width: rem(60px);
+  }
+
+  &-xl {
+    border-radius: $md-border-radius;
+    font-size: $md-font-size * 2; // 36px
+    height: rem(70px);
+    min-height: rem(70px);
+    min-width: rem(70px);
+    width: rem(70px);
+
+    @include media-breakpoint-up(xl) {
+      font-size: $h3-font-size;
+      height: rem(80px);
+      min-height: rem(80px);
+      min-width: rem(80px);
+      width: rem(80px);
+    }
+
+    img {
+      max-height: rem(40px);
+      max-width: rem(40px);
+
+      @include media-breakpoint-up(xl) {
+        max-height: rem(50px);
+        max-width: rem(50px);
+      }
+    }
+  }
+
+  &-primary {
+    background-color: $primary-color-light;
+    color: $primary-color;
+  }
+
+  &-secondary {
+    background-color: $warning-color-light;
+    color: $warning-color;
+  }
+
+  &-secondary-brand {
+    background-color: $secondary-color-lighter;
+    color: $secondary-color-dark;
+  }
+
+  &-success {
+    background-color: $success-color-light;
+    color: $success-color;
+  }
+
+  &-info {
+    background-color: $info-color-light;
+    color: $info-color;
+  }
+
+  &-warning {
+    background-color: $warning-color-light;
+    color: $warning-color;
+  }
+
+  &-accent {
+    background-color: $accent-color-light;
+    color: $accent-color;
+  }
+
+  &-highlight {
+    background-color: $highlight-color-light;
+    color: $highlight-color;
+  }
+}

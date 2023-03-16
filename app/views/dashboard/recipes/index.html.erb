@@ -1,0 +1,14 @@
+<% meta title: "Dashboard – Recipes" %>
+<% @page_title = "Recipes" %>
+
+<section class="bg-white shadow rounded-2 p-4">
+  <h2 class="h5 mb-1"><%= Rails.configuration.name %> recipes</h2>
+  <p class="mb-4">Get inspired with delicious recipes, packed with protein, nutrients, and many benefits for you and your baby.</p>
+  <div class="row">
+    <div class="col-xxl-16">
+      <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 gy-4 gx-lg-4">
+        <%= render @recipes %>
+      </div>
+    </div>
+  </div>
+</section>

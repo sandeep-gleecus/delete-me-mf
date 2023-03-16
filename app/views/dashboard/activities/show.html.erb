@@ -1,0 +1,29 @@
+<% meta title: "Dashboard - Activities" %>
+<% @page_title = "Activities" %>
+
+<section class="bg-white rounded-2 shadow p-4">
+  <div class="row g-0">
+    <div class="col-auto mb-4 order-1 me-3 me-md-4">
+      <div class="tile tile-primary tile-xl flex-column me-auto">
+        <%= activity_icon(@activity.activity_type) %>
+      </div>
+    </div>
+    <div class="col-auto col-md-24 col-xl-15 col-xxl-11 order-3 order-xl-2">
+      <h2 class="h5 mb-2"><%= @activity.title %></h2>
+      <div class="h3 text-primary lead mb-2"><%= convert_to_short_date(@activity.date) %></div>
+      <p class="lead mb-3"><%= @activity.description %></p>
+      <div class="mb-3">
+        <%= convert_to_badge(:calories_burned, @activity.calories_burned, "badge-lg me-2") %>
+        <%= convert_to_badge(:time_recorded, @activity.time_spent, "badge-lg") %>
+      </div>
+      <% if @activity.featured_image.attached? %>
+        <%= image_tag resize_to_medium_image(@activity.featured_image), class: "img-fluid rounded-2 d-md-none" %>
+        <%= image_tag resize_to_large_image(@activity.featured_image), class: "img-fluid rounded-2 d-none d-md-block" %>
+      <% end %>
+    </div>
+    <div class="col-auto d-flex flex-row ms-auto ms-xxl-0 order-2 order-xl-3">
+      <%= link_to "#{icon "fas", "edit", class: "me-2"}Edit".html_safe, edit_dashboard_activity_path(@activity), class: "btn btn-link shadow-none border-0 me-md-3" %>
+      <%= link_to "#{icon "fas", "trash", class: "me-2"}Delete".html_safe, dashboard_activity_path(@activity), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-link text-danger shadow-none border-0" %>
+    </div>
+  </div>
+</section>

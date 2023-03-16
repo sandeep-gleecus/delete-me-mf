@@ -1,0 +1,4 @@
+<%= f.input :pregnancy_due_date, as: :string, label: false, input_html: {autocomplete: "off", class: "js-datepicker js-birth-date", value: (f.object.pregnancy_due_date.to_date.strftime("%d/%m/%Y") rescue nil), data: {"start-view": "days"}} %>
+<%= f.input :birth_date, as: :string, label: false, input_html: {autocomplete: "off", class: "js-datepicker js-birth-date", value: (f.object.birth_date.to_date.strftime("%d/%m/%Y") rescue nil), data: {"max-date": DateTime.now.to_s} } %>
+
+    <#= REMOVE max_date attr from data above %>

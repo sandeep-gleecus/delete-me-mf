@@ -1,0 +1,22 @@
+<% meta title: "Category - #{@category.title}" %>
+<% @page_title = "#{@category.title}" %>
+
+<section class="bg-white shadow rounded-2 p-4">
+  <div class="row">
+    <div class="col-xxl-16">
+      <%= image_tag resize_to_medium_image(@category.featured_image), class: "img-fluid rounded-2 mb-4 d-md-none" %>
+      <%= image_tag resize_to_large_image(@category.featured_image), class: "img-fluid rounded-2 mb-5 d-none d-md-block" %>
+      <h2 class="h5 mb-0"><%= @category.title %></h2>
+      <p class="mb-4"><%= @category.description %></p>
+      <div class="row row-cols-1 gy-4 mb-5">
+        <%= render @category.lessons.order(id: @category.lessons_default_order),
+                   horizontal_style: true, horizontal_image_width: 120 %>
+      </div>
+      <div class="row row-cols-1 gy-4">
+        <% unless @category.parent.title.eql?('Rebuild') && @category.title.eql?('The Postpartum Program') %>
+          <%= render @category.children.order(:id), horizontal_style: true %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>
